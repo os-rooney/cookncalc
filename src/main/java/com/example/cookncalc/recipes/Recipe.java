@@ -18,7 +18,7 @@ public class Recipe {
 
     private String title;
 
-    @OneToMany
+    @OneToMany(mappedBy = "recipe")
     private List<Ingredient> ingredient;
 
     private String description;
@@ -75,4 +75,6 @@ public class Recipe {
     public void setDescription(String description) {
         this.description = description;
     }
+
+
 }
