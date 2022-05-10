@@ -28,16 +28,14 @@ public class SetUpComponent {
     @EventListener
     @Transactional
     public void handleApplicationReady(ApplicationReadyEvent event) {
-        List<Ingredient> liste = new ArrayList<>();
-        liste.add(new Ingredient("Butter", 2.0,"stück"));
-        liste.add(new Ingredient("Marmelade", 1.0, "Glas"));
-        ingredientRepository.save(liste.get(0));
-        ingredientRepository.save(liste.get(1));
+        Recipe recipe = new Recipe("Kuchen", "Bester Kuchen");
+      //  Ingredient eins = new Ingredient("Butter", 2.0,"stück", recipe);
+        //Ingredient zwei = new Ingredient("Marmelade", 1.0, "Glas", recipe);
 
-        if (recipeRepository.count() == 0) {
-            recipeRepository.save(new Recipe("Erstes Rezept", liste, "BlaBlaBla"));
-           // recipeRepository.save(new Recipe("Zweites Rezept", liste,"BlubBlubBlub"));
-
+        if (recipeRepository.count()== 0) {
+            recipeRepository.save(recipe);
+          //  ingredientRepository.save(eins);
+            //ingredientRepository.save(zwei);
         }
-    }
+        }
 }
