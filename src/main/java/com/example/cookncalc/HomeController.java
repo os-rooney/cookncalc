@@ -18,7 +18,7 @@ public class HomeController {
         this.recipeRepository = recipeRepository;
     }
 
-    @GetMapping("/")
+    @GetMapping("/api")
     public List<Recipe> home(){
         return recipeRepository.findAll();
     }
