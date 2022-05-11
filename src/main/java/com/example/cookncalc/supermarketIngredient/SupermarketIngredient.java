@@ -22,7 +22,7 @@ public class SupermarketIngredient {
 
     private Double price;
 
-    private String brand;
+
 
     public SupermarketIngredient() {
     }
@@ -49,14 +49,6 @@ public class SupermarketIngredient {
 
     public void setPrice(Double price) {
         this.price = price;
-    }
-
-    public String getBrand() {
-        return brand;
-    }
-
-    public void setBrand(String brand) {
-        this.brand = brand;
     }
 
     public Ingredient getIngredient() {
