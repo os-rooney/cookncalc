@@ -26,8 +26,12 @@ public class RecipeIngredient {
     public RecipeIngredient(){}
 
 
-    public RecipeIngredientKey getId() {
-        return id;
+    public String getIngredientName() {
+        return ingredient.getName();
+    }
+
+    public String getIngredientUnit() {
+        return ingredient.getUnit();
     }
 
     public void setId(RecipeIngredientKey id) {
