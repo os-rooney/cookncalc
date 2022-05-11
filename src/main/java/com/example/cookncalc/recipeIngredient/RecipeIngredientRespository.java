@@ -1,7 +1,10 @@
 package com.example.cookncalc.recipeIngredient;
 
+import com.example.cookncalc.recipes.Recipe;
 import org.springframework.data.repository.CrudRepository;
 
-public interface RecipeIngredientRespository extends CrudRepository<RecipeIngredient, RecipeIngredientKey> {
+import java.util.List;
 
+public interface RecipeIngredientRespository extends CrudRepository<RecipeIngredient, RecipeIngredientKey> {
+    List<RecipeIngredient> findAll();
 }

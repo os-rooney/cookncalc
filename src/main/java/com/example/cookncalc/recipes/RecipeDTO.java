@@ -1,17 +1,24 @@
 package com.example.cookncalc.recipes;
 
-import com.example.cookncalc.ingredient.Ingredient;
-
-import java.util.List;
 
 public class RecipeDTO {
 
     private String title;
     private String description;
+    private String preparation;
 
-    public RecipeDTO(String title, String description) {
+    public RecipeDTO(String title, String description, String preparation) {
         this.title = title;
         this.description = description;
+        this.preparation = preparation;
+    }
+
+    public String getPreparation() {
+        return preparation;
+    }
+
+    public void setPreparation(String preparation) {
+        this.preparation = preparation;
     }
 
     public String getTitle() {

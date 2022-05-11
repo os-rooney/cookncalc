@@ -18,5 +18,4 @@ export class AppComponent implements OnInit{
     this.httpClient.get<Recipe[]>("/api").subscribe(result => this.recipes=result);
   }
 
-
 }

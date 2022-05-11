@@ -24,23 +24,33 @@ public class Recipe {
 
     private String description;
 
+    private String preparation;
+
     private Instant createdAt;
 
     public Recipe(){
 
     }
 
-   /* public Recipe(String title, List<Ingredient> ingredient, String description) {
-        this.title = title;
-        this.ingredient = ingredient;
-        this.description = description;
-        this.createdAt = Instant.now();
-    }*/
-
     public Recipe(String title, String description) {
         this.title = title;
         this.description = description;
         this.createdAt = Instant.now();
+    }
+
+    public Recipe(String title, String description, String preparation) {
+        this.title = title;
+        this.description = description;
+        this.preparation = preparation;
+        this.createdAt = Instant.now();
+    }
+
+    public String getPreparation() {
+        return preparation;
+    }
+
+    public void setPreparation(String preparation) {
+        this.preparation = preparation;
     }
 
     public void setId(Long id) {
