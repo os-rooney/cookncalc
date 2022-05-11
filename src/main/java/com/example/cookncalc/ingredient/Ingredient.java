@@ -1,6 +1,7 @@
 package com.example.cookncalc.ingredient;
 
 import com.example.cookncalc.recipeIngredient.RecipeIngredient;
+import com.example.cookncalc.supermarketIngredient.SupermarketIngredient;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -17,6 +18,9 @@ public class Ingredient {
 
     @OneToMany(mappedBy = "ingredient")
     private Set<RecipeIngredient> recipeIngredient = new HashSet<>();
+
+    @OneToMany(mappedBy = "ingredient")
+    private Set<SupermarketIngredient> supermarketIngredients = new HashSet<>();
 
     //TODO: Enum erstellen
     private String unit;
@@ -53,6 +57,14 @@ public class Ingredient {
 
     public void setRecipeIngredient(Set<RecipeIngredient> recipeIngredient) {
         this.recipeIngredient = recipeIngredient;
+    }
+
+    public Set<SupermarketIngredient> getSupermarketIngredients() {
+        return supermarketIngredients;
+    }
+
+    public void setSupermarketIngredients(Set<SupermarketIngredient> supermarketIngredients) {
+        this.supermarketIngredients = supermarketIngredients;
     }
 
     @Override
