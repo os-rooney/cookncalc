@@ -2,17 +2,14 @@ package com.example.cookncalc.supermarket;
 
 import com.example.cookncalc.supermarketIngredient.SupermarketIngredient;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 public class Supermarket {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
