@@ -21,7 +21,7 @@ public class RecipeIngredient {
     @JoinColumn(name = "ingredient_id")
     private Ingredient ingredient;
 
-    double amount;
+    private double amount;
 
     public RecipeIngredient(){}
 
