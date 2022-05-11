@@ -4,7 +4,6 @@ public class IngredientDTO {
 
     private String name;
 
-
     //TODO: Enum erstellen
     private String unit;
 
