@@ -1,77 +1,94 @@
 package com.example.cookncalc.ingredient;
 
-import com.example.cookncalc.recipes.Recipe;
-import com.sun.xml.bind.v2.TODO;
+import com.example.cookncalc.recipeIngredient.RecipeIngredient;
+import com.example.cookncalc.supermarketIngredient.SupermarketIngredient;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
+@Table(name ="ingredient")
 public class Ingredient {
 
     @Id
     @GeneratedValue
     private Long id;
-
     private String name;
 
-    private Double amount;
+    @OneToMany(mappedBy = "ingredient")
+    private Set<RecipeIngredient> recipeIngredient = new HashSet<>();
+
+    @OneToMany(mappedBy = "ingredient")
+    private Set<SupermarketIngredient> supermarketIngredients = new HashSet<>();
 
     //TODO: Enum erstellen
     private String unit;
 
-    @ManyToOne
-    private Recipe recipe;
+    public Ingredient(){}
 
-    public Ingredient(){
-
-    }
-
-    public Ingredient(String name, Double amount, String unit){
+    public Ingredient(String name, String unit){
         this.name = name;
-        this.amount = amount;
         this.unit = unit;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
-
     public Long getId() {
         return id;
     }
-
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
-
-    public Double getAmount() {
-        return amount;
-    }
-
-    public void setAmount(Double amount) {
-        this.amount = amount;
-    }
-
     public String getUnit() {
         return unit;
     }
-
     public void setUnit(String unit) {
         this.unit = unit;
     }
 
-    public Recipe getRecipe() {
-        return recipe;
+    public Set<RecipeIngredient> getRecipeIngredient() {
+        return recipeIngredient;
     }
 
-    public void setRecipe(Recipe recipe) {
-        this.recipe = recipe;
+    public void setRecipeIngredient(Set<RecipeIngredient> recipeIngredient) {
+        this.recipeIngredient = recipeIngredient;
+    }
+
+    public Set<SupermarketIngredient> getSupermarketIngredients() {
+        return supermarketIngredients;
+    }
+
+    public void setSupermarketIngredients(Set<SupermarketIngredient> supermarketIngredients) {
+        this.supermarketIngredients = supermarketIngredients;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Ingredient other = (Ingredient) obj;
+        if (id == null) {
+            if (other.id != null)
+                return false;
+        } else if (!id.equals(other.id))
+            return false;
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        return result;
     }
 }
