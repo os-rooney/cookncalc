@@ -23,6 +23,9 @@ public class RecipeIngredient {
 
     private double amount;
 
+    public RecipeIngredient(Double amount){
+        this.amount = amount;
+    }
     public RecipeIngredient(){}
 
 

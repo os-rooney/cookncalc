@@ -45,17 +45,17 @@ public class SetUpComponent {
         recipeIngredient.setIngredient(butter);
         recipeIngredient.setAmount(3);
 
-      /*  RecipeIngredient recipeIngredient1 = new RecipeIngredient();
+        RecipeIngredient recipeIngredient1 = new RecipeIngredient();
         recipeIngredient1.setRecipe(recipe);
         recipeIngredient1.setIngredient(marmelade);
-        recipeIngredient1.setAmount(2);*/
+        recipeIngredient1.setAmount(2);
 
         if (recipeRepository.count() == 0) {
             recipeRepository.save(recipe);
             ingredientRepository.save(butter);
             ingredientRepository.save(marmelade);
             recipeIngredientRespository.save(recipeIngredient);
-            // recipeIngredientRespository.save(recipeIngredient1);
+            recipeIngredientRespository.save(recipeIngredient1);
         }
 
         Supermarket rewe = new Supermarket("Rewe");

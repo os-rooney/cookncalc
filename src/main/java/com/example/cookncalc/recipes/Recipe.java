@@ -29,7 +29,7 @@ public class Recipe {
     private Instant createdAt;
 
     public Recipe(){
-
+        this.createdAt = Instant.now();
     }
 
     public Recipe(String title, String description) {
