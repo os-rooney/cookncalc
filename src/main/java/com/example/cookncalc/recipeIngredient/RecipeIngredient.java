@@ -9,7 +9,7 @@ import javax.persistence.*;
 public class RecipeIngredient {
 
     @EmbeddedId
-    RecipeIngredientKey id;
+    private RecipeIngredientKey id = new RecipeIngredientKey();
 
     @ManyToOne
     @MapsId("recipeId")
@@ -24,6 +24,7 @@ public class RecipeIngredient {
     double amount;
 
     public RecipeIngredient(){}
+
 
     public RecipeIngredientKey getId() {
         return id;
