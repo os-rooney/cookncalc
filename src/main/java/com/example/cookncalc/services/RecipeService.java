@@ -34,6 +34,7 @@ public class RecipeService {
         recipe.setDescription(dto.getDescription());
         recipe.setPreparation(dto.getPreparation());
         recipeRepository.save(recipe);
+
         for(IngredientDTO ingredientDTO : dto.getIngredients()){
             Double amount = ingredientDTO.getAmount();
             RecipeIngredient recipeIngredient = new RecipeIngredient();
