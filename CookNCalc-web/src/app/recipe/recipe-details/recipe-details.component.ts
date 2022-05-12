@@ -1,7 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Recipe} from "../../Recipe";
 import {ActivatedRoute} from "@angular/router";
-import {RecipeService} from "../../RecipeService";
 import {HttpClient} from "@angular/common/http";
 
 @Component({
@@ -11,18 +10,15 @@ import {HttpClient} from "@angular/common/http";
 })
 export class RecipeDetailsComponent implements OnInit {
 
-  recipe?: Recipe={
-    "id":0,
-    "title":"",
-    "description":"",
-    "preparation":"",
-  }
+  recipe?: Recipe;
 
-  constructor(private route: ActivatedRoute, private recipeService: RecipeService) { }
+  id?: number;
+
+  constructor(private httpClient: HttpClient, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-   const id= Number(this.route.snapshot.paramMap.get("id"));
-   this.recipe = this.recipeService.getRecipe(id);
+   this.id = Number(this.route.snapshot.paramMap.get("id"));
+   this.httpClient.post<Recipe>("/api/recipe", this.id).subscribe(result => this.recipe = result);
   }
 
 }
