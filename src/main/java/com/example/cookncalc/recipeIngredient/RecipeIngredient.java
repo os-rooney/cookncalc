@@ -41,17 +41,9 @@ public class RecipeIngredient {
         this.id = id;
     }
 
-/*    public Recipe getRecipe() {
-        return recipe;
-    }*/
-
     public void setRecipe(Recipe recipe) {
         this.recipe = recipe;
     }
-
-/*    public Ingredient getIngredient() {
-        return ingredient;
-    }*/
 
     public void setIngredient(Ingredient ingredient) {
         this.ingredient = ingredient;
