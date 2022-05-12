@@ -1,6 +1,7 @@
 package com.example.cookncalc.recipeIngredient;
 
 import com.example.cookncalc.ingredient.Ingredient;
+import com.example.cookncalc.ingredient.IngredientDTO;
 import com.example.cookncalc.recipes.Recipe;
 
 import javax.persistence.*;
@@ -29,22 +30,25 @@ public class RecipeIngredient {
     public RecipeIngredient(){}
 
 
-    public String getName() {
-        return ingredient.getName();
-    }
-
-    public String getUnit() {
-        return ingredient.getUnit();
-    }
+//    public String getName() {
+//        return ingredient.getName();
+//    }
+//
+//    public String getUnit() {
+//        return ingredient.getUnit();
+//    }
 
     public void setId(RecipeIngredientKey id) {
         this.id = id;
     }
 
-/*    public Recipe getRecipe() {
+    public Recipe getRecipe() {
         return recipe;
-    }*/
+    }
 
+    public Ingredient getIngredient() {
+        return ingredient;
+    }
     public void setRecipe(Recipe recipe) {
         this.recipe = recipe;
     }

@@ -30,8 +30,8 @@ public class HomeController {
     }
 
     @GetMapping("/api/recipe/{id}")
-    public Recipe detail(@PathVariable Long id){
-        return recipeRepository.findById(id).orElseThrow();
+    public RecipeWithIngredientsDTO detail(@PathVariable Long id){
+        return recipeService.showDetailRecipe(id);
     }
 
     @PostMapping("/api/addRecipe")

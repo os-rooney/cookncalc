@@ -14,6 +14,10 @@ public class IngredientDTO {
         this.unit = unit;
     }
 
+    public IngredientDTO(){
+
+    }
+
     public String getName() {
         return name;
     }
@@ -29,5 +33,8 @@ public class IngredientDTO {
 
     public Double getAmount() {
         return amount;
+    }
+    public void setAmount(Double amount) {
+        this.amount = amount;
     }
 }
