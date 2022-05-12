@@ -1,1 +1,14 @@
-<p>recipe-add works!</p>
+<h1>New Recipe</h1>
+
+<div *ngIf="recipe">
+  <label for="title">
+    Title: <input id="title" name="title" type="text" [(ngModel)]="recipe.title">
+  </label>
+  <label for="description">
+    Description: <input id="description" name="description" type="text" [(ngModel)]="recipe.description">
+  </label>
+  <label for="preparation">
+    Preparation: <input id="preparation" name="preparation" type="text" [(ngModel)]="recipe.preparation">
+  </label>
+  <button type="submit" (click)="saveRecipe()">Add</button>
+</div>
