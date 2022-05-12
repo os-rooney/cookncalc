@@ -2,6 +2,7 @@ package com.example.cookncalc.ingredient;
 
 import com.example.cookncalc.recipeIngredient.RecipeIngredient;
 import com.example.cookncalc.supermarketIngredient.SupermarketIngredient;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -12,9 +13,10 @@ import java.util.Set;
 public class Ingredient {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+
 
     @OneToMany(mappedBy = "ingredient")
     private Set<RecipeIngredient> recipeIngredient = new HashSet<>();
@@ -77,11 +79,8 @@ public class Ingredient {
             return false;
         Ingredient other = (Ingredient) obj;
         if (id == null) {
-            if (other.id != null)
-                return false;
-        } else if (!id.equals(other.id))
-            return false;
-        return true;
+            return other.id == null;
+        } else return id.equals(other.id);
     }
 
     @Override

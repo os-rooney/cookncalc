@@ -1,0 +1,12 @@
+<h1>Startseite</h1>
+
+<div *ngFor="let recipe of recipes">
+  {{recipe.id}}
+  <br>
+  {{recipe.title}}
+  <br>
+  {{recipe.description}}
+  <br>
+  <a [routerLink]="['/recipes', recipe.id]">Details</a>
+</div>
+

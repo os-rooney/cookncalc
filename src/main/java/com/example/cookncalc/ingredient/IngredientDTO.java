@@ -7,9 +7,15 @@ public class IngredientDTO {
     //TODO: Enum erstellen
     private String unit;
 
+    private Double amount;
+
     public IngredientDTO(String name, String unit) {
         this.name = name;
         this.unit = unit;
+    }
+
+    public IngredientDTO(){
+
     }
 
     public String getName() {
@@ -23,5 +29,12 @@ public class IngredientDTO {
     }
     public void setUnit(String unit) {
         this.unit = unit;
+    }
+
+    public Double getAmount() {
+        return amount;
+    }
+    public void setAmount(Double amount) {
+        this.amount = amount;
     }
 }
