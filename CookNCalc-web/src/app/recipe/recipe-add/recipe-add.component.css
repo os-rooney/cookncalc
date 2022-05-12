@@ -14,3 +14,12 @@ input{
 button{
   display: block;
 }
+#delete-ingredient{
+  display: inline;
+  margin-left: 1rem;
+  background-color: transparent;
+  border: none;
+  color: red;
+  -webkit-text-stroke: .3px #000;
+  font-size: 1.2rem;
+}
