@@ -11,7 +11,6 @@ export class RecipeComponent implements OnInit {
 
   recipes?: Recipe[];
 
-  //ToDo : Service einbinden!!!
   constructor(private httpClient: HttpClient) {
   }
 

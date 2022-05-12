@@ -27,6 +27,11 @@ public class HomeController {
         return recipeRepository.findAll();
     }
 
+    @PostMapping("/api/recipe")
+    public Recipe detail(@RequestBody Long id){
+        return recipeRepository.findById(id).orElseThrow();
+    }
+
     @PostMapping("/api/addRecipe")
     public void add(@RequestBody JsonDTO dto){
         recipeService.addRecipe(dto);
