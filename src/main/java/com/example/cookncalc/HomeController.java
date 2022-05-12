@@ -1,6 +1,6 @@
 package com.example.cookncalc;
 
-import com.example.cookncalc.json.JsonDTO;
+import com.example.cookncalc.json.RecipeWithIngredientsDTO;
 import com.example.cookncalc.recipes.Recipe;
 import com.example.cookncalc.recipes.RecipeRepository;
 import com.example.cookncalc.services.RecipeService;
@@ -27,13 +27,13 @@ public class HomeController {
         return recipeRepository.findAll();
     }
 
-    @PostMapping("/api/recipe")
-    public Recipe detail(@RequestBody Long id){
+    @GetMapping("/api/recipe/{id}")
+    public Recipe detail(@PathVariable Long id){
         return recipeRepository.findById(id).orElseThrow();
     }
 
     @PostMapping("/api/addRecipe")
-    public void add(@RequestBody JsonDTO dto){
+    public void add(@RequestBody RecipeWithIngredientsDTO dto){
         recipeService.addRecipe(dto);
     }
 }

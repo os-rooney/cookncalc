@@ -20,7 +20,7 @@ public class Recipe {
     private String title;
 
     @OneToMany(mappedBy = "recipe")
-    private Set<RecipeIngredient> recipeIngredient = new HashSet<>();
+    private Set<RecipeIngredient> ingredients = new HashSet<>();
 
     private String description;
 
@@ -69,12 +69,12 @@ public class Recipe {
         this.title = name;
     }
 
-    public Set<RecipeIngredient> getRecipeIngredient() {
-        return recipeIngredient;
+    public Set<RecipeIngredient> getIngredients() {
+        return ingredients;
     }
 
-    public void setRecipeIngredient(Set<RecipeIngredient> recipeIngredient) {
-        this.recipeIngredient = recipeIngredient;
+    public void setIngredients(Set<RecipeIngredient> recipeIngredient) {
+        this.ingredients = recipeIngredient;
     }
 
     public Instant getCreatedAt() {

@@ -18,7 +18,7 @@ export class RecipeDetailsComponent implements OnInit {
 
   ngOnInit(): void {
    this.id = Number(this.route.snapshot.paramMap.get("id"));
-   this.httpClient.post<Recipe>("/api/recipe", this.id).subscribe(result => this.recipe = result);
+   this.httpClient.get<Recipe>(`/api/recipe/${this.id}`).subscribe(result => this.recipe = result);
   }
 
 }

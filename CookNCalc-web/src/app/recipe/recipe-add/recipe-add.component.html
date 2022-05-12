@@ -1,14 +1,24 @@
-<h1>New Recipe</h1>
-
-<div *ngIf="recipe">
-  <label for="title">
-    Title: <input id="title" name="title" type="text" [(ngModel)]="recipe.title">
-  </label>
-  <label for="description">
-    Description: <input id="description" name="description" type="text" [(ngModel)]="recipe.description">
-  </label>
-  <label for="preparation">
-    Preparation: <input id="preparation" name="preparation" type="text" [(ngModel)]="recipe.preparation">
-  </label>
-  <button type="submit" (click)="saveRecipe()">Add</button>
+<div class="container">
+  <h1>New Recipe</h1>
+  <div *ngIf="recipe">
+    <label for="title">
+      Title:
+    </label>
+    <input id="title" name="title" type="text" [(ngModel)]="recipe.title">
+    <label for="description">
+      Description:
+    </label>
+    <input id="description" name="description" type="text" [(ngModel)]="recipe.description">
+    <label for="preparation">
+      Preparation:
+    </label>
+    <input id="preparation" name="preparation" type="text" [(ngModel)]="recipe.preparation">
+    <div *ngFor="let ingredient of recipe.ingredients; let i = index">
+      <input type="text" [(ngModel)]="ingredient.amount">
+      <input type="text"  [(ngModel)]="ingredient.name">
+      <input type="text" [(ngModel)]="ingredient.unit">
+    </div>
+    <button (click)="recipe.ingredients.push({name:'', unit:'', amount: 0})">add ingredient</button>
+    <button type="submit" (click)="saveRecipe()">Add</button>
+  </div>
 </div>

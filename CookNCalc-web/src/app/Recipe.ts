@@ -1,9 +1,9 @@
-import {RecipeIngredient} from "./Ingredient";
+import {RecipeIngredient} from "./RecipeIngredient";
 
 export interface Recipe{
   id:number;
   title: string;
-  recipeIngredient: RecipeIngredient[];
+  ingredients: RecipeIngredient[];
   description: string;
   preparation: string;
 }

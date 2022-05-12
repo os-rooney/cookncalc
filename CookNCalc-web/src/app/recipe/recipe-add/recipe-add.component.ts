@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {Recipe} from "../../Recipe";
-import {RecipeIngredient} from "../../Ingredient";
 import {HttpClient} from "@angular/common/http";
 
 @Component({
@@ -15,7 +14,9 @@ export class RecipeAddComponent implements OnInit {
   recipe?: Recipe = {
     id: 0,
     title: "",
-    recipeIngredient: [],
+    ingredients: [
+      {amount: 0, name:'', unit:''},
+    ],
     description: "",
     preparation: ""
   }

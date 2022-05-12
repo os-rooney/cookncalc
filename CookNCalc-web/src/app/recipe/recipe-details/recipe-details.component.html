@@ -1,10 +1,10 @@
 <div *ngIf="recipe">
   <p>{{recipe.title}}</p>
   <p>{{recipe.description}}</p>
-  <p *ngFor="let ingredient of recipe.recipeIngredient">
+  <p *ngFor="let ingredient of recipe.ingredients">
     {{ingredient.amount}}
-    {{ingredient.ingredientUnit}}
-    {{ingredient.ingredientName}}
+    {{ingredient.unit}}
+    {{ingredient.name}}
   </p>
   <p>{{recipe.preparation}}</p>
 </div>

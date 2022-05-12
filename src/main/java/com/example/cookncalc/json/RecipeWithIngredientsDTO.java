@@ -4,7 +4,7 @@ import com.example.cookncalc.ingredient.IngredientDTO;
 
 import java.util.List;
 
-public class JsonDTO {
+public class RecipeWithIngredientsDTO {
 
     private String title;
     private String description;
@@ -13,10 +13,10 @@ public class JsonDTO {
     private Double amount;
     private  List<IngredientDTO> ingredients;
 
-    public JsonDTO(){
+    public RecipeWithIngredientsDTO(){
     }
 
-    public JsonDTO(String title, String description, String preparation, List<IngredientDTO> ingredients, Double amount) {
+    public RecipeWithIngredientsDTO(String title, String description, String preparation, List<IngredientDTO> ingredients, Double amount) {
         this.title = title;
         this.description = description;
         this.preparation = preparation;

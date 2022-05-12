@@ -29,11 +29,11 @@ public class RecipeIngredient {
     public RecipeIngredient(){}
 
 
-    public String getIngredientName() {
+    public String getName() {
         return ingredient.getName();
     }
 
-    public String getIngredientUnit() {
+    public String getUnit() {
         return ingredient.getUnit();
     }
 
@@ -48,10 +48,6 @@ public class RecipeIngredient {
     public void setRecipe(Recipe recipe) {
         this.recipe = recipe;
     }
-
-/*    public Ingredient getIngredient() {
-        return ingredient;
-    }*/
 
     public void setIngredient(Ingredient ingredient) {
         this.ingredient = ingredient;

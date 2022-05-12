@@ -1,6 +1,6 @@
 package com.example.cookncalc.services;
 
-import com.example.cookncalc.json.JsonDTO;
+import com.example.cookncalc.json.RecipeWithIngredientsDTO;
 import com.example.cookncalc.ingredient.Ingredient;
 import com.example.cookncalc.ingredient.IngredientDTO;
 import com.example.cookncalc.ingredient.IngredientRepository;
@@ -28,7 +28,7 @@ public class RecipeService {
         this.recipeIngredientRespository = recipeIngredientRespository;
     }
 
-    public void addRecipe(JsonDTO dto){
+    public void addRecipe(RecipeWithIngredientsDTO dto){
         Recipe recipe = new Recipe();
         recipe.setTitle(dto.getTitle());
         recipe.setDescription(dto.getDescription());
