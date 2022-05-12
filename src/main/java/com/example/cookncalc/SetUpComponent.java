@@ -38,8 +38,8 @@ public class SetUpComponent {
     @Transactional
     public void handleApplicationReady(ApplicationReadyEvent event) {
         Recipe recipe = new Recipe("Kuchen", "Bester Kuchen");
-        Ingredient butter = new Ingredient("Butter", "stück");
-        Ingredient marmelade = new Ingredient("Marmelade", "Glas");
+        Ingredient butter = new Ingredient("Butter", "gramm", 500 );
+        Ingredient marmelade = new Ingredient("Marmelade", "gramm", 500);
         RecipeIngredient recipeIngredient = new RecipeIngredient();
         recipeIngredient.setRecipe(recipe);
         recipeIngredient.setIngredient(butter);
@@ -85,6 +85,25 @@ public class SetUpComponent {
             supermarketIngredientEdeka.setSupermarket(edeka);
             supermarketIngredientEdeka.setPrice(2.75);
             supermarketIngredientRepository.save(supermarketIngredientEdeka);
+
+            //Marmelade
+            SupermarketIngredient supermarketMarmeladeRewe = new SupermarketIngredient();
+            supermarketMarmeladeRewe.setIngredient(marmelade);
+            supermarketMarmeladeRewe.setSupermarket(rewe);
+            supermarketMarmeladeRewe.setPrice(3.0);
+            supermarketIngredientRepository.save(supermarketMarmeladeRewe);
+
+            SupermarketIngredient supermarketMarmeladeLidl = new SupermarketIngredient();
+            supermarketMarmeladeLidl.setIngredient(marmelade);
+            supermarketMarmeladeLidl.setSupermarket(lidl);
+            supermarketMarmeladeLidl.setPrice(2.0);
+            supermarketIngredientRepository.save(supermarketMarmeladeLidl);
+
+            SupermarketIngredient supermarketMarmeladeEdeka = new SupermarketIngredient();
+            supermarketMarmeladeEdeka.setIngredient(marmelade);
+            supermarketMarmeladeEdeka.setSupermarket(edeka);
+            supermarketMarmeladeEdeka.setPrice(1.90);
+            supermarketIngredientRepository.save(supermarketMarmeladeEdeka);
         }
     }
 }
