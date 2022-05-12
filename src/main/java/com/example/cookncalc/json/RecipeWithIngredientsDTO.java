@@ -2,6 +2,7 @@ package com.example.cookncalc.json;
 
 import com.example.cookncalc.ingredient.IngredientDTO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RecipeWithIngredientsDTO {
@@ -11,7 +12,7 @@ public class RecipeWithIngredientsDTO {
     private String preparation;
 
     private Double amount;
-    private  List<IngredientDTO> ingredients;
+    private  List<IngredientDTO> ingredients = new ArrayList<>();
 
     public RecipeWithIngredientsDTO(){
     }
@@ -24,6 +25,10 @@ public class RecipeWithIngredientsDTO {
         this.amount = amount;
     }
 
+
+    public void setIngredients(List<IngredientDTO> ingredients) {
+        this.ingredients = ingredients;
+    }
 
     public String getTitle() {
         return title;
@@ -60,5 +65,7 @@ public class RecipeWithIngredientsDTO {
     public void setAmount(Double amount) {
         this.amount = amount;
     }
+
+
 
 }

@@ -12,6 +12,7 @@ import com.example.cookncalc.recipes.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -45,6 +46,33 @@ public class RecipeService {
         }
         return recipeDTO;
     }
+
+    public RecipeWithIngredientsDTO showDetailRecipe(Long id) {
+        RecipeWithIngredientsDTO recipeWithIngredientsDTO = new RecipeWithIngredientsDTO();
+        Recipe recipe = recipeRepository.findById(id).orElseThrow();
+        recipeWithIngredientsDTO.setTitle(recipe.getTitle());
+        recipeWithIngredientsDTO.setDescription(recipe.getDescription());
+        recipeWithIngredientsDTO.setPreparation(recipe.getPreparation());
+
+        //Für ein bst. Recipe, Ingredients (Id's der Ingredients), Amounts von jedem Ingredient
+        //Amounts --> in Liste von Ingredient DTO'S
+        List<RecipeIngredient> recipeIngredient = recipeIngredientRespository.findAllByRecipeId(recipe.getId());
+
+
+
+        for(RecipeIngredient recipeIngredient1: recipeIngredient){
+            IngredientDTO ingredientDTO = new IngredientDTO();
+            ingredientDTO.setAmount(recipeIngredient1.getAmount());
+            ingredientDTO.setName(recipeIngredient1.getIngredient().getName());
+            ingredientDTO.setUnit(recipeIngredient1.getIngredient().getUnit());
+            recipeWithIngredientsDTO.getIngredients().add(ingredientDTO);
+        }
+
+        return recipeWithIngredientsDTO;
+
+    }
+
+
     public void addRecipe(RecipeWithIngredientsDTO dto){
         Recipe recipe = new Recipe();
         recipe.setTitle(dto.getTitle());
