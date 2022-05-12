@@ -2,11 +2,13 @@ package com.example.cookncalc;
 
 import com.example.cookncalc.json.RecipeWithIngredientsDTO;
 import com.example.cookncalc.recipes.Recipe;
+import com.example.cookncalc.recipes.RecipeDTO;
 import com.example.cookncalc.recipes.RecipeRepository;
 import com.example.cookncalc.services.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.LinkedList;
 import java.util.List;
 
 @RestController
@@ -23,8 +25,8 @@ public class HomeController {
     }
 
     @GetMapping("/api")
-    public List<Recipe> home(){
-        return recipeRepository.findAll();
+    public List<RecipeDTO> home(){
+        return recipeService.showRecipes();
     }
 
     @GetMapping("/api/recipe/{id}")

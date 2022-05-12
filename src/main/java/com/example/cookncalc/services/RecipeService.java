@@ -7,9 +7,13 @@ import com.example.cookncalc.ingredient.IngredientRepository;
 import com.example.cookncalc.recipeIngredient.RecipeIngredient;
 import com.example.cookncalc.recipeIngredient.RecipeIngredientRespository;
 import com.example.cookncalc.recipes.Recipe;
+import com.example.cookncalc.recipes.RecipeDTO;
 import com.example.cookncalc.recipes.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.LinkedList;
+import java.util.List;
 
 
 @Service
@@ -28,6 +32,19 @@ public class RecipeService {
         this.recipeIngredientRespository = recipeIngredientRespository;
     }
 
+
+    public List<RecipeDTO> showRecipes(){
+        List<RecipeDTO> recipeDTO = new LinkedList<RecipeDTO>();
+        List<Recipe> recipes = recipeRepository.findAll();
+        for(Recipe recipe : recipes){
+            RecipeDTO recipeDTO1 =  new RecipeDTO();
+            recipeDTO1.setId(recipe.getId());
+            recipeDTO1.setTitle(recipe.getTitle());
+            recipeDTO1.setDescription(recipe.getDescription());
+            recipeDTO.add(recipeDTO1);
+        }
+        return recipeDTO;
+    }
     public void addRecipe(RecipeWithIngredientsDTO dto){
         Recipe recipe = new Recipe();
         recipe.setTitle(dto.getTitle());
