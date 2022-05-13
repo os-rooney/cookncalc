@@ -50,49 +50,88 @@ public class SetUpComponent {
         recipeIngredientRepository.save(recipeIngredient);
     }
 
-
     @EventListener
     @Transactional
     public void handleApplicationReady(ApplicationReadyEvent event) {
-        Recipe kuchen = new Recipe("Kuchen", "Bester Kuchen");
-        Recipe cookies = new Recipe("Cookies", "Beste Cookies der Welt");
-
-        Ingredient butter = new Ingredient("Butter", "gramm", 250);
-        Ingredient marmelade = new Ingredient("Marmelade", "gramm", 500);
-        Ingredient mehl = new Ingredient("Mehl", "gramm", 1000);
-        Ingredient eier = new Ingredient("Eier", "Stück", 10);
-
-        RecipeIngredient kuchenButter = new RecipeIngredient();
-        kuchenButter.setRecipe(kuchen);
-        kuchenButter.setIngredient(butter);
-        kuchenButter.setAmount(3);
-
-        RecipeIngredient kuchenMarmelade = new RecipeIngredient();
-        kuchenMarmelade.setRecipe(kuchen);
-        kuchenMarmelade.setIngredient(marmelade);
-        kuchenMarmelade.setAmount(2);
-
+        //new recipes
+        Recipe gemuesepfanne = new Recipe("Mediterrane Zucchinipfanne", "Schmeckt mit jedem Gemüse ;)",
+                "Nudelwasser aufsetzen und kräftig salzen. Das Gemüse waschen und in kleine Würfel" +
+                        " schneiden. Zucchini schon mal salzen, damit sie Wasser ziehen können. Käse ebenfalls" +
+                        " würfeln. Besonders gut eignet sich Feta, aber wer es beispielsweise lieber italienisch " +
+                        "mag, kann auch Mozzarella oder Parmesan (dann aber gerieben) nehmen. Wenn das Wasser kocht," +
+                        " Nudeln zugeben - echte Pasta muss übrigens ganz ohne Öl im Nudelwasser auskommen! " +
+                        "Zucchiniwürfel mit etwas Olivenöl in eine Pfanne geben. Wenn die Nudeln al dente sind," +
+                        " das Wasser abgießen und ebenfalls in die Pfanne geben. Nachdem die Nudeln Farbe bekommen" +
+                        " haben, auch die mit Salz und Pfeffer gewürzten Tomaten dazugeben. Die frischen " +
+                        "Basilikumblätter nicht schneiden, sonder in Stücke zupfen, damit sich das Aroma entfalten" +
+                        " kann. Zuletzt wird noch der Feta über die Pfanne gestreut und dann kann serviert werden :)"
+        );
+        Recipe gefuellteZucchini = new Recipe("gefüllte Zucchini", "Ein tolles Ofengericht!",
+                "Den Reis kochen. Zwiebeln und Tomaten in kleine Stücke schneiden. Die Zucchinis mit " +
+                        "einem Löffel aushöhlen. Hackfleisch nach Belieben würzen und zusammen mit den Zwiebeln " +
+                        "anbraten. Reis und Tomaten zufügen und Zucchinis mit der Mischung füllen. Ab in den Ofen " +
+                        "und bei 200°C für eine halbe Stunde backen. Nach etwa der Hälfte der Zeit den geriebenen " +
+                        "Käse darüber streuen.");
 
         if (recipeRepository.count() == 0) {
-            recipeRepository.save(kuchen);
-            recipeRepository.save(cookies);
+            recipeRepository.save(gemuesepfanne);
+            recipeRepository.save(gefuellteZucchini);
+        }
 
-            ingredientRepository.save(butter);
-            ingredientRepository.save(marmelade);
-            ingredientRepository.save(mehl);
-            ingredientRepository.save(eier);
+        //new ingredients
+        Ingredient basilikum = new Ingredient("Basilikum", "Bund", 1);
+        Ingredient kaese = new Ingredient("Käse", "g", 200);
+        Ingredient nudeln = new Ingredient("Nudeln", "g", 500);
+        Ingredient oel = new Ingredient("Öl", "ml", 500);
+        Ingredient tomate = new Ingredient("Tomate(n)", "Stück", 1);
+        Ingredient zucchini = new Ingredient("Zucchini", "Stück", 1);
 
-            recipeIngredientRepository.save(kuchenButter);
-            recipeIngredientRepository.save(kuchenMarmelade);
+        Ingredient hack = new Ingredient("Hackfleisch", "g", 250);
+        Ingredient reis = new Ingredient("Reis", "g", 500);
+        Ingredient zwiebel = new Ingredient("Zwiebel(n)", "Stück", 1);
 
-            addRecipeIngredient(cookies, mehl, 550.0);
-            addRecipeIngredient(cookies, eier, 3.0);
-            addRecipeIngredient(cookies, butter, 250.0);
+//        Ingredient butter = new Ingredient("Butter", "g", 250);
+//        Ingredient marmelade = new Ingredient("Marmelade", "g", 500);
+//        Ingredient mehl = new Ingredient("Mehl", "g", 1000);
+//        Ingredient eier = new Ingredient("Eier", "Stück", 10);
 
+        if (ingredientRepository.count() == 0) {
+            ingredientRepository.save(basilikum);
+            ingredientRepository.save(kaese);
+            ingredientRepository.save(nudeln);
+            ingredientRepository.save(oel);
+            ingredientRepository.save(tomate);
+            ingredientRepository.save(zucchini);
 
+            ingredientRepository.save(hack);
+            ingredientRepository.save(reis);
+            ingredientRepository.save(zwiebel);
+
+//            ingredientRepository.save(butter);
+//            ingredientRepository.save(marmelade);
+//            ingredientRepository.save(mehl);
+//            ingredientRepository.save(eier);
+        }
+
+        //link recipes to ingredients
+        if (recipeIngredientRepository.count() == 0) {
+            addRecipeIngredient(gemuesepfanne, basilikum, 1.0);
+            addRecipeIngredient(gemuesepfanne, kaese, 150.0);
+            addRecipeIngredient(gemuesepfanne, nudeln, 200.0);
+            addRecipeIngredient(gemuesepfanne, oel, 20.0);
+            addRecipeIngredient(gemuesepfanne, tomate, 4.0);
+            addRecipeIngredient(gemuesepfanne, zucchini, 2.0);
+
+            addRecipeIngredient(gefuellteZucchini, hack, 150.0);
+            addRecipeIngredient(gefuellteZucchini, kaese, 100.0);
+            addRecipeIngredient(gefuellteZucchini, reis, 150.0);
+            addRecipeIngredient(gefuellteZucchini, tomate, 3.0);
+            addRecipeIngredient(gefuellteZucchini, zucchini, 4.0);
+            addRecipeIngredient(gefuellteZucchini, zwiebel, 2.0);
         }
 
 
+        //new supermarket
         Supermarket rewe = new Supermarket("Rewe");
         Supermarket lidl = new Supermarket("Lidl");
         Supermarket edeka = new Supermarket("Edeka");
@@ -103,26 +142,62 @@ public class SetUpComponent {
             supermarketRepository.save(edeka);
         }
 
+        //link recipes to ingredients
         if (supermarketIngredientRepository.count() == 0) {
-            addSupermarketIngredient(butter, rewe, 3.0);
-            addSupermarketIngredient(butter, lidl, 2.50);
-            addSupermarketIngredient(butter, edeka, 2.75);
+            //Basilikum
+            addSupermarketIngredient(basilikum, rewe, 2.0);
+            addSupermarketIngredient(basilikum, lidl, 1.5);
+            addSupermarketIngredient(basilikum, edeka, 1.8);
+            //Käse
+            addSupermarketIngredient(kaese, rewe, 3.0);
+            addSupermarketIngredient(kaese, lidl, 2.3);
+            addSupermarketIngredient(kaese, edeka, 2.5);
+            //Nudeln
+            addSupermarketIngredient(nudeln, rewe, 2.0);
+            addSupermarketIngredient(nudeln, lidl, 1.50);
+            addSupermarketIngredient(nudeln, edeka, 1.75);
+            //Öl
+            addSupermarketIngredient(oel, rewe, 5.0);
+            addSupermarketIngredient(oel, lidl, 5.5);
+            addSupermarketIngredient(oel, edeka, 5.25);
+            //Tomate
+            addSupermarketIngredient(tomate, rewe, 0.80);
+            addSupermarketIngredient(tomate, lidl, 0.60);
+            addSupermarketIngredient(tomate, edeka, 0.70);
+            //Zucchini
+            addSupermarketIngredient(zucchini, rewe, 1.5);
+            addSupermarketIngredient(zucchini, lidl, 1.4);
+            addSupermarketIngredient(zucchini, edeka, 1.5);
 
-            //Marmelade
-            addSupermarketIngredient(marmelade, rewe, 3.0);
-            addSupermarketIngredient(marmelade, lidl, 2.0);
-            addSupermarketIngredient(marmelade, edeka, 1.90);
+            //Hack
+            addSupermarketIngredient(hack, rewe, 7.0);
+            addSupermarketIngredient(hack, lidl, 6.5);
+            addSupermarketIngredient(hack, edeka, 8.25);
+            //Reis
+            addSupermarketIngredient(reis, rewe, 1.80);
+            addSupermarketIngredient(reis, lidl, 1.60);
+            addSupermarketIngredient(reis, edeka, 1.70);
+            //Zwiebel
+            addSupermarketIngredient(zwiebel, rewe, 0.6);
+            addSupermarketIngredient(zwiebel, lidl, 0.35);
+            addSupermarketIngredient(zwiebel, edeka, 0.5);
 
-            //Mehl
-            addSupermarketIngredient(mehl, rewe, 1.79);
-            addSupermarketIngredient(mehl, lidl, 1.29);
-            addSupermarketIngredient(mehl, edeka, 1.20);
-
-            //Eier
-            addSupermarketIngredient(eier, rewe, 2.59);
-            addSupermarketIngredient(eier, lidl, 1.99);
-            addSupermarketIngredient(eier, edeka, 2.20);
-
+//            //Butter
+//            addSupermarketIngredient(butter, rewe, 3.0);
+//            addSupermarketIngredient(butter, lidl, 2.50);
+//            addSupermarketIngredient(butter, edeka, 2.75);
+//            //Marmelade
+//            addSupermarketIngredient(marmelade, rewe, 3.0);
+//            addSupermarketIngredient(marmelade, lidl, 2.0);
+//            addSupermarketIngredient(marmelade, edeka, 1.90);
+//            //Mehl
+//            addSupermarketIngredient(mehl, rewe, 1.79);
+//            addSupermarketIngredient(mehl, lidl, 1.29);
+//            addSupermarketIngredient(mehl, edeka, 1.20);
+//            //Eier
+//            addSupermarketIngredient(eier, rewe, 2.59);
+//            addSupermarketIngredient(eier, lidl, 1.99);
+//            addSupermarketIngredient(eier, edeka, 2.20);
         }
     }
 }

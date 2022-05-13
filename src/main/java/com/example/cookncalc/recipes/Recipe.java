@@ -2,10 +2,7 @@ package com.example.cookncalc.recipes;
 
 import com.example.cookncalc.recipeIngredient.RecipeIngredient;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
@@ -24,6 +21,7 @@ public class Recipe {
 
     private String description;
 
+    @Column(columnDefinition = "varchar(1000) default 'Einfach alle Zutaten kombinieren ;)'")
     private String preparation;
 
     private Instant createdAt;
