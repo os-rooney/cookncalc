@@ -42,12 +42,6 @@ public class HomeController {
 
     @DeleteMapping("/api/deleteRecipe/{id}")
     public List<RecipeDTO> deleteRecipe(@PathVariable("id") Long id){
-        Optional<Recipe> recipeToDeleteOptional = recipeRepository.findById(id);
-        if(!recipeToDeleteOptional.isPresent()){
-            return null;
-        }
-        Recipe recipeToDelete = recipeToDeleteOptional.get();
-        recipeRepository.delete(recipeToDelete);
-        return recipeService.showRecipes();
+        return recipeService.deleteRecipe(id);
     }
 }

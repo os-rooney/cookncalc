@@ -11,10 +11,12 @@ import com.example.cookncalc.recipes.RecipeDTO;
 import com.example.cookncalc.recipes.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -90,6 +92,17 @@ public class RecipeService {
             ingredientRepository.save(ingredient);
             recipeIngredientRespository.save(recipeIngredient);
         }
+    }
+
+
+    public List<RecipeDTO> deleteRecipe(Long id){
+        Optional<Recipe> recipeToDeleteOptional = recipeRepository.findById(id);
+        if(!recipeToDeleteOptional.isPresent()){
+            return null;
+        }
+        Recipe recipeToDelete = recipeToDeleteOptional.get();
+        recipeRepository.delete(recipeToDelete);
+        return showRecipes();
     }
 
 }
