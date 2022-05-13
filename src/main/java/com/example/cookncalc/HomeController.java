@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class HomeController {
@@ -43,5 +44,10 @@ public class HomeController {
     @GetMapping("/api/ingredients")
     public List<IngredientDTO> fillDropdown() {
         return recipeService.ingredientsForDropdown();
+    }
+
+    @DeleteMapping("/api/deleteRecipe/{id}")
+    public void deleteRecipe(@PathVariable Long id){
+        recipeService.deleteRecipe(id);
     }
 }

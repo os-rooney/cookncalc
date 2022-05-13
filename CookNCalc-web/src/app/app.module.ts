@@ -8,13 +8,15 @@ import {FormsModule} from "@angular/forms";
 import { RecipeDetailsComponent } from './recipe/recipe-details/recipe-details.component';
 import { RecipeComponent } from './recipe/recipe.component';
 import { RecipeAddComponent } from './recipe/recipe-add/recipe-add.component';
+import { RecipeDeleteComponent } from './recipe/recipe-delete/recipe-delete.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RecipeDetailsComponent,
     RecipeComponent,
-    RecipeAddComponent
+    RecipeAddComponent,
+    RecipeDeleteComponent
   ],
   imports: [
     BrowserModule,

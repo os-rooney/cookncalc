@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -100,6 +101,20 @@ public class RecipeService {
             ingredientDTOList.add(ingredientDTO);
         }
         return ingredientDTOList;
+
+    public List<RecipeDTO> deleteRecipe(Long id){
+        Optional<Recipe> recipeToDeleteOptional = recipeRepository.findById(id);
+        if(!recipeToDeleteOptional.isPresent()){
+            return null;
+        }
+        Recipe recipeToDelete = recipeToDeleteOptional.get();
+        List<RecipeIngredient> recipeIngredient = recipeIngredientRepository.findByRecipe(recipeToDelete);
+        for(RecipeIngredient recipeIngredient1: recipeIngredient){
+            recipeIngredientRepository.delete(recipeIngredient1);
+        }
+        recipeRepository.delete(recipeToDelete);
+
+        return showRecipes();
     }
 
 }
