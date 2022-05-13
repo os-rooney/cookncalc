@@ -34,7 +34,7 @@ public class SetUpComponent {
         this.supermarketRepository = supermarketRepository;
     }
 
-    public void supermarketIngredientService(Ingredient ingredient, Supermarket supermarket, Double price ){
+    public void addSupermarketIngredient(Ingredient ingredient, Supermarket supermarket, Double price) {
         SupermarketIngredient supermarketIngredient = new SupermarketIngredient();
         supermarketIngredient.setIngredient(ingredient);
         supermarketIngredient.setSupermarket(supermarket);
@@ -42,13 +42,22 @@ public class SetUpComponent {
         supermarketIngredientRepository.save(supermarketIngredient);
     }
 
+    public void addRecipeIngredient(Recipe recipe, Ingredient ingredient, Double amount) {
+        RecipeIngredient recipeIngredient = new RecipeIngredient();
+        recipeIngredient.setRecipe(recipe);
+        recipeIngredient.setIngredient(ingredient);
+        recipeIngredient.setAmount(amount);
+        recipeIngredientRespository.save(recipeIngredient);
+    }
+
+
     @EventListener
     @Transactional
     public void handleApplicationReady(ApplicationReadyEvent event) {
         Recipe kuchen = new Recipe("Kuchen", "Bester Kuchen");
         Recipe cookies = new Recipe("Cookies", "Beste Cookies der Welt");
 
-        Ingredient butter = new Ingredient("Butter", "gramm", 250 );
+        Ingredient butter = new Ingredient("Butter", "gramm", 250);
         Ingredient marmelade = new Ingredient("Marmelade", "gramm", 500);
         Ingredient mehl = new Ingredient("Mehl", "gramm", 1000);
         Ingredient eier = new Ingredient("Eier", "Stück", 10);
@@ -63,20 +72,6 @@ public class SetUpComponent {
         kuchenMarmelade.setIngredient(marmelade);
         kuchenMarmelade.setAmount(2);
 
-        RecipeIngredient cookieMehl = new RecipeIngredient();
-        cookieMehl.setRecipe(cookies);
-        cookieMehl.setIngredient(mehl);
-        cookieMehl.setAmount(550);
-
-        RecipeIngredient cookieButter = new RecipeIngredient();
-        cookieButter.setRecipe(cookies);
-        cookieButter.setIngredient(butter);
-        cookieButter.setAmount(250);
-
-        RecipeIngredient cookieEi = new RecipeIngredient();
-        cookieEi.setRecipe(cookies);
-        cookieEi.setIngredient(eier);
-        cookieEi.setAmount(3);
 
         if (recipeRepository.count() == 0) {
             recipeRepository.save(kuchen);
@@ -89,14 +84,19 @@ public class SetUpComponent {
 
             recipeIngredientRespository.save(kuchenButter);
             recipeIngredientRespository.save(kuchenMarmelade);
-            recipeIngredientRespository.save(cookieMehl);
-            recipeIngredientRespository.save(cookieButter);
-            recipeIngredientRespository.save(cookieEi);
+
+            addRecipeIngredient(cookies, mehl, 550.0);
+            addRecipeIngredient(cookies, eier, 3.0);
+            addRecipeIngredient(cookies, butter, 250.0);
+
+
         }
+
 
         Supermarket rewe = new Supermarket("Rewe");
         Supermarket lidl = new Supermarket("Lidl");
         Supermarket edeka = new Supermarket("Edeka");
+
         if (supermarketRepository.count() == 0) {
             supermarketRepository.save(rewe);
             supermarketRepository.save(lidl);
@@ -104,52 +104,24 @@ public class SetUpComponent {
         }
 
         if (supermarketIngredientRepository.count() == 0) {
-            SupermarketIngredient supermarketButterRewe = new SupermarketIngredient();
-            supermarketButterRewe.setIngredient(butter);
-            supermarketButterRewe.setSupermarket(rewe);
-            supermarketButterRewe.setPrice(3.0);
-            supermarketIngredientRepository.save(supermarketButterRewe);
-
-            SupermarketIngredient supermarketButterLidl = new SupermarketIngredient();
-            supermarketButterLidl.setIngredient(butter);
-            supermarketButterLidl.setSupermarket(lidl);
-            supermarketButterLidl.setPrice(2.5);
-            supermarketIngredientRepository.save(supermarketButterLidl);
-
-            SupermarketIngredient supermarketButterEdeka = new SupermarketIngredient();
-            supermarketButterEdeka.setIngredient(butter);
-            supermarketButterEdeka.setSupermarket(edeka);
-            supermarketButterEdeka.setPrice(2.75);
-            supermarketIngredientRepository.save(supermarketButterEdeka);
+            addSupermarketIngredient(butter, rewe, 3.0);
+            addSupermarketIngredient(butter, lidl, 2.50);
+            addSupermarketIngredient(butter, edeka, 2.75);
 
             //Marmelade
-            SupermarketIngredient supermarketMarmeladeRewe = new SupermarketIngredient();
-            supermarketMarmeladeRewe.setIngredient(marmelade);
-            supermarketMarmeladeRewe.setSupermarket(rewe);
-            supermarketMarmeladeRewe.setPrice(3.0);
-            supermarketIngredientRepository.save(supermarketMarmeladeRewe);
-
-            SupermarketIngredient supermarketMarmeladeLidl = new SupermarketIngredient();
-            supermarketMarmeladeLidl.setIngredient(marmelade);
-            supermarketMarmeladeLidl.setSupermarket(lidl);
-            supermarketMarmeladeLidl.setPrice(2.0);
-            supermarketIngredientRepository.save(supermarketMarmeladeLidl);
-
-            SupermarketIngredient supermarketMarmeladeEdeka = new SupermarketIngredient();
-            supermarketMarmeladeEdeka.setIngredient(marmelade);
-            supermarketMarmeladeEdeka.setSupermarket(edeka);
-            supermarketMarmeladeEdeka.setPrice(1.90);
-            supermarketIngredientRepository.save(supermarketMarmeladeEdeka);
+            addSupermarketIngredient(marmelade, rewe, 3.0);
+            addSupermarketIngredient(marmelade, lidl, 2.0);
+            addSupermarketIngredient(marmelade, edeka, 1.90);
 
             //Mehl
-            supermarketIngredientService(mehl, rewe, 1.79);
-            supermarketIngredientService(mehl, lidl, 1.29);
-            supermarketIngredientService(mehl, edeka, 1.20);
+            addSupermarketIngredient(mehl, rewe, 1.79);
+            addSupermarketIngredient(mehl, lidl, 1.29);
+            addSupermarketIngredient(mehl, edeka, 1.20);
 
             //Eier
-            supermarketIngredientService(eier, rewe, 2.59);
-            supermarketIngredientService(eier, lidl, 1.99);
-            supermarketIngredientService(eier, edeka, 2.20);
+            addSupermarketIngredient(eier, rewe, 2.59);
+            addSupermarketIngredient(eier, lidl, 1.99);
+            addSupermarketIngredient(eier, edeka, 2.20);
 
         }
     }
