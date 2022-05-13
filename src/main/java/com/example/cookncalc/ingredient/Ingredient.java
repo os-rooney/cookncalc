@@ -2,7 +2,6 @@ package com.example.cookncalc.ingredient;
 
 import com.example.cookncalc.recipeIngredient.RecipeIngredient;
 import com.example.cookncalc.supermarketIngredient.SupermarketIngredient;
-import com.fasterxml.jackson.annotation.JsonInclude;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -17,6 +16,7 @@ public class Ingredient {
     private Long id;
     private String name;
 
+   private double packageSize;
 
     @OneToMany(mappedBy = "ingredient")
     private Set<RecipeIngredient> recipeIngredient = new HashSet<>();
@@ -28,6 +28,12 @@ public class Ingredient {
     private String unit;
 
     public Ingredient(){}
+
+    public Ingredient(String name, String unit, double packageSize){
+        this.name = name;
+        this.unit = unit;
+        this.packageSize = packageSize;
+    }
 
     public Ingredient(String name, String unit){
         this.name = name;
@@ -67,6 +73,14 @@ public class Ingredient {
 
     public void setSupermarketIngredients(Set<SupermarketIngredient> supermarketIngredients) {
         this.supermarketIngredients = supermarketIngredients;
+    }
+
+    public double getPackageSize() {
+        return packageSize;
+    }
+
+    public void setPackageSize(double packageSize) {
+        this.packageSize = packageSize;
     }
 
     @Override
