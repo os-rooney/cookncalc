@@ -3,7 +3,7 @@ package com.example.cookncalc;
 import com.example.cookncalc.ingredient.Ingredient;
 import com.example.cookncalc.ingredient.IngredientRepository;
 import com.example.cookncalc.recipeIngredient.RecipeIngredient;
-import com.example.cookncalc.recipeIngredient.RecipeIngredientRespository;
+import com.example.cookncalc.recipeIngredient.RecipeIngredientRepository;
 import com.example.cookncalc.recipes.Recipe;
 import com.example.cookncalc.recipes.RecipeRepository;
 import com.example.cookncalc.supermarket.Supermarket;
@@ -21,15 +21,15 @@ public class SetUpComponent {
 
     private final RecipeRepository recipeRepository;
     private final IngredientRepository ingredientRepository;
-    private final RecipeIngredientRespository recipeIngredientRespository;
+    private final RecipeIngredientRepository recipeIngredientRepository;
     private final SupermarketIngredientRepository supermarketIngredientRepository;
     private final SupermarketRepository supermarketRepository;
 
     @Autowired
-    public SetUpComponent(RecipeRepository recipeRepository, IngredientRepository ingredientRepository, RecipeIngredientRespository recipeIngredientRespository, SupermarketIngredientRepository supermarketIngredientRepository, SupermarketRepository supermarketRepository) {
+    public SetUpComponent(RecipeRepository recipeRepository, IngredientRepository ingredientRepository, RecipeIngredientRepository recipeIngredientRepository, SupermarketIngredientRepository supermarketIngredientRepository, SupermarketRepository supermarketRepository) {
         this.recipeRepository = recipeRepository;
         this.ingredientRepository = ingredientRepository;
-        this.recipeIngredientRespository = recipeIngredientRespository;
+        this.recipeIngredientRepository = recipeIngredientRepository;
         this.supermarketIngredientRepository = supermarketIngredientRepository;
         this.supermarketRepository = supermarketRepository;
     }
@@ -47,7 +47,7 @@ public class SetUpComponent {
         recipeIngredient.setRecipe(recipe);
         recipeIngredient.setIngredient(ingredient);
         recipeIngredient.setAmount(amount);
-        recipeIngredientRespository.save(recipeIngredient);
+        recipeIngredientRepository.save(recipeIngredient);
     }
 
 
@@ -82,8 +82,8 @@ public class SetUpComponent {
             ingredientRepository.save(mehl);
             ingredientRepository.save(eier);
 
-            recipeIngredientRespository.save(kuchenButter);
-            recipeIngredientRespository.save(kuchenMarmelade);
+            recipeIngredientRepository.save(kuchenButter);
+            recipeIngredientRepository.save(kuchenMarmelade);
 
             addRecipeIngredient(cookies, mehl, 550.0);
             addRecipeIngredient(cookies, eier, 3.0);

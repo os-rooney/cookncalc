@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Recipe} from "../../Recipe";
 import {HttpClient} from "@angular/common/http";
+import {RecipeIngredient} from "../../RecipeIngredient";
 import {Router} from "@angular/router";
 
 @Component({
@@ -10,6 +11,7 @@ import {Router} from "@angular/router";
 })
 export class RecipeAddComponent implements OnInit {
 
+  ingredients?: RecipeIngredient[];
   recipes?: Recipe[];
 
 
@@ -26,6 +28,7 @@ export class RecipeAddComponent implements OnInit {
   constructor(private http: HttpClient,private router: Router) { }
 
   ngOnInit(): void {
+    this.http.get<RecipeIngredient[]>('api/ingredients').subscribe(list => this.ingredients = list);
   }
 
   saveRecipe(){
