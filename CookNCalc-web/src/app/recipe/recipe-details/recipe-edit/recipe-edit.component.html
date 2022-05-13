@@ -1,0 +1,17 @@
+<div *ngIf="recipe">
+ Titel: <input type="text" [(ngModel)]="recipe.title" >
+<br>
+  <br>
+  Description: <input type="text" [(ngModel)]="recipe.description" >
+
+ <p *ngFor="let ingredient of recipe.ingredients">
+  Amount: <input type="text" [(ngModel)]="ingredient.amount">
+   Unit: <input type="text" [(ngModel)]="ingredient.unit">
+   Name: <input type="text" [(ngModel)]="ingredient.name">
+ </p>
+
+  Preparation: <input type="text" [(ngModel)]="recipe.preparation">
+<br>
+  <br>
+  <button (click)="changeRecipe()">Submit</button>
+</div>
