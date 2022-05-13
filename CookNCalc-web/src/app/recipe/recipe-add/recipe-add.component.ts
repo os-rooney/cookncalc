@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Recipe} from "../../Recipe";
 import {HttpClient} from "@angular/common/http";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-recipe-add',
@@ -9,9 +10,10 @@ import {HttpClient} from "@angular/common/http";
 })
 export class RecipeAddComponent implements OnInit {
 
+  recipes?: Recipe[];
 
 
-  recipe?: Recipe = {
+  recipe: Recipe = {
     id: 0,
     title: "",
     ingredients: [
@@ -21,7 +23,7 @@ export class RecipeAddComponent implements OnInit {
     preparation: ""
   }
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -29,7 +31,9 @@ export class RecipeAddComponent implements OnInit {
   saveRecipe(){
     this.http.post<Recipe>('/api/addRecipe', this.recipe)
       .subscribe();
-    this.recipe = {} as Recipe;
+
+    this.http.get<Recipe[]>("/api").subscribe(result => this.recipes=result);
+    this.router.navigate(['/recipes']);
   }
 
 }

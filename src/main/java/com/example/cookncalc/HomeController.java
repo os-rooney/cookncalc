@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class HomeController {
@@ -37,5 +38,10 @@ public class HomeController {
     @PostMapping("/api/addRecipe")
     public void add(@RequestBody RecipeWithIngredientsDTO dto){
         recipeService.addRecipe(dto);
+    }
+
+    @DeleteMapping("/api/deleteRecipe/{id}")
+    public void deleteRecipe(@PathVariable Long id){
+        recipeService.deleteRecipe(id);
     }
 }
