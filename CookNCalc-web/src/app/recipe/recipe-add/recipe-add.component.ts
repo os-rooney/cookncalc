@@ -29,7 +29,15 @@ export class RecipeAddComponent implements OnInit {
   saveRecipe(){
     this.http.post<Recipe>('/api/addRecipe', this.recipe)
       .subscribe();
-    this.recipe = {} as Recipe;
+    this.recipe = {
+      id: 0,
+      title: "",
+      ingredients: [
+        {amount: 0, name:'', unit:''},
+      ],
+      description: "",
+      preparation: ""
+    };
   }
 
 }
