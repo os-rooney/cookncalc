@@ -5,15 +5,14 @@ import com.example.cookncalc.ingredient.Ingredient;
 import com.example.cookncalc.ingredient.IngredientDTO;
 import com.example.cookncalc.ingredient.IngredientRepository;
 import com.example.cookncalc.recipeIngredient.RecipeIngredient;
+import com.example.cookncalc.recipeIngredient.RecipeIngredientRepository;
 import com.example.cookncalc.recipeIngredient.RecipeIngredientRespository;
 import com.example.cookncalc.recipes.Recipe;
 import com.example.cookncalc.recipes.RecipeDTO;
 import com.example.cookncalc.recipes.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -25,14 +24,16 @@ public class RecipeService {
     private final RecipeRepository recipeRepository;
     private final IngredientRepository ingredientRepository;
     private final RecipeIngredientRespository recipeIngredientRespository;
+    private final RecipeIngredientRepository recipeIngredientRepository;
 
     @Autowired
     public RecipeService(RecipeRepository recipeRepository,
                          IngredientRepository ingredientRepository,
-                         RecipeIngredientRespository recipeIngredientRespository) {
+                         RecipeIngredientRespository recipeIngredientRespository, RecipeIngredientRepository recipeIngredientRepository) {
         this.recipeRepository = recipeRepository;
         this.ingredientRepository = ingredientRepository;
         this.recipeIngredientRespository = recipeIngredientRespository;
+        this.recipeIngredientRepository = recipeIngredientRepository;
     }
 
 
@@ -101,7 +102,12 @@ public class RecipeService {
             return null;
         }
         Recipe recipeToDelete = recipeToDeleteOptional.get();
+        List<RecipeIngredient> recipeIngredient = recipeIngredientRepository.findByRecipe(recipeToDelete);
+        for(RecipeIngredient recipeIngredient1: recipeIngredient){
+            recipeIngredientRepository.delete(recipeIngredient1);
+        }
         recipeRepository.delete(recipeToDelete);
+
         return showRecipes();
     }
 

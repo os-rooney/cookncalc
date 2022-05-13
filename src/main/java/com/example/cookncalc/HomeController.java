@@ -41,7 +41,7 @@ public class HomeController {
     }
 
     @DeleteMapping("/api/deleteRecipe/{id}")
-    public List<RecipeDTO> deleteRecipe(@PathVariable("id") Long id){
-        return recipeService.deleteRecipe(id);
+    public void deleteRecipe(@PathVariable Long id){
+        recipeService.deleteRecipe(id);
     }
 }
