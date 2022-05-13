@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Recipe} from "../../Recipe";
 import {HttpClient} from "@angular/common/http";
+import {RecipeIngredient} from "../../RecipeIngredient";
 
 @Component({
   selector: 'app-recipe-add',
@@ -9,7 +10,7 @@ import {HttpClient} from "@angular/common/http";
 })
 export class RecipeAddComponent implements OnInit {
 
-
+  ingredients?: RecipeIngredient[];
 
   recipe?: Recipe = {
     id: 0,
@@ -24,6 +25,7 @@ export class RecipeAddComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
+    this.http.get<RecipeIngredient[]>('api/ingredients').subscribe(list => this.ingredients = list);
   }
 
   saveRecipe(){

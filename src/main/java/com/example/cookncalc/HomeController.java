@@ -1,5 +1,6 @@
 package com.example.cookncalc;
 
+import com.example.cookncalc.ingredient.IngredientDTO;
 import com.example.cookncalc.json.RecipeWithIngredientsDTO;
 import com.example.cookncalc.recipes.Recipe;
 import com.example.cookncalc.recipes.RecipeDTO;
@@ -37,5 +38,10 @@ public class HomeController {
     @PostMapping("/api/addRecipe")
     public void add(@RequestBody RecipeWithIngredientsDTO dto){
         recipeService.addRecipe(dto);
+    }
+
+    @GetMapping("/api/ingredients")
+    public List<IngredientDTO> fillDropdown() {
+        return recipeService.ingredientsForDropdown();
     }
 }
