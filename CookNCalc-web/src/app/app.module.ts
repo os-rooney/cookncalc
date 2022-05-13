@@ -9,6 +9,9 @@ import { RecipeDetailsComponent } from './recipe/recipe-details/recipe-details.c
 import { RecipeComponent } from './recipe/recipe.component';
 import { RecipeAddComponent } from './recipe/recipe-add/recipe-add.component';
 import { PriceCalculationComponent } from './price-calculation/price-calculation.component';
+import { RecipeDeleteComponent } from './recipe/recipe-delete/recipe-delete.component';
+import {RecipeEditComponent} from "./recipe/recipe-details/recipe-edit/recipe-edit.component";
+
 
 @NgModule({
   declarations: [
@@ -17,6 +20,8 @@ import { PriceCalculationComponent } from './price-calculation/price-calculation
     RecipeComponent,
     RecipeAddComponent,
     PriceCalculationComponent
+    RecipeDeleteComponent,
+    RecipeEditComponent
   ],
   imports: [
     BrowserModule,
