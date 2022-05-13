@@ -1,6 +1,6 @@
 package com.example.cookncalc.recipes;
 
-import com.example.cookncalc.recipeIngredient.RecipeIngredientRespository;
+import com.example.cookncalc.recipeIngredient.RecipeIngredientRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,11 +10,11 @@ import java.util.List;
 @RestController
 public class RecipeController {
     private final RecipeRepository recipeRepository;
-    private final RecipeIngredientRespository recipeIngredientRespository;
+    private final RecipeIngredientRepository recipeIngredientRepository;
 
-    public RecipeController(RecipeRepository recipeRepository, RecipeIngredientRespository recipeIngredientRespository) {
+    public RecipeController(RecipeRepository recipeRepository, RecipeIngredientRepository recipeIngredientRepository) {
         this.recipeRepository = recipeRepository;
-        this.recipeIngredientRespository = recipeIngredientRespository;
+        this.recipeIngredientRepository = recipeIngredientRepository;
     }
 
 @GetMapping("/api/test")

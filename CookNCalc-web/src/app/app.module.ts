@@ -19,7 +19,7 @@ import {RecipeEditComponent} from "./recipe/recipe-details/recipe-edit/recipe-ed
     RecipeDetailsComponent,
     RecipeComponent,
     RecipeAddComponent,
-    PriceCalculationComponent
+    PriceCalculationComponent,
     RecipeDeleteComponent,
     RecipeEditComponent
   ],
