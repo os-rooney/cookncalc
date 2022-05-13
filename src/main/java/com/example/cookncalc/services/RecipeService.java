@@ -90,17 +90,18 @@ public class RecipeService {
         }
     }
 
-    public List<IngredientDTO> ingredientsForDropdown(){
+    public List<IngredientDTO> ingredientsForDropdown() {
         List<IngredientDTO> ingredientDTOList = new LinkedList<>();
         List<Ingredient> ingredients = ingredientRepository.findAll();
-        for(Ingredient ingredient : ingredients){
-            IngredientDTO ingredientDTO =  new IngredientDTO();
+        for (Ingredient ingredient : ingredients) {
+            IngredientDTO ingredientDTO = new IngredientDTO();
             ingredientDTO.setId(ingredient.getId());
             ingredientDTO.setName(ingredient.getName());
             ingredientDTO.setUnit(ingredient.getUnit());
             ingredientDTOList.add(ingredientDTO);
         }
         return ingredientDTOList;
+    }
 
     public List<RecipeDTO> deleteRecipe(Long id){
         Optional<Recipe> recipeToDeleteOptional = recipeRepository.findById(id);
