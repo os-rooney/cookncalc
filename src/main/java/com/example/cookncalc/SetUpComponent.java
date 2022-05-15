@@ -73,9 +73,22 @@ public class SetUpComponent {
                         "und bei 200°C für eine halbe Stunde backen. Nach etwa der Hälfte der Zeit den geriebenen " +
                         "Käse darüber streuen.");
 
+        Recipe schokoTorte = new Recipe("Schokotorte", "Die leckerste Kalorienbombe der Welt!", "Die 150 g Kinderschokolade " +
+                " und 250 g Kinderschokolade in einem Wasserbad schmelzen. Die Butter cremig rühren und Zuckers, den Kakao, die Eigelbe, die Eier, " +
+                "den Vanillinzucker und Schokolade unterrühren. Mehl mit Backpulver mischen, Eiweiße steif schlagen."+
+                "Die Teigmasse in zwei Hälften teilen im vorgeheizten Backofen bei 180°C ca. 40 – 45 min. in der Springform backen.");
+
+        Recipe spargelImUltra = new Recipe("Spargel im Ultra", "Das Gericht der Spargelsaison", "Den Spargel gut schälen, die " +
+                "holzigen Enden abschneiden und den Spargel tropfnass in den Ultra - Plus von Tupper legen (ich habe den 3-Liter Topf genommen)." +
+                " Salz und Zucker darüber streuen und die zerlassene Butter darüber gießen. Den Backofen bei Umluft auf 180 Grad vorheizen und den " +
+                "Spargel darin 40 bis 45 Minuten garen (zwischendurch evtl. eine Messerprobe machen).");
+
+
         if (recipeRepository.count() == 0) {
             recipeRepository.save(gemuesepfanne);
             recipeRepository.save(gefuellteZucchini);
+            recipeRepository.save(schokoTorte);
+            recipeRepository.save(spargelImUltra);
         }
 
         //new ingredients
@@ -90,10 +103,23 @@ public class SetUpComponent {
         Ingredient reis = new Ingredient("Reis", "g", 500);
         Ingredient zwiebel = new Ingredient("Zwiebel(n)", "Stück", 1);
 
-//        Ingredient butter = new Ingredient("Butter", "g", 250);
+        Ingredient butter = new Ingredient("Butter", "g", 250);
+        Ingredient zucker = new Ingredient("Zucker", "g", 500);
+        Ingredient vanilleZucker = new Ingredient("VanilleZucker", "Päckchen", 1);
+        Ingredient schokolade = new Ingredient("Schokolade", "g", 250);
+        Ingredient eier = new Ingredient("Eier", "Stück", 10);
+        Ingredient mehl = new Ingredient("Mehl", "g", 500);
+        Ingredient kakaoPulver = new Ingredient("Kakaopulver", "g", 100);
+        Ingredient backPulver = new Ingredient("Backpulver", "Päckchen", 1);
+        Ingredient sahne = new Ingredient("Sahne", "Becher", 1);
+        Ingredient nutella = new Ingredient("Nutella", "Glas", 1);
+        Ingredient schokoRiegel = new Ingredient("Schokoriegel", "Stück", 10);
+
+        Ingredient Spargel = new Ingredient("Spargel", "Bund", 1);
+        Ingredient salz = new Ingredient("Salz", "g", 250);
+
 //        Ingredient marmelade = new Ingredient("Marmelade", "g", 500);
 //        Ingredient mehl = new Ingredient("Mehl", "g", 1000);
-//        Ingredient eier = new Ingredient("Eier", "Stück", 10);
 
         if (ingredientRepository.count() == 0) {
             ingredientRepository.save(basilikum);
@@ -107,10 +133,23 @@ public class SetUpComponent {
             ingredientRepository.save(reis);
             ingredientRepository.save(zwiebel);
 
-//            ingredientRepository.save(butter);
+            ingredientRepository.save(butter);
+            ingredientRepository.save(zucker);
+            ingredientRepository.save(vanilleZucker);
+            ingredientRepository.save(schokolade);
+            ingredientRepository.save(eier);
+            ingredientRepository.save(mehl);
+            ingredientRepository.save(kakaoPulver);
+            ingredientRepository.save(backPulver);
+            ingredientRepository.save(sahne);
+            ingredientRepository.save(nutella);
+            ingredientRepository.save(schokoRiegel);
+
+            ingredientRepository.save(Spargel);
+            ingredientRepository.save(salz);
+
 //            ingredientRepository.save(marmelade);
 //            ingredientRepository.save(mehl);
-//            ingredientRepository.save(eier);
         }
 
         //link recipes to ingredients
@@ -128,6 +167,23 @@ public class SetUpComponent {
             addRecipeIngredient(gefuellteZucchini, tomate, 3.0);
             addRecipeIngredient(gefuellteZucchini, zucchini, 4.0);
             addRecipeIngredient(gefuellteZucchini, zwiebel, 2.0);
+
+            addRecipeIngredient(schokoTorte, butter, 150.0);
+            addRecipeIngredient(schokoTorte, zucker, 150.0);
+            addRecipeIngredient(schokoTorte, vanilleZucker, 1.0);
+            addRecipeIngredient(schokoTorte, schokolade, 600.0);
+            addRecipeIngredient(schokoTorte, eier, 8.0);
+            addRecipeIngredient(schokoTorte, mehl, 300.0);
+            addRecipeIngredient(schokoTorte, kakaoPulver, 400.0);
+            addRecipeIngredient(schokoTorte, backPulver,3.0);
+            addRecipeIngredient(schokoTorte, sahne,2.0);
+            addRecipeIngredient(schokoTorte, nutella, 1.0);
+            addRecipeIngredient(schokoTorte, schokoRiegel, 8.0);
+
+            addRecipeIngredient(spargelImUltra, Spargel, 1.0);
+            addRecipeIngredient(spargelImUltra, salz, 10.0);
+            addRecipeIngredient(spargelImUltra, butter, 30.0);
+            addRecipeIngredient(spargelImUltra, zucker, 5.0);
         }
 
 
@@ -182,10 +238,63 @@ public class SetUpComponent {
             addSupermarketIngredient(zwiebel, lidl, 0.35);
             addSupermarketIngredient(zwiebel, edeka, 0.5);
 
-//            //Butter
-//            addSupermarketIngredient(butter, rewe, 3.0);
-//            addSupermarketIngredient(butter, lidl, 2.50);
-//            addSupermarketIngredient(butter, edeka, 2.75);
+
+            //Butter
+            addSupermarketIngredient(butter, rewe, 1.50);
+            addSupermarketIngredient(butter, lidl, 0.80);
+            addSupermarketIngredient(butter, edeka, 1.25);
+            //Zucker
+            addSupermarketIngredient(zucker, rewe, 0.70);
+            addSupermarketIngredient(zucker, lidl, 0.30);
+            addSupermarketIngredient(zucker, edeka, 0.65);
+            //VanilleZucker
+            addSupermarketIngredient(vanilleZucker, rewe, 0.50);
+            addSupermarketIngredient(vanilleZucker, lidl, 0.20);
+            addSupermarketIngredient(vanilleZucker, edeka, 0.45);
+            //Schokolade
+            addSupermarketIngredient(schokolade, rewe, 2.70);
+            addSupermarketIngredient(schokolade, lidl, 2.00);
+            addSupermarketIngredient(schokolade, edeka, 2.35);
+            //Eier
+            addSupermarketIngredient(eier, rewe, 2.59);
+            addSupermarketIngredient(eier, lidl, 1.99);
+            addSupermarketIngredient(eier, edeka, 2.20);
+            //Mehl
+            addSupermarketIngredient(mehl, rewe, 0.90);
+            addSupermarketIngredient(mehl, lidl, 0.60);
+            addSupermarketIngredient(mehl, edeka, 0.75);
+            //Kakaopulver
+            addSupermarketIngredient(kakaoPulver, rewe, 2.20);
+            addSupermarketIngredient(kakaoPulver, lidl, 2.00);
+            addSupermarketIngredient(kakaoPulver, edeka, 2.15);
+            //backPulver
+            addSupermarketIngredient(backPulver, rewe, 1.20);
+            addSupermarketIngredient(backPulver, lidl, 1.00);
+            addSupermarketIngredient(backPulver, edeka, 1.66);
+            //Sahne
+            addSupermarketIngredient(sahne, rewe, 1.70);
+            addSupermarketIngredient(sahne, lidl, 1.00);
+            addSupermarketIngredient(sahne, edeka, 1.35);
+            //Nutella
+            addSupermarketIngredient(nutella, rewe, 3.50);
+            addSupermarketIngredient(nutella, lidl, 3.20);
+            addSupermarketIngredient(nutella, edeka, 3.65);
+            //Schokoriegel
+            addSupermarketIngredient(schokoRiegel, rewe, 2.95);
+            addSupermarketIngredient(schokoRiegel, lidl, 2.15);
+            addSupermarketIngredient(schokoRiegel, edeka, 2.55);
+
+            //Spargel
+            addSupermarketIngredient(Spargel, rewe, 4.50);
+            addSupermarketIngredient(Spargel, lidl, 3.80);
+            addSupermarketIngredient(Spargel, edeka, 4.25);
+
+            //Salz
+            addSupermarketIngredient(salz, rewe, 1.30);
+            addSupermarketIngredient(salz, lidl, 0.90);
+            addSupermarketIngredient(salz, edeka, 1.15);
+
+
 //            //Marmelade
 //            addSupermarketIngredient(marmelade, rewe, 3.0);
 //            addSupermarketIngredient(marmelade, lidl, 2.0);
@@ -194,10 +303,7 @@ public class SetUpComponent {
 //            addSupermarketIngredient(mehl, rewe, 1.79);
 //            addSupermarketIngredient(mehl, lidl, 1.29);
 //            addSupermarketIngredient(mehl, edeka, 1.20);
-//            //Eier
-//            addSupermarketIngredient(eier, rewe, 2.59);
-//            addSupermarketIngredient(eier, lidl, 1.99);
-//            addSupermarketIngredient(eier, edeka, 2.20);
+
         }
     }
 }
