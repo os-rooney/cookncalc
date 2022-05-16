@@ -33,15 +33,11 @@ public class AuthController {
 
     @PostMapping("/login")
     public User login(@RequestBody UserLogin userLogin, HttpServletResponse response) {
-        try {
-            Cookie cookie = this.authService.createTokenCookie(userLogin.getUsername(), userLogin.getPassword());
-            response.addCookie(cookie);
+        User user = this.authService.authenticate(userLogin.getUsername(), userLogin.getPassword());
+        Cookie cookie = this.authService.createTokenCookie(user.getUsername());
+        response.addCookie(cookie);
 
-        } catch (Exception e) {
-
-        }
-
-        return null;
+        return user;
     }
 
     private static class UserLogin {

@@ -34,12 +34,17 @@ public class AuthService {
         this.passwordEncoder = passwordEncoder;
         this.userService = userService;
     }
-    protected Cookie createTokenCookie(String username, String password) throws AuthenticationException, IllegalArgumentException, JWTCreationException {
+    protected User authenticate(String username, String password) throws AuthenticationException, IllegalArgumentException, JWTCreationException {
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(username, password);
 
         Authentication authentication = authenticationManager.authenticate(authenticationToken);
-        String token = jwtUtil.generateToken(authentication.getName());
+
+        return this.userService.findByName(authentication.getName()).orElseThrow();
+    }
+
+    protected Cookie createTokenCookie(String username) {
+        String token = jwtUtil.generateToken(username);
 
         Cookie cookie = new Cookie(cookieName, token);
         cookie.setHttpOnly(true);
