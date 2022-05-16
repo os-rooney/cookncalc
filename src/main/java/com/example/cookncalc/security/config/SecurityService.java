@@ -18,7 +18,7 @@ import static java.lang.String.format;
 @Service
 public class SecurityService implements UserDetailsService {
 
-    private static final String ADMIN_ROLE = "ADMIN";
+    public static final String ADMIN_ROLE = "ADMIN";
 
     private final UserService userService;
 
