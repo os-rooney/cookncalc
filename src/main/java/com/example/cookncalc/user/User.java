@@ -18,4 +18,15 @@ public class User {
 
     private boolean isAdmin;
 
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
 }
