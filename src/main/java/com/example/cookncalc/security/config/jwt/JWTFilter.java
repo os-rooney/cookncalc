@@ -1,6 +1,5 @@
 package com.example.cookncalc.security.config.jwt;
 
-
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.example.cookncalc.security.config.SecurityService;
 import org.springframework.beans.factory.annotation.Value;
