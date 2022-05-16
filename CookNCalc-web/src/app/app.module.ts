@@ -13,6 +13,7 @@ import { RecipeDeleteComponent } from './recipe/recipe-delete/recipe-delete.comp
 import {RecipeEditComponent} from "./recipe/recipe-details/recipe-edit/recipe-edit.component";
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { MyRecipeComponent } from './recipe/my-recipe/my-recipe.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { RegisterComponent } from './register/register.component';
     RecipeDeleteComponent,
     RecipeEditComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    MyRecipeComponent
   ],
   imports: [
     BrowserModule,
