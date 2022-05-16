@@ -14,6 +14,7 @@ export class AuthService {
 
   constructor(private http: HttpClient) {
     if (AuthService.checkLoginState()) {
+      this.authenticated = true;
       this.refreshSession();
     }
   }
@@ -43,6 +44,9 @@ export class AuthService {
         },
         error: err => {
           console.error('Login failed!', err);
+          this.user = undefined;
+          this.authenticated = false;
+          localStorage.removeItem(SECURITY_EXAMPLE_LOGIN_STATE);
           if (errorCallback) {
             errorCallback(err);
           }
@@ -52,12 +56,19 @@ export class AuthService {
   }
 
   private refreshSession() {
-    this.http.get<User>('/api/users/current').subscribe(user => {
-        if (user) {
-          this.user = user;
-          this.authenticated = true;
-          AuthService.saveLoginState(user);
-        } else {
+    this.http.get<User>('/api/users/current').subscribe({
+        next: user => {
+          if (user) {
+            this.user = user;
+            this.authenticated = true;
+            AuthService.saveLoginState(user);
+          } else {
+            this.user = undefined;
+            this.authenticated = false;
+            localStorage.removeItem(SECURITY_EXAMPLE_LOGIN_STATE);
+          }
+        },
+        error: err => {
           this.user = undefined;
           this.authenticated = false;
           localStorage.removeItem(SECURITY_EXAMPLE_LOGIN_STATE);
