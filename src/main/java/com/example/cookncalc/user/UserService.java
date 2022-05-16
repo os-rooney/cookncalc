@@ -1,6 +1,5 @@
 package com.example.cookncalc.user;
 
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 
@@ -13,7 +12,7 @@ public class UserService {
     private final UserRepository userRepository;
 
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
