@@ -22,19 +22,22 @@ public class UserController {
     }
 
     @GetMapping("")
-    public List<User> users() {
-        return this.userService.findAll();
+    public List<UserDTO> users() {
+        return this.userService.findAll()
+                .stream()
+                .map(UserDTO::fromEntity)
+                .toList();
     }
 
     @GetMapping("/{userId}")
-    public User userById(@PathVariable Long userId) {
-        return this.userService.findById(userId);
+    public UserDTO userById(@PathVariable Long userId) {
+        return UserDTO.fromEntity(this.userService.findById(userId));
     }
 
     @GetMapping("/current")
-    public User current(Principal principal) {
+    public UserDTO current(Principal principal) {
         if (principal != null) {
-            return this.userService.findByName(principal.getName()).orElseThrow();
+            return UserDTO.fromEntity(this.userService.findByName(principal.getName()).orElseThrow());
         }
         return null;
     }

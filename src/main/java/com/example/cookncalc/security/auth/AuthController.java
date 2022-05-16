@@ -2,6 +2,7 @@ package com.example.cookncalc.security.auth;
 
 
 import com.example.cookncalc.user.User;
+import com.example.cookncalc.user.UserDTO;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,20 +25,20 @@ public class AuthController {
 
 
     @PostMapping("/register")
-    public User register(@RequestBody RegistrationDTO registration) {
+    public UserDTO register(@RequestBody RegistrationDTO registration) {
         if (!registration.getPassword().equals(registration.getPasswordRepeat())) {
             throw new WrongPasswordException("Passwords don't match!");
         }
-        return this.authService.register(registration);
+        return UserDTO.fromEntity(this.authService.register(registration));
     }
 
     @PostMapping("/login")
-    public User login(@RequestBody UserLogin userLogin, HttpServletResponse response) {
+    public UserDTO login(@RequestBody UserLogin userLogin, HttpServletResponse response) {
         User user = this.authService.authenticate(userLogin.getUsername(), userLogin.getPassword());
         Cookie cookie = this.authService.createTokenCookie(user.getUsername());
         response.addCookie(cookie);
 
-        return user;
+        return UserDTO.fromEntity(user);
     }
 
     private static class UserLogin {
