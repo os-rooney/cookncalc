@@ -1,6 +1,7 @@
 package com.example.cookncalc.recipes;
 
 import com.example.cookncalc.recipeIngredient.RecipeIngredient;
+import com.example.cookncalc.user.User;
 
 import javax.persistence.*;
 import java.time.Instant;
@@ -26,14 +27,19 @@ public class Recipe {
 
     private Instant createdAt;
 
+    @ManyToOne
+    private User user;
+
     public Recipe(){
         this.createdAt = Instant.now();
     }
 
-    public Recipe(String title, String description) {
+    public Recipe(String title, String description, String preparation, User user) {
         this.title = title;
         this.description = description;
+        this.preparation = preparation;
         this.createdAt = Instant.now();
+        this.user = user;
     }
 
     public Recipe(String title, String description, String preparation) {
@@ -91,5 +97,11 @@ public class Recipe {
         this.description = description;
     }
 
+    public User getUser() {
+        return user;
+    }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
 }
