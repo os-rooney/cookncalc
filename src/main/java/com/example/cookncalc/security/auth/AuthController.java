@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+
 import static java.lang.String.format;
 
 @RestController
@@ -29,8 +32,16 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public User login(@RequestBody UserLogin userLogin) {
-        return this.authService.login(userLogin.getUsername(), userLogin.getPassword());
+    public User login(@RequestBody UserLogin userLogin, HttpServletResponse response) {
+        try {
+            Cookie cookie = this.authService.createTokenCookie(userLogin.getUsername(), userLogin.getPassword());
+            response.addCookie(cookie);
+
+        } catch (Exception e) {
+
+        }
+
+        return null;
     }
 
     private static class UserLogin {
@@ -45,5 +56,7 @@ public class AuthController {
             return password;
         }
     }
+
+
 
 }

@@ -1,34 +1,51 @@
 package com.example.cookncalc.security.auth;
 
 
+import com.auth0.jwt.exceptions.JWTCreationException;
+import com.example.cookncalc.security.config.jwt.JWTUtil;
 import com.example.cookncalc.user.User;
 import com.example.cookncalc.user.UserService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import javax.servlet.http.Cookie;
 
-import static java.lang.String.format;
 
 @Service
 public class AuthService {
 
+
+    private final AuthenticationManager authenticationManager;
+    private final JWTUtil jwtUtil;
     private final PasswordEncoder passwordEncoder;
     private final UserService userService;
 
-    public AuthService(PasswordEncoder passwordEncoder, UserService userService) {
+
+    @Value("${jwt-cookie-name}")
+    private String cookieName;
+
+    public AuthService(AuthenticationManager authenticationManager, JWTUtil jwtUtil, PasswordEncoder passwordEncoder, UserService userService) {
+        this.authenticationManager = authenticationManager;
+        this.jwtUtil = jwtUtil;
         this.passwordEncoder = passwordEncoder;
         this.userService = userService;
     }
+    protected Cookie createTokenCookie(String username, String password) throws AuthenticationException, IllegalArgumentException, JWTCreationException {
+        UsernamePasswordAuthenticationToken authenticationToken =
+                new UsernamePasswordAuthenticationToken(username, password);
 
-    protected User login(String username, String password) {
-        User user = this.userService.findByName(username)
-                .orElseThrow(() -> new UsernameNotFoundException(format("User '%s' not found", username)));
+        Authentication authentication = authenticationManager.authenticate(authenticationToken);
+        String token = jwtUtil.generateToken(authentication.getName());
 
-        if (passwordEncoder.matches(password, user.getPassword())) {
-            return user;
-        } else {
-            throw new WrongPasswordException(format("Wrong password for user '%s'.", username));
-        }
+        Cookie cookie = new Cookie(cookieName, token);
+        cookie.setHttpOnly(true);
+        // FIXME cookie.setMaxAge() should be called to set a time in seconds after when the cookie should expire
+        cookie.setPath("/");
+        return cookie;
     }
 
     public User register(RegistrationDTO registration) {
