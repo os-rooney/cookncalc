@@ -12,6 +12,7 @@ import { PriceCalculationComponent } from './price-calculation/price-calculation
 import { RecipeDeleteComponent } from './recipe/recipe-delete/recipe-delete.component';
 import {RecipeEditComponent} from "./recipe/recipe-details/recipe-edit/recipe-edit.component";
 import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { LoginComponent } from './login/login.component';
     PriceCalculationComponent,
     RecipeDeleteComponent,
     RecipeEditComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

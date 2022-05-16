@@ -1,0 +1,14 @@
+<div>
+  <label for="username">Username</label>
+  <input type="text" id="username" name="username" [(ngModel)]="registration.username" required>
+
+  <label for="password">Password</label>
+  <input type="password" id="password" name="password" [(ngModel)]="registration.password" required>
+
+  <label for="passwordRepeat">Repeat password</label>
+  <input type="password" id="passwordRepeat" name="passwordRepeat" [(ngModel)]="registration.passwordRepeat" required>
+  <span class="error" *ngIf="registration.password !== registration.passwordRepeat">Passwords do not match!</span>
+
+  <button (click)="register()" [disabled]="!valid()">Register</button>
+</div>
+
