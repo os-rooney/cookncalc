@@ -1,1 +1,12 @@
-<p>login works!</p>
+<div>
+  <label for="username">Username</label>
+  <input type="text" id="username" name="username" [(ngModel)]="credentials.username" required>
+
+  <label for="password">Password</label>
+  <input type="password" id="password" name="password" [(ngModel)]="credentials.password" required>
+
+  <div *ngIf="loginError"><small style="color: darkred">{{ loginError | json }}</small></div>
+
+  <button (click)="login()" [disabled]="!valid()">Login</button>
+
+</div>
