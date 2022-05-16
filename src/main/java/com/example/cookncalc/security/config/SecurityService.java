@@ -1,4 +1,4 @@
-package com.example.cookncalc.config;
+package com.example.cookncalc.security.config;
 
 
 import com.example.cookncalc.user.User;

@@ -1,4 +1,4 @@
-package com.example.cookncalc.config;
+package com.example.cookncalc.security.config;
 
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;

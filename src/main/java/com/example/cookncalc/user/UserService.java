@@ -26,4 +26,7 @@ public class UserService {
     public Optional<User> findByName(String username) {
         return this.userRepository.findByUsernameIgnoreCase(username);
     }
+    public User save(User user) {
+        return this.userRepository.save(user);
+    }
 }
