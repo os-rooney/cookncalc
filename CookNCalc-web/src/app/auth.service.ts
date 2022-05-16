@@ -18,10 +18,6 @@ export class AuthService {
     }
   }
 
-  private static createToken(username: string, password: string) {
-    return btoa(username + ':' + password);
-  }
-
   private static saveLoginState(user: User) {
     const data = {user: user.username, login: Date.now()}
     localStorage.setItem(SECURITY_EXAMPLE_LOGIN_STATE, JSON.stringify(data));
@@ -36,11 +32,7 @@ export class AuthService {
   }
 
   public authenticate(username: string, password: string, successCallback?: Function, errorCallback?: Function) {
-    this.http.post<User>('/api/auth/login', {username, password}, {
-      headers: new HttpHeaders({
-        'Authorization': 'Basic ' + AuthService.createToken(username, password),
-      }), withCredentials: true,
-    }).subscribe({
+    this.http.post<User>('/api/auth/login', {username, password}).subscribe({
         next: user => {
           this.user = user;
           this.authenticated = true;

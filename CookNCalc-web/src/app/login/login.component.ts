@@ -26,8 +26,8 @@ export class LoginComponent implements OnInit {
   login() {
     if (this.valid()) {
       this.authService.authenticate(this.credentials.username, this.credentials.password,
-        () => this.router.navigate(['/'])),
-        (err: string | undefined) => this.loginError = err;
+        () => this.router.navigate(['/']),
+        (err: string | undefined) => this.loginError = err);
     }
   }
 }
