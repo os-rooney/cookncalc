@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {User} from "../../model/user";
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-my-recipe',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MyRecipeComponent implements OnInit {
 
-  constructor() { }
+  user?: User;
+
+  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
+    this.http.get<User>('/api/users/current').subscribe(user => this.user = user);
   }
 
 }
