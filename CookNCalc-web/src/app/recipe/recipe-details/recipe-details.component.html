@@ -8,9 +8,6 @@
   </p>
   <p>{{recipe.preparation}}</p>
   <a *ngIf="authService.isAuthenticated" routerLink="./edit">Edit</a>
-  <br>
-  <a *ngIf="authService.isAuthenticated" routerLink="/addRecipe">Add</a>
-  <br>
   <app-recipe-delete *ngIf="authService.isAuthenticated"></app-recipe-delete>
   <br>
   <a routerLink="/recipes">back to recipes</a>
