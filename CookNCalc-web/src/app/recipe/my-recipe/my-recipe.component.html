@@ -3,3 +3,6 @@
 {{user?.username}}
 {{user?.admin}}
 
+<br>
+<a *ngIf="authService.isAuthenticated" routerLink="/addRecipe">Add</a>
+<br>
