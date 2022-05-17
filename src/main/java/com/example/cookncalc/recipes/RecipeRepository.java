@@ -10,6 +10,8 @@ import java.util.List;
 public interface RecipeRepository extends CrudRepository<Recipe, Long> {
     List<Recipe> findAll();
 
+    List<Recipe> findAllByUserId(Long id);
+
     @Query(value = "select t.Rezept_ID, t.Rezept_Title, t.Markt, t.Zutat, t.VPE_Need, t.Preis * t.VPE_Need as Ges_Produkt_Preis\n" +
             "from (select r.id                                                                             as Rezept_ID,\n" +
             "             r.title                                                                          as Rezept_Title,\n" +

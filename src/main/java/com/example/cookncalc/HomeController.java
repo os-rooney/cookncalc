@@ -2,20 +2,19 @@ package com.example.cookncalc;
 
 import com.example.cookncalc.ingredient.IngredientDTO;
 import com.example.cookncalc.json.RecipeWithIngredientsDTO;
-import com.example.cookncalc.recipes.Recipe;
 import com.example.cookncalc.recipes.RecipeDTO;
-import com.example.cookncalc.recipes.RecipeRepository;
 import com.example.cookncalc.services.RecipeService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class HomeController {
+
+    private final static Logger logger = LoggerFactory.getLogger(HomeController.class);
 
     private final RecipeService recipeService;
 
@@ -27,6 +26,15 @@ public class HomeController {
     @GetMapping("/api")
     public List<RecipeDTO> home(){
         return recipeService.showRecipes();
+    }
+
+    @GetMapping("/api/myrecipe")
+    public List<RecipeDTO> getMyRecipes(@RequestParam long id, @RequestParam String username, @RequestParam boolean admin){
+        System.out.println(id);
+        System.out.println(username);
+        System.out.println(admin);
+        logger.info("id: " + id);
+        return recipeService.findRecipeByUser(id);
     }
 
     @GetMapping("/api/recipe/{id}")
