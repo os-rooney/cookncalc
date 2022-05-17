@@ -1,4 +1,5 @@
 import {RecipeIngredient} from "./RecipeIngredient";
+import {User} from "./model/user";
 
 export interface Recipe{
   id:number;
@@ -6,4 +7,5 @@ export interface Recipe{
   ingredients: RecipeIngredient[];
   description: string;
   preparation: string;
+  user: User;
 }

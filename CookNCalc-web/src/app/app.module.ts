@@ -8,13 +8,26 @@ import {FormsModule} from "@angular/forms";
 import { RecipeDetailsComponent } from './recipe/recipe-details/recipe-details.component';
 import { RecipeComponent } from './recipe/recipe.component';
 import { RecipeAddComponent } from './recipe/recipe-add/recipe-add.component';
+import { PriceCalculationComponent } from './price-calculation/price-calculation.component';
+import { RecipeDeleteComponent } from './recipe/recipe-delete/recipe-delete.component';
+import {RecipeEditComponent} from "./recipe/recipe-details/recipe-edit/recipe-edit.component";
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { MyRecipeComponent } from './recipe/my-recipe/my-recipe.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     RecipeDetailsComponent,
     RecipeComponent,
-    RecipeAddComponent
+    RecipeAddComponent,
+    PriceCalculationComponent,
+    RecipeDeleteComponent,
+    RecipeEditComponent,
+    LoginComponent,
+    RegisterComponent,
+    MyRecipeComponent
   ],
   imports: [
     BrowserModule,

@@ -11,6 +11,14 @@ label{
 input{
   margin-bottom: 1rem;
 }
+.ingredients{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.ingredients input{
+  margin-right: 1rem;
+}
 button{
   display: block;
 }
@@ -22,4 +30,10 @@ button{
   color: red;
   -webkit-text-stroke: .3px #000;
   font-size: 1.2rem;
+  align-self: start;
+}
+#unit{
+  margin: 0;
+  align-self: baseline;
+  font-weight: bold;
 }

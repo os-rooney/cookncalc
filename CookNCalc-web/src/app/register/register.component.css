@@ -1,0 +1,39 @@
+* {
+  box-sizing: border-box;
+}
+
+div {
+  width: 30vw;
+
+}
+
+label,
+input {
+  display: inline-block;
+  margin: 0.8em 0;
+
+}
+
+label {
+  width: 30%;
+  text-align: right;
+}
+
+label + input {
+  width: 30%;
+  margin: 0 30% 0 4%;
+}
+
+.error {
+  width: 100%;
+  font-weight: bold;
+  display: inline-block;
+  text-align: center;
+  color: darkred;
+}
+
+button {
+  width: 40%;
+  display: block;
+  margin: 1em auto;
+}

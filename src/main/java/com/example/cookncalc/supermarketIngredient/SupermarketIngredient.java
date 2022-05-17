@@ -51,9 +51,9 @@ public class SupermarketIngredient {
         this.price = price;
     }
 
-    public Ingredient getIngredient() {
-        return ingredient;
-    }
+//    public Ingredient getIngredient() {
+//        return ingredient;
+//    }
 
     public void setIngredient(Ingredient ingredient) {
         this.ingredient = ingredient;

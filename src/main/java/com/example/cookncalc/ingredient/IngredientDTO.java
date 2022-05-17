@@ -2,6 +2,7 @@ package com.example.cookncalc.ingredient;
 
 public class IngredientDTO {
 
+    private Long id;
     private String name;
 
     //TODO: Enum erstellen
@@ -36,5 +37,13 @@ public class IngredientDTO {
     }
     public void setAmount(Double amount) {
         this.amount = amount;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

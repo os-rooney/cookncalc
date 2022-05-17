@@ -1,1 +1,13 @@
+<header>
+  <nav>
+    <ul>
+      <li><a routerLink="/">Home</a></li>
+      <li *ngIf="!authService.isAuthenticated"><a routerLink="/register">Register</a></li>
+      <li *ngIf="!authService.isAuthenticated"><a routerLink="/login">Login</a></li>
+      <li *ngIf="authService.isAuthenticated"><a (click)="authService.logout()" routerLink="/">Logout</a></li>
+      <li *ngIf="authService.isAuthenticated"><a routerLink="/myRecipes">My Recipes</a></li>
+    </ul>
+  </nav>
+</header>
+
 <router-outlet></router-outlet>

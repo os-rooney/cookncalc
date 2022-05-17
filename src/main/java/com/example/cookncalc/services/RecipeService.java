@@ -5,16 +5,19 @@ import com.example.cookncalc.ingredient.Ingredient;
 import com.example.cookncalc.ingredient.IngredientDTO;
 import com.example.cookncalc.ingredient.IngredientRepository;
 import com.example.cookncalc.recipeIngredient.RecipeIngredient;
-import com.example.cookncalc.recipeIngredient.RecipeIngredientRespository;
+import com.example.cookncalc.recipeIngredient.RecipeIngredientRepository;
 import com.example.cookncalc.recipes.Recipe;
 import com.example.cookncalc.recipes.RecipeDTO;
 import com.example.cookncalc.recipes.RecipeRepository;
+import com.example.cookncalc.recipes.TotalPriceForRecipe;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -22,15 +25,15 @@ public class RecipeService {
 
     private final RecipeRepository recipeRepository;
     private final IngredientRepository ingredientRepository;
-    private final RecipeIngredientRespository recipeIngredientRespository;
+    private final RecipeIngredientRepository recipeIngredientRepository;
 
     @Autowired
     public RecipeService(RecipeRepository recipeRepository,
                          IngredientRepository ingredientRepository,
-                         RecipeIngredientRespository recipeIngredientRespository) {
+                         RecipeIngredientRepository recipeIngredientRepository) {
         this.recipeRepository = recipeRepository;
         this.ingredientRepository = ingredientRepository;
-        this.recipeIngredientRespository = recipeIngredientRespository;
+        this.recipeIngredientRepository = recipeIngredientRepository;
     }
 
 
@@ -56,7 +59,7 @@ public class RecipeService {
 
         //Für ein bst. Recipe, Ingredients (Id's der Ingredients), Amounts von jedem Ingredient
         //Amounts --> in Liste von Ingredient DTO'S
-        List<RecipeIngredient> recipeIngredient = recipeIngredientRespository.findAllByRecipeId(recipe.getId());
+        List<RecipeIngredient> recipeIngredient = recipeIngredientRepository.findAllByRecipeId(recipe.getId());
 
 
 
@@ -78,18 +81,56 @@ public class RecipeService {
         recipe.setTitle(dto.getTitle());
         recipe.setDescription(dto.getDescription());
         recipe.setPreparation(dto.getPreparation());
+        recipe.setUser(dto.getUser());
         recipeRepository.save(recipe);
 
         for(IngredientDTO ingredientDTO : dto.getIngredients()){
             Double amount = ingredientDTO.getAmount();
             RecipeIngredient recipeIngredient = new RecipeIngredient();
             recipeIngredient.setRecipe(recipe);
-            Ingredient ingredient = new Ingredient(ingredientDTO.getName(), ingredientDTO.getUnit());
-            recipeIngredient.setIngredient(ingredient);
+            recipeIngredient.setIngredient(ingredientRepository.findByName(ingredientDTO.getName()).orElseThrow());
             recipeIngredient.setAmount(amount);
-            ingredientRepository.save(ingredient);
-            recipeIngredientRespository.save(recipeIngredient);
+            recipeIngredientRepository.save(recipeIngredient);
         }
+    }
+
+
+
+    public List<IngredientDTO> ingredientsForDropdown() {
+        List<IngredientDTO> ingredientDTOList = new LinkedList<>();
+        List<Ingredient> ingredients = ingredientRepository.findAll();
+        for (Ingredient ingredient : ingredients) {
+            IngredientDTO ingredientDTO = new IngredientDTO();
+            ingredientDTO.setId(ingredient.getId());
+            ingredientDTO.setName(ingredient.getName());
+            ingredientDTO.setUnit(ingredient.getUnit());
+            ingredientDTOList.add(ingredientDTO);
+        }
+        return ingredientDTOList;
+    }
+
+    public List<RecipeDTO> deleteRecipe(Long id){
+        Optional<Recipe> recipeToDeleteOptional = recipeRepository.findById(id);
+        if(!recipeToDeleteOptional.isPresent()){
+            return null;
+        }
+        Recipe recipeToDelete = recipeToDeleteOptional.get();
+        List<RecipeIngredient> recipeIngredient = recipeIngredientRepository.findByRecipe(recipeToDelete);
+        for(RecipeIngredient recipeIngredient1: recipeIngredient){
+            recipeIngredientRepository.delete(recipeIngredient1);
+        }
+        recipeRepository.delete(recipeToDelete);
+
+        return showRecipes();
+    }
+
+    public List<TotalPriceForRecipe> priceCalculation(List<Object[]> calculation){
+        List<TotalPriceForRecipe> calcTable = new ArrayList<>();
+        for(Object[] object: calculation){
+            calcTable.add(new TotalPriceForRecipe(object));
+
+        }
+        return calcTable;
     }
 
 }
