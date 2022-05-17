@@ -2,16 +2,14 @@ package com.example.cookncalc.recipes;
 
 import java.math.BigInteger;
 
-public class TotalAmountRow {
+public class TotalPriceForRecipe {
    BigInteger recipeId;
     String recipeTitle;
     String supermarket;
     double totalPrice;
 
-    public TotalAmountRow(Object[] objects){
+    public TotalPriceForRecipe(Object[] objects){
         for(int i=0; i<objects.length; i++){
-            System.out.println( objects[i]);
-            System.out.println( objects[i].getClass());
             switch (i){
                 case 0:
                     if(objects[i] instanceof BigInteger){
