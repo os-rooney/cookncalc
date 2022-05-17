@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { User } from './model/user';
+import { User } from '../model/user';
 
 const SECURITY_EXAMPLE_LOGIN_STATE = 'SECURITY_EXAMPLE_LOGIN_STATE';
 
