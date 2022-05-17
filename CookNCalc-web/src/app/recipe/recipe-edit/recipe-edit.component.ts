@@ -1,8 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Recipe} from "../../../Recipe";
+import {Recipe} from "../../model/recipe";
 import {ActivatedRoute, Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
-import {RecipeIngredient} from "../../../RecipeIngredient";
+import {RecipeIngredient} from "../../model/recipeIngredient";
 
 @Component({
   selector: 'app-recipe-change',
@@ -23,11 +23,11 @@ export class RecipeEditComponent implements OnInit {
   ngOnInit(): void {
     this.http.get<RecipeIngredient[]>('api/ingredients').subscribe(list => this.ingredients = list);
     this.id = Number(this.route.snapshot.paramMap.get("id"));
-    this.http.get<Recipe>(`/api/recipe/${this.id}`).subscribe(result => this.recipe = result);
+    this.http.get<Recipe>(`/api/recipes/${this.id}`).subscribe(result => this.recipe = result);
   }
 
   changeRecipe(){
-    this.http.post<Recipe>(`/api/recipe/${this.id}/edit`, this.recipe).subscribe();
+    this.http.post<Recipe>(`/api/recipes/${this.id}/edit`, this.recipe).subscribe();
 
     this.http.get<Recipe[]>("/api").subscribe(result => this.recipes=result);
     this.router.navigate(['/recipes']);
