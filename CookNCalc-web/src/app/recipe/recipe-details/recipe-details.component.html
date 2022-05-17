@@ -7,10 +7,14 @@
     {{ingredient.name}}
   </p>
   <p>{{recipe.preparation}}</p>
-  <app-recipe-delete>delete recipe</app-recipe-delete>
+  <a *ngIf="authService.isAuthenticated" routerLink="./edit">Edit</a>
+  <br>
+  <a *ngIf="authService.isAuthenticated" routerLink="/addRecipe">Add</a>
+  <br>
+  <app-recipe-delete *ngIf="authService.isAuthenticated"></app-recipe-delete>
   <br>
   <a routerLink="/recipes">back to recipes</a>
 </div>
-<app-price-calculation></app-price-calculation>
-<a routerLink="./edit">Edit</a>
+<app-price-calculation *ngIf="authService.isAuthenticated"></app-price-calculation>
+
 
