@@ -9,6 +9,7 @@ import com.example.cookncalc.services.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -16,13 +17,10 @@ import java.util.Optional;
 @RestController
 public class HomeController {
 
-    private final RecipeRepository recipeRepository;
     private final RecipeService recipeService;
 
     @Autowired
-    public HomeController(RecipeRepository recipeRepository,
-                          RecipeService recipeService){
-        this.recipeRepository = recipeRepository;
+    public HomeController(RecipeService recipeService){
         this.recipeService = recipeService;
     }
 
