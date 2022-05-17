@@ -30,9 +30,9 @@ public class RecipeController {
     }
 
     @GetMapping("/api/test/{recipeId}")
-    public List<TotalAmountRow> recipeTest(@PathVariable Long recipeId){
+    public List<TotalPriceForRecipe> recipeTest(@PathVariable Long recipeId){
 
-        return  new TotalAmountDTO(this.recipeRepository.getTotalAmountPerMarketForRecipeId(recipeId)).getResTable();
+        return  new TotalPriceForRecipeTransformer(this.recipeRepository.getTotalAmountPerMarketForRecipeId(recipeId)).getResTable();
 
     }
 
