@@ -1,25 +1,12 @@
 <h1>Meine Rezepte</h1>
 
 <div *ngFor="let recipe of recipes">
-  {{recipe.id}}
   <br>
   {{recipe.title}}
   <br>
   {{recipe.description}}
   <br>
-  <a [routerLink]="['/recipes', recipe.id]">Details</a>
-</div>
-
-<div *ngIf="user.id !== 0">
-  <div *ngFor="let recipe of recipes">
-    {{recipe.id}}
-    <br>
-    {{recipe.title}}
-    <br>
-    {{recipe.description}}
-    <br>
-    <a [routerLink]="['/recipes', recipe.id]">Details</a>
-  </div>
+  <a [routerLink]="['/myRecipes', recipe.id]">Details</a>
 </div>
 
 <br>
