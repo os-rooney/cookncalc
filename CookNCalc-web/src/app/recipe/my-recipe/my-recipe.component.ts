@@ -1,8 +1,8 @@
 import {AfterContentInit, Component, OnInit} from '@angular/core';
 import {User} from "../../model/user";
 import {HttpClient} from "@angular/common/http";
-import {AuthService} from "../../auth.service";
-import {Recipe} from "../../Recipe";
+import {AuthService} from "../../auth/auth.service";
+import {Recipe} from "../../model/recipe";
 import {HttpParams} from "@angular/common/http";
 
 @Component({
@@ -35,7 +35,7 @@ export class MyRecipeComponent implements OnInit {
   //mergeMap
 
   getRecipes(){
-    this.http.get<Recipe[]>("/api/myrecipe", {params: this.user}).subscribe(result => this.recipes=result);
+    this.http.get<Recipe[]>("/api/myrecipes", {params: this.user}).subscribe(result => this.recipes=result);
   }
 }
 

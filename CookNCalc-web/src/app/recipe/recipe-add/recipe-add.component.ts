@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Recipe} from "../../Recipe";
+import {Recipe} from "../../model/recipe";
 import {HttpClient} from "@angular/common/http";
-import {RecipeIngredient} from "../../RecipeIngredient";
+import {RecipeIngredient} from "../../model/recipeIngredient";
 import {Router} from "@angular/router";
 import {User} from "../../model/user";
 
@@ -36,11 +36,11 @@ export class RecipeAddComponent implements OnInit {
   }
 
   saveRecipe(){
-    this.http.post<Recipe>('/api/addRecipe', this.recipe)
+    this.http.post<Recipe>('/api/recipes/add', this.recipe)
       .subscribe();
 
     this.http.get<Recipe[]>("/api").subscribe(result => this.recipes=result);
-    this.router.navigate(['/recipes']);
+    this.router.navigate(['/myRecipes']);
   }
 
   findUnit(ingredientName : string){
