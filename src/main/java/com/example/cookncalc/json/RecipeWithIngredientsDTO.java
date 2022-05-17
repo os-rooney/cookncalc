@@ -1,6 +1,7 @@
 package com.example.cookncalc.json;
 
 import com.example.cookncalc.ingredient.IngredientDTO;
+import com.example.cookncalc.user.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,8 @@ public class RecipeWithIngredientsDTO {
     private Double amount;
     private  List<IngredientDTO> ingredients = new ArrayList<>();
 
+    private User user;
+
     public RecipeWithIngredientsDTO(){
     }
 
@@ -25,6 +28,14 @@ public class RecipeWithIngredientsDTO {
         this.amount = amount;
     }
 
+    public RecipeWithIngredientsDTO(String title, String description, String preparation, Double amount, List<IngredientDTO> ingredients, User user) {
+        this.title = title;
+        this.description = description;
+        this.preparation = preparation;
+        this.amount = amount;
+        this.ingredients = ingredients;
+        this.user = user;
+    }
 
     public void setIngredients(List<IngredientDTO> ingredients) {
         this.ingredients = ingredients;
@@ -66,6 +77,11 @@ public class RecipeWithIngredientsDTO {
         this.amount = amount;
     }
 
+    public User getUser() {
+        return user;
+    }
 
-
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

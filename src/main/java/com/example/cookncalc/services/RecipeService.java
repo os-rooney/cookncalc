@@ -12,6 +12,7 @@ import com.example.cookncalc.recipes.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -78,6 +79,7 @@ public class RecipeService {
         recipe.setTitle(dto.getTitle());
         recipe.setDescription(dto.getDescription());
         recipe.setPreparation(dto.getPreparation());
+        recipe.setUser(dto.getUser());
         recipeRepository.save(recipe);
 
         for(IngredientDTO ingredientDTO : dto.getIngredients()){
@@ -89,6 +91,7 @@ public class RecipeService {
             recipeIngredientRepository.save(recipeIngredient);
         }
     }
+
 
 
     public List<IngredientDTO> ingredientsForDropdown() {

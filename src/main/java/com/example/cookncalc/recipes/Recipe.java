@@ -27,7 +27,7 @@ public class Recipe {
 
     private Instant createdAt;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
     public Recipe(){

@@ -1,9 +1,10 @@
 package com.example.cookncalc.user;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.example.cookncalc.recipes.Recipe;
+
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class User {
@@ -17,6 +18,17 @@ public class User {
     private String password;
 
     private boolean isAdmin;
+
+    @OneToMany (mappedBy = "user")
+    private List<Recipe> recipeList = new ArrayList<>();
+
+    public List<Recipe> getRecipeList() {
+        return recipeList;
+    }
+
+    public void setRecipeList(List<Recipe> recipeList) {
+        this.recipeList = recipeList;
+    }
 
     public String getUsername() {
         return username;
@@ -45,4 +57,6 @@ public class User {
     public Long getId() {
         return id;
     }
+
+
 }
