@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Recipe} from "../../../Recipe";
 import {ActivatedRoute, Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
+import {RecipeIngredient} from "../../../RecipeIngredient";
 
 @Component({
   selector: 'app-recipe-change',
@@ -10,28 +11,38 @@ import {HttpClient} from "@angular/common/http";
 })
 export class RecipeEditComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, private httpClient: HttpClient, private router: Router) { }
+  constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router) { }
 
   @Input()
   recipe?: Recipe;
-
+  ingredients?: RecipeIngredient[];
   recipes?:Recipe[];
 
   id?:number;
 
   ngOnInit(): void {
+    this.http.get<RecipeIngredient[]>('api/ingredients').subscribe(list => this.ingredients = list);
     this.id = Number(this.route.snapshot.paramMap.get("id"));
-    this.httpClient.get<Recipe>(`/api/recipe/${this.id}`).subscribe(result => this.recipe = result);
+    this.http.get<Recipe>(`/api/recipe/${this.id}`).subscribe(result => this.recipe = result);
   }
 
   changeRecipe(){
-    this.httpClient.post<Recipe>(`/api/recipe/${this.id}/edit`, this.recipe).subscribe();
+    this.http.post<Recipe>(`/api/recipe/${this.id}/edit`, this.recipe).subscribe();
 
-    this.httpClient.get<Recipe[]>("/api").subscribe(result => this.recipes=result);
+    this.http.get<Recipe[]>("/api").subscribe(result => this.recipes=result);
     this.router.navigate(['/recipes']);
 
   }
 
-
+  findUnit(ingredientName : string){
+    if(this.ingredients){
+      for(let ingredient of this.ingredients){
+        if(ingredient.name === ingredientName){
+          return ingredient.unit;
+        }
+      }
+    }
+    return "";
+  }
 
 }
