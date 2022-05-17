@@ -1,5 +1,5 @@
-import {RecipeIngredient} from "./RecipeIngredient";
-import {User} from "./model/user";
+import {RecipeIngredient} from "./recipeIngredient";
+import {User} from "./user";
 
 export interface Recipe{
   id:number;

@@ -1,4 +1,4 @@
-export interface TotalAmountRow {
+export interface TotalPriceForRecipe {
   recipeId: number;
   recipeTitle: string;
   supermarket: string;
