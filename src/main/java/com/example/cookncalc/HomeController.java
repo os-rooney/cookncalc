@@ -30,10 +30,6 @@ public class HomeController {
 
     @GetMapping("/api/myrecipe")
     public List<RecipeDTO> getMyRecipes(@RequestParam long id, @RequestParam String username, @RequestParam boolean admin){
-        System.out.println(id);
-        System.out.println(username);
-        System.out.println(admin);
-        logger.info("id: " + id);
         return recipeService.findRecipeByUser(id);
     }
 
