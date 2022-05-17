@@ -9,10 +9,13 @@ import com.example.cookncalc.recipeIngredient.RecipeIngredientRepository;
 import com.example.cookncalc.recipes.Recipe;
 import com.example.cookncalc.recipes.RecipeDTO;
 import com.example.cookncalc.recipes.RecipeRepository;
+import com.example.cookncalc.recipes.TotalPriceForRecipe;
+import com.example.cookncalc.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -32,6 +35,19 @@ public class RecipeService {
         this.recipeRepository = recipeRepository;
         this.ingredientRepository = ingredientRepository;
         this.recipeIngredientRepository = recipeIngredientRepository;
+    }
+
+    public List<RecipeDTO> findRecipeByUser(Long id){
+        List <RecipeDTO> recipeDTOS = new LinkedList<>();
+        List<Recipe> recipes = recipeRepository.findAllByUserId(id);
+        for(Recipe recipe: recipes){
+            RecipeDTO recipeDTO = new RecipeDTO();
+            recipeDTO.setId(recipe.getId());
+            recipeDTO.setTitle(recipe.getTitle());
+            recipeDTO.setDescription(recipe.getDescription());
+            recipeDTOS.add(recipeDTO);
+        }
+        return recipeDTOS;
     }
 
 
@@ -120,6 +136,15 @@ public class RecipeService {
         recipeRepository.delete(recipeToDelete);
 
         return showRecipes();
+    }
+
+    public List<TotalPriceForRecipe> priceCalculation(List<Object[]> calculation){
+        List<TotalPriceForRecipe> calcTable = new ArrayList<>();
+        for(Object[] object: calculation){
+            calcTable.add(new TotalPriceForRecipe(object));
+
+        }
+        return calcTable;
     }
 
 }
