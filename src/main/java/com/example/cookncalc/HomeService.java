@@ -1,4 +1,4 @@
-package com.example.cookncalc.services;
+package com.example.cookncalc;
 
 import com.example.cookncalc.json.RecipeWithIngredientsDTO;
 import com.example.cookncalc.ingredient.Ingredient;
@@ -10,11 +10,11 @@ import com.example.cookncalc.recipes.Recipe;
 import com.example.cookncalc.recipes.RecipeDTO;
 import com.example.cookncalc.recipes.RecipeRepository;
 import com.example.cookncalc.recipes.TotalPriceForRecipe;
-import com.example.cookncalc.user.User;
+import com.example.cookncalc.supermarketIngredient.SupermarketIngredient;
+import com.example.cookncalc.supermarketIngredient.SupermarketIngredientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.security.Principal;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -22,19 +22,22 @@ import java.util.Optional;
 
 
 @Service
-public class RecipeService {
+public class HomeService {
 
     private final RecipeRepository recipeRepository;
     private final IngredientRepository ingredientRepository;
     private final RecipeIngredientRepository recipeIngredientRepository;
 
+    private final SupermarketIngredientRepository supermarketIngredientRepository;
+
     @Autowired
-    public RecipeService(RecipeRepository recipeRepository,
-                         IngredientRepository ingredientRepository,
-                         RecipeIngredientRepository recipeIngredientRepository) {
+    public HomeService(RecipeRepository recipeRepository,
+                       IngredientRepository ingredientRepository,
+                       RecipeIngredientRepository recipeIngredientRepository, SupermarketIngredientRepository supermarketIngredientRepository) {
         this.recipeRepository = recipeRepository;
         this.ingredientRepository = ingredientRepository;
         this.recipeIngredientRepository = recipeIngredientRepository;
+        this.supermarketIngredientRepository = supermarketIngredientRepository;
     }
 
     public List<RecipeDTO> findRecipeByUser(Long id){
@@ -71,11 +74,7 @@ public class RecipeService {
         recipeWithIngredientsDTO.setDescription(recipe.getDescription());
         recipeWithIngredientsDTO.setPreparation(recipe.getPreparation());
 
-        //Für ein bst. Recipe, Ingredients (Id's der Ingredients), Amounts von jedem Ingredient
-        //Amounts --> in Liste von Ingredient DTO'S
         List<RecipeIngredient> recipeIngredient = recipeIngredientRepository.findAllByRecipeId(recipe.getId());
-
-
 
         for(RecipeIngredient recipeIngredient1: recipeIngredient){
             IngredientDTO ingredientDTO = new IngredientDTO();
@@ -84,11 +83,8 @@ public class RecipeService {
             ingredientDTO.setUnit(recipeIngredient1.getIngredient().getUnit());
             recipeWithIngredientsDTO.getIngredients().add(ingredientDTO);
         }
-
         return recipeWithIngredientsDTO;
-
     }
-
 
     public void addRecipe(RecipeWithIngredientsDTO dto){
         Recipe recipe = new Recipe();
@@ -107,8 +103,6 @@ public class RecipeService {
             recipeIngredientRepository.save(recipeIngredient);
         }
     }
-
-
 
     public List<IngredientDTO> ingredientsForDropdown() {
         List<IngredientDTO> ingredientDTOList = new LinkedList<>();
@@ -138,13 +132,16 @@ public class RecipeService {
         return showRecipes();
     }
 
-    public List<TotalPriceForRecipe> priceCalculation(List<Object[]> calculation){
+    public List<TotalPriceForRecipe> priceCalculation(Long id){
         List<TotalPriceForRecipe> calcTable = new ArrayList<>();
-        for(Object[] object: calculation){
+        for(Object[] object: this.recipeRepository.getTotalAmountPerMarketForRecipeId(id)){
             calcTable.add(new TotalPriceForRecipe(object));
 
         }
         return calcTable;
     }
 
+    public List<SupermarketIngredient> getIngredientPrices(Long id) {
+        return supermarketIngredientRepository.findSupermarketIngredientByIngredientId(id);
+    }
 }
