@@ -13,24 +13,22 @@
       Preparation:
     </label>
     <input id="preparation" name="preparation" type="text" [(ngModel)]="recipe.preparation">
-    <div *ngFor="let ingredient of recipe.ingredients; let i = index">
-
-      <input type="text" [(ngModel)]="ingredient.amount">
-
-      <input list="unit" type="text" [(ngModel)]="ingredient.unit">
-      <datalist id="unit">
-        <option *ngFor="let ingredient of ingredients">
-          {{ingredient.unit}}
-        </option>
-      </datalist>
-      <input list="name" type="text" [(ngModel)]="ingredient.name">
-      <datalist id="name">
-        <option *ngFor="let ingredient of ingredients">
-          {{ingredient.name}}
-        </option>
-      </datalist>
-
-
+    <div class="ingredients" *ngFor="let ingredient of recipe.ingredients; let i = index">
+      <label for="ing-name">Ingredient:
+        <input list="ingredient-name" id="ing-name" type="text" [(ngModel)]="ingredient.name" #ingName>
+        <datalist id="ingredient-name">
+          <option *ngFor="let ingredient of ingredients">
+            {{ingredient.name}}
+          </option>
+        </datalist>
+      </label>
+      <label for="amount">Amount:
+        <input type="text" id="amount" [(ngModel)]="ingredient.amount">
+      </label>
+      <p id="unit" *ngIf="ingName">
+        {{findUnit(ingredient.name)}}
+      </p>
+      <input type="hidden" name="ingredientUni" [value]="findUnit(ingredient.name)">
       <button id="delete-ingredient" (click)="recipe.ingredients.splice(i,1)">X</button>
     </div>
     <button (click)="recipe.ingredients.push({name:'', unit:'', amount: 0})">add ingredient</button>

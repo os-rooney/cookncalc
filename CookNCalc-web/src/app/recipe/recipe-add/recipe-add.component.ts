@@ -25,6 +25,7 @@ export class RecipeAddComponent implements OnInit {
     preparation: "",
     user: {id: 0, username:"", admin:true}
   }
+  ingredientUnit?: string;
 
 
   constructor(private http: HttpClient,private router: Router) { }
@@ -42,4 +43,14 @@ export class RecipeAddComponent implements OnInit {
     this.router.navigate(['/recipes']);
   }
 
+  findUnit(ingredientName : string){
+    if(this.ingredients){
+      for(let ingredient of this.ingredients){
+        if(ingredient.name === ingredientName){
+          return ingredient.unit;
+        }
+      }
+    }
+    return "";
+  }
 }
