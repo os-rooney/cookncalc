@@ -8,17 +8,18 @@ import {LoginComponent} from "./auth/login/login.component";
 import {RegisterComponent} from "./auth/register/register.component";
 import {MyRecipeComponent} from "./recipe/my-recipe/my-recipe.component";
 import {MyRecipeDetailsComponent} from "./recipe/my-recipe/my-recipe-details/my-recipe-details.component";
+import {AuthGuard} from "./auth/auth.guard";
 
 const routes: Routes = [
   {path:"", redirectTo:"recipes", pathMatch:"full"},
   {path:"recipes", component:RecipeComponent},
   {path:"recipes/:id", component: RecipeDetailsComponent},
-  {path:"recipes/:id/edit", component: RecipeEditComponent},
-  {path:"addRecipe", component: RecipeAddComponent},
+  {path:"recipes/:id/edit", component: RecipeEditComponent, canActivate: [AuthGuard]},
+  {path:"addRecipe", component: RecipeAddComponent, canActivate: [AuthGuard]},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'myRecipes', component: MyRecipeComponent},
-  {path: 'myRecipes/:id', component: MyRecipeDetailsComponent},
+  {path: 'myRecipes', component: MyRecipeComponent, canActivate: [AuthGuard]},
+  {path: 'myRecipes/:id', component: MyRecipeDetailsComponent, canActivate: [AuthGuard]},
 ];
 
 @NgModule({
