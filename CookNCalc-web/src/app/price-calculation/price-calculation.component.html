@@ -1,7 +1,6 @@
-
-<hr>
-<h1>Price calculation</h1>
-<div *ngFor="let row of totalAmountRow">
-  <p><strong>{{row.supermarket}}: {{row.totalPrice}} € </strong></p>
-  <hr>
+<div class="text-center p-3">
+<h3 class="m-3">Price calculation</h3>
+<span class="ps-5 pe-5 m-4 fs-4 prices" *ngFor="let row of totalAmountRow">
+  <span>{{ row.supermarket }}: <strong> {{ row.totalPrice }} €</strong></span>
+</span>
 </div>
