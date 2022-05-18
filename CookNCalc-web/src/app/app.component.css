@@ -5,10 +5,14 @@
 #color{
   background-color: #A7D7C5 !important;
 }
-.wrapper{
-  background-color: #5C8D89;
-}
+
 .middlebar{
   width: 75%;
-  background-color: #EEEEEE;
+  background-color: white;
+}
+
+.gradient-custom-2 {
+  background: -webkit-linear-gradient(to right, #F4F9F4, #A7D7C5,#74B49B, #5C8D89 );
+
+  background: linear-gradient(to right, #F4F9F4, #A7D7C5,#74B49B, #5C8D89);
 }
