@@ -16,14 +16,22 @@
 
 .ingredients {
   width: 350px;
+  border-radius: 5px;
 }
 
 .ingredients:nth-child(odd) {
-  border-radius: 5px;
   background-color: #F4F9F4;
 }
 
 .calculation {
   border-radius: 5px;
   background-color: #74B49B;
+}
+
+.link {
+  color: #1B1A17;
+  padding: .625rem;
+  border-radius: .5rem;
+  box-shadow: .1rem .1rem .1rem #1B1A17;
+  background-color: #A7D7C5;
 }

@@ -1,4 +1,3 @@
-<div class="p-5 bg-light">
   <div *ngIf="recipe">
     <div class="text-center m-3">
       <h2 class="fw-bold">{{recipe.title}}</h2>
@@ -6,7 +5,7 @@
     </div>
 
     <div class="d-flex flex-column align-items-center m-5">
-      <div class="ingredients text-center" *ngFor="let ingredient of recipe.ingredients">
+      <div class="ingredients text-center border border-light" *ngFor="let ingredient of recipe.ingredients">
         <span class="d-inline-block p-1 text-end amount">{{ingredient.amount}}</span>
         <span class="d-inline-block p-1 text-start unit">{{ingredient.unit}}</span>
         <span class="d-inline-block p-1 text-start name">{{ingredient.name}}</span>
@@ -15,11 +14,9 @@
 
     <div class="m-5 p-2">
       <p>{{recipe.preparation}}</p>
-      <a *ngIf="authService.isAuthenticated" routerLink="./edit">Edit</a>
-      <br>
-      <app-recipe-delete *ngIf="authService.isAuthenticated"></app-recipe-delete>
-      <br>
-      <a routerLink="/recipes">back to recipes</a>
+      <a class="link m-3" *ngIf="authService.isAuthenticated" routerLink="./edit">Edit</a>
+      <app-recipe-delete class="link m-3" *ngIf="authService.isAuthenticated"></app-recipe-delete>
+      <a class="link m-3" routerLink="/recipes">back to recipes</a>
     </div>
 
   </div>
@@ -27,4 +24,3 @@
   <div class="d-flex flex-column align-items-center m-5 calculation">
     <app-price-calculation *ngIf="authService.isAuthenticated"></app-price-calculation>
   </div>
-</div>
