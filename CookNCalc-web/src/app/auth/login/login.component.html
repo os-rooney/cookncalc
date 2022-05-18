@@ -8,5 +8,4 @@
   <div *ngIf="loginError"><small style="color: darkred">{{ loginError | json }}</small></div>
 
   <button (click)="login()" [disabled]="!valid()">Login</button>
-
 </div>
