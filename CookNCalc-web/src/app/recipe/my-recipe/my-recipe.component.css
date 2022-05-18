@@ -1,0 +1,46 @@
+.container{
+  min-height: 100vh;
+}
+a.btn{
+  background-color: #3D827C;
+  box-shadow: .1rem .1rem .3rem #1B1A17;
+}
+a.btn:hover{
+  transform: scale(1.1);
+}
+.svg svg{
+  max-width: 25rem;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 3rem auto 2rem auto;
+}
+.wrapper{
+  max-width: 54rem;
+  margin: 3rem auto 1rem auto;
+}
+h3{
+  width: auto;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  border-bottom: .1rem solid #EEEEEE;
+}
+.link {
+  color: #1B1A17;
+  padding: .625rem;
+  border-radius: .5rem;
+  box-shadow: .1rem .1rem .1rem #1B1A17;
+  background-color: #A7D7C5;
+}
+.recipe{
+  color: #EEEEEE;
+  background-color: #5C8D89;
+  padding: 2rem;
+  width: 25rem;
+  border-radius: 1rem;
+  box-shadow: .1rem .1rem .3rem #1B1A17;
+}
+.recipe:nth-child(odd){
+  margin-right: 2rem;
+}
