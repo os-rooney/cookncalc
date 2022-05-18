@@ -1,39 +1,14 @@
-* {
-  box-sizing: border-box;
+.button{
+  background-color: #5C8D89;
+  color: black;
 }
 
-div {
-  width: 30vw;
+.gradient-component{
+  background: -webkit-linear-gradient(to right, #F4F9F4, #A7D7C5,#74B49B, #5C8D89 );
 
+  background: linear-gradient(to right, #F4F9F4, #A7D7C5,#74B49B, #5C8D89);
 }
 
-label,
-input {
-  display: inline-block;
-  margin: 0.8em 0;
-
-}
-
-label {
-  width: 30%;
-  text-align: right;
-}
-
-label + input {
-  width: 30%;
-  margin: 0 30% 0 4%;
-}
-
-.error {
-  width: 100%;
-  font-weight: bold;
-  display: inline-block;
-  text-align: center;
-  color: darkred;
-}
-
-button {
-  width: 40%;
-  display: block;
-  margin: 1em auto;
+.firstcolumn{
+  background-color: #F4F9F4;
 }
