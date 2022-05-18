@@ -1,44 +1,40 @@
-/* Dropdown Button */
-.dropbtn {
-  background-color: #3498DB;
-  color: white;
-  padding: 16px;
-  font-size: 16px;
-  border: none;
-  cursor: pointer;
+body{
+  background-color: #EEEEEE;
+  color: #1B1A17;
 }
-
-/* Dropdown button on hover & focus */
-.dropbtn:hover, .dropbtn:focus {
-  background-color: #2980B9;
-}
-
-/* The container <div> - needed to position the dropdown content */
-.dropdown {
+.svg svg{
+  max-width: 25rem;
   position: relative;
-  display: inline-block;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 3rem auto 2rem auto;
 }
-
-/* Dropdown Content (Hidden by Default) */
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f1f1f1;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
+.wrapper{
+  max-width: 54rem;
+  margin: 0 auto;
 }
-
-/* Links inside the dropdown */
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
+h3{
+  width: auto;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  border-bottom: .1rem solid #EEEEEE;
 }
-
-/* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: #ddd}
-
-/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
-.show {display:block;}
+.link {
+  color: #1B1A17;
+  padding: .625rem;
+  border-radius: .5rem;
+  box-shadow: .1rem .1rem .1rem #1B1A17;
+  background-color: #A7D7C5;
+}
+.recipe{
+  color: #EEEEEE;
+  background-color: #5C8D89;
+  padding: 2rem;
+  width: 25rem;
+  border-radius: 1rem;
+  box-shadow: .1rem .1rem .3rem #1B1A17;
+}
+.recipe:nth-child(odd){
+  margin-right: 2rem;
+}

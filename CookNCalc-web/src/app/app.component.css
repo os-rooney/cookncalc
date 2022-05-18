@@ -1,7 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@300;400;700&display=swap');
+*{
+  font-family: 'Merriweather Sans', sans-serif;
+}
 #color{
   background-color: #A7D7C5 !important;
 }
-
+.wrapper{
+  background-color: #5C8D89;
+}
 .middlebar{
   width: 75%;
+  background-color: #EEEEEE;
 }
