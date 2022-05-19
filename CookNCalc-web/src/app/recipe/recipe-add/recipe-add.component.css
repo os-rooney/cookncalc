@@ -1,3 +1,9 @@
+.maincontent{
+  min-height: 90vh;
+}
+.maincontent > div{
+  padding-bottom: 1rem;
+}
 .container{
   display: flex;
   flex-direction: column;
@@ -21,12 +27,18 @@ input{
 }
 button{
   display: block;
+  color: #1B1A17;
+  padding: .625rem;
+  border-radius: .5rem;
+  box-shadow: .1rem .1rem .1rem #1B1A17;
+  background-color: #A7D7C5;
+  margin-bottom: 1rem;
 }
 #delete-ingredient{
   display: inline;
-  margin-left: 1rem;
   background-color: transparent;
   border: none;
+  box-shadow: none;
   color: red;
   -webkit-text-stroke: .3px #000;
   font-size: 1.2rem;
@@ -36,4 +48,14 @@ button{
   margin: 0;
   align-self: baseline;
   font-weight: bold;
+}
+.submit{
+  display: block;
+  color: #1B1A17;
+  padding: .625rem;
+ border: none;
+  box-shadow: .1rem .1rem .1rem #1B1A17;
+  background-color: #A7D7C5;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
 }

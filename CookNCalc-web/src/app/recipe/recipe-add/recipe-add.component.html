@@ -1,37 +1,69 @@
-<div class="container">
-  <h1>New Recipe</h1>
-  <div *ngIf="recipe">
-    <label for="title">
-      Title:
-    </label>
-    <input id="title" name="title" type="text" [(ngModel)]="recipe.title">
-    <label for="description">
-      Description:
-    </label>
-    <input id="description" name="description" type="text" [(ngModel)]="recipe.description">
-    <label for="preparation">
-      Preparation:
-    </label>
-    <input id="preparation" name="preparation" type="text" [(ngModel)]="recipe.preparation">
-    <div class="ingredients" *ngFor="let ingredient of recipe.ingredients; let i = index">
-      <label for="ing-name">Ingredient:
-        <input list="ingredient-name" id="ing-name" type="text" [(ngModel)]="ingredient.name" #ingName>
+
+
+<div *ngIf="recipe" class="col-8 mx-auto my-5 maincontent">
+  <h1>Neues Rezept anlegen:</h1>
+  <div>
+    <label for="title" class="form-label">Rezeptüberschrift:</label>
+    <input type="text" name="title" id="title" class="form-control" placeholder="Rezeptname"
+           [(ngModel)]="recipe.title">
+  </div>
+  <!--  Kurzbeschreibung-->
+  <div>
+    <label for="description">Kurzbeschreibung:</label>
+    <div class="form-floating">
+    <textarea class="form-control" placeholder="beschreiben Sie hier die Einzigartigkeit Ihres Rezepts" id="description"
+              name="description" type="text" [(ngModel)]="recipe.description" style="height: 100px"></textarea>
+      <label for="floatingTextarea2">Was macht Ihr Rezept einzigartig?</label>
+    </div>
+  </div>
+
+  <div>
+    <!--  Zutatenliste:-->
+    <label for="title" class="form-label">Zutatenliste:</label>
+    <div class="ingredients input-group row" *ngFor="let ingredient of recipe.ingredients; let i = index">
+      <div class="col-4">
+        <input list="ingredient-name" id="ing-name" type="text" [(ngModel)]="ingredient.name" #ingName
+               placeholder="Zutatenname">
         <datalist id="ingredient-name">
           <option *ngFor="let ingredient of ingredients">
             {{ingredient.name}}
           </option>
         </datalist>
-      </label>
-      <label for="amount">Amount:
-        <input type="text" id="amount" [(ngModel)]="ingredient.amount">
-      </label>
-      <p id="unit" *ngIf="ingName">
-        {{findUnit(ingredient.name)}}
-      </p>
-      <input type="hidden" name="ingredientUni" [value]="findUnit(ingredient.name)">
-      <button id="delete-ingredient" (click)="recipe.ingredients.splice(i,1)">X</button>
+      </div>
+      <div class="col-2">
+        <input type="number" id="amount" [(ngModel)]="ingredient.amount" class="form-control"
+               placeholder="Mengenangabe">
+      </div>
+      <div class="col-3">
+        <input class="form-control" placeholder="Einheit" type="text" name="ingredientUni"
+               [value]="findUnit(ingredient.name)" disabled
+               readonly>
+        <!--        <input class="col-1" type="hidden" name="ingredientUni" [value]="findUnit(ingredient.name)">-->
+      </div>
+      <div class="col-2">
+        <button id="delete-ingredient" (click)="recipe.ingredients.splice(i,1)" type="submit" class="btn btn-primary">
+          löschen
+        </button>
+      </div>
     </div>
-    <button (click)="recipe.ingredients.push({name:'', unit:'', amount: 0})">add ingredient</button>
-    <button type="submit" (click)="saveRecipe()">Add</button>
+    <div class="row justify-content-end">
+      <button type="button" class="btn col-3" (click)="recipe.ingredients.push({name:'', unit:'', amount: 0})">Zutat
+        hinzufügen
+      </button>
+    </div>
+  </div>
+<div>
+  <!--Zubereitung-->
+  <label for="title" class="form-label">Zubereitung:</label>
+  <div class="form-floating">
+    <textarea class="form-control" placeholder="Hallo" id="floatingTextarea2" style="height: 300px"></textarea>
+    <!--      <label for="floatingTextarea2">Perperation</label>-->
+  </div>
+  <div class="row justify-content-end">
+    <button type="button" class="submit col-2" (click)="saveRecipe()">speichern</button>
   </div>
 </div>
+</div>
+
+
+
