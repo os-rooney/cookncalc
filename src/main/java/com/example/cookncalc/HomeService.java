@@ -37,10 +37,10 @@ public class HomeService {
         this.supermarketIngredientRepository = supermarketIngredientRepository;
     }
 
-    public List<RecipeDTO> findRecipeByUser(Long id){
-        List <RecipeDTO> recipeDTOS = new LinkedList<>();
+    public List<RecipeDTO> findRecipeByUser(Long id) {
+        List<RecipeDTO> recipeDTOS = new LinkedList<>();
         List<Recipe> recipes = recipeRepository.findAllByUserId(id);
-        for(Recipe recipe: recipes){
+        for (Recipe recipe : recipes) {
             RecipeDTO recipeDTO = new RecipeDTO();
             recipeDTO.setId(recipe.getId());
             recipeDTO.setTitle(recipe.getTitle());
@@ -51,11 +51,11 @@ public class HomeService {
     }
 
 
-    public List<RecipeDTO> showRecipes(){
+    public List<RecipeDTO> showRecipes() {
         List<RecipeDTO> recipeDTO = new LinkedList<RecipeDTO>();
         List<Recipe> recipes = recipeRepository.findAll();
-        for(Recipe recipe : recipes){
-            RecipeDTO recipeDTO1 =  new RecipeDTO();
+        for (Recipe recipe : recipes) {
+            RecipeDTO recipeDTO1 = new RecipeDTO();
             recipeDTO1.setId(recipe.getId());
             recipeDTO1.setTitle(recipe.getTitle());
             recipeDTO1.setDescription(recipe.getDescription());
@@ -73,7 +73,7 @@ public class HomeService {
 
         List<RecipeIngredient> recipeIngredient = recipeIngredientRepository.findAllByRecipeId(recipe.getId());
 
-        for(RecipeIngredient recipeIngredient1: recipeIngredient){
+        for (RecipeIngredient recipeIngredient1 : recipeIngredient) {
             IngredientDTO ingredientDTO = new IngredientDTO();
             ingredientDTO.setAmount(recipeIngredient1.getAmount());
             ingredientDTO.setName(recipeIngredient1.getIngredient().getName());
@@ -83,7 +83,7 @@ public class HomeService {
         return recipeIngredientDTO;
     }
 
-    public void addRecipe(RecipeIngredientDTO dto){
+    public void addRecipe(RecipeIngredientDTO dto) {
         Recipe recipe = new Recipe();
         recipe.setTitle(dto.getTitle());
         recipe.setDescription(dto.getDescription());
@@ -101,9 +101,9 @@ public class HomeService {
         }
     }
 
-    public boolean checkForDuplicateIngredients(RecipeIngredientDTO dto){
+    public boolean checkForDuplicateIngredients(RecipeIngredientDTO dto) {
         Set<String> ingredientNames = new HashSet<>();
-        for(IngredientDTO ingredientDTO : dto.getIngredients()){
+        for (IngredientDTO ingredientDTO : dto.getIngredients()) {
             ingredientNames.add(ingredientDTO.getName());
         }
         if (dto.getIngredients().size() == ingredientNames.size()) {
@@ -112,17 +112,17 @@ public class HomeService {
         return false;
     }
 
-    public boolean checkForAllowedIngredientNames(RecipeIngredientDTO dto){
-        for(IngredientDTO ingredientDTO : dto.getIngredients()){
-            if (ingredientRepository.findByName(ingredientDTO.getName()).isEmpty()){
+    public boolean checkForAllowedIngredientNames(RecipeIngredientDTO dto) {
+        for (IngredientDTO ingredientDTO : dto.getIngredients()) {
+            if (ingredientRepository.findByName(ingredientDTO.getName()).isEmpty()) {
                 return false;
             }
         }
         return true;
     }
 
-    public boolean checkIfRecipeIsFilled(RecipeIngredientDTO dto){
-        if(dto.getTitle().length() > 1 && dto.getIngredients().size() > 0) {
+    public boolean checkIfRecipeIsFilled(RecipeIngredientDTO dto) {
+        if (dto.getTitle().length() > 1 && dto.getIngredients().size() > 0) {
             return true;
         }
         return false;
@@ -141,24 +141,21 @@ public class HomeService {
         return ingredientDTOList;
     }
 
-    public List<RecipeDTO> deleteRecipe(Long id){
+    public void deleteRecipe(Long id) {
         Optional<Recipe> recipeToDeleteOptional = recipeRepository.findById(id);
-        if(!recipeToDeleteOptional.isPresent()){
-            return null;
+        if (recipeToDeleteOptional.isPresent()) {
+            Recipe recipeToDelete = recipeToDeleteOptional.get();
+            List<RecipeIngredient> recipeIngredient = recipeIngredientRepository.findByRecipe(recipeToDelete);
+            for (RecipeIngredient recipeIngredient1 : recipeIngredient) {
+                recipeIngredientRepository.delete(recipeIngredient1);
+            }
+            recipeRepository.delete(recipeToDelete);
         }
-        Recipe recipeToDelete = recipeToDeleteOptional.get();
-        List<RecipeIngredient> recipeIngredient = recipeIngredientRepository.findByRecipe(recipeToDelete);
-        for(RecipeIngredient recipeIngredient1: recipeIngredient){
-            recipeIngredientRepository.delete(recipeIngredient1);
-        }
-        recipeRepository.delete(recipeToDelete);
-
-        return showRecipes();
     }
 
-    public List<TotalPriceForRecipe> priceCalculation(Long id){
+    public List<TotalPriceForRecipe> priceCalculation(Long id) {
         List<TotalPriceForRecipe> calcTable = new ArrayList<>();
-        for(Object[] object: this.recipeRepository.getTotalAmountPerMarketForRecipeId(id)){
+        for (Object[] object : this.recipeRepository.getTotalAmountPerMarketForRecipeId(id)) {
             calcTable.add(new TotalPriceForRecipe(object));
 
         }

@@ -17,8 +17,6 @@ import java.util.List;
 @RestController
 public class HomeController {
 
-    private final static Logger logger = LoggerFactory.getLogger(HomeController.class);
-
     private final HomeService homeService;
 
     @Autowired
