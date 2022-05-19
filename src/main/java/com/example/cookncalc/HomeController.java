@@ -21,15 +21,9 @@ public class HomeController {
 
     private final HomeService homeService;
 
-    private final RecipeRepository recipeRepository;
-
-    private final SupermarketIngredientRepository supermarketIngredientRepository;
-
     @Autowired
-    public HomeController(HomeService homeService, RecipeRepository recipeRepository, SupermarketIngredientRepository supermarketIngredientRepository){
+    public HomeController(HomeService homeService){
         this.homeService = homeService;
-        this.recipeRepository = recipeRepository;
-        this.supermarketIngredientRepository = supermarketIngredientRepository;
     }
 
     @GetMapping("/api")
@@ -49,7 +43,7 @@ public class HomeController {
 
     @PostMapping("/api/recipes/add")
     public void add(@RequestBody RecipeIngredientDTO dto){
-        if(homeService.checkForDuplicateIngredients(dto)) {
+        if(homeService.checkForDuplicateIngredients(dto) && homeService.checkForAllowedIngredientNames(dto)) {
             homeService.addRecipe(dto);
         }
     }
@@ -61,7 +55,7 @@ public class HomeController {
 
     @PostMapping("/api/recipe/{id}/edit")
     public void change(@PathVariable Long id, @RequestBody RecipeIngredientDTO dto){
-        if(homeService.checkForDuplicateIngredients(dto)) {
+        if(homeService.checkForDuplicateIngredients(dto) && homeService.checkForAllowedIngredientNames(dto)) {
             homeService.deleteRecipe(id);
             homeService.addRecipe(dto);
         }

@@ -112,6 +112,15 @@ public class HomeService {
         return false;
     }
 
+    public boolean checkForAllowedIngredientNames(RecipeIngredientDTO dto){
+        for(IngredientDTO ingredientDTO : dto.getIngredients()){
+            if (ingredientRepository.findByName(ingredientDTO.getName()).isEmpty()){
+                return false;
+            }
+        }
+        return true;
+    }
+
     public List<IngredientDTO> ingredientsForDropdown() {
         List<IngredientDTO> ingredientDTOList = new LinkedList<>();
         List<Ingredient> ingredients = ingredientRepository.findAll();
