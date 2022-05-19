@@ -2,6 +2,7 @@ package com.example.cookncalc.recipeIngredient;
 
 import com.example.cookncalc.ingredient.IngredientDTO;
 import com.example.cookncalc.user.User;
+import com.example.cookncalc.user.UserDTO;
 
 import java.util.ArrayList;
 import java.util.List;

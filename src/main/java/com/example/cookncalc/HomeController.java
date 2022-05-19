@@ -2,6 +2,7 @@ package com.example.cookncalc;
 
 import com.example.cookncalc.ingredient.IngredientDTO;
 import com.example.cookncalc.recipeIngredient.RecipeIngredientDTO;
+import com.example.cookncalc.recipeIngredient.RecipeIngredientDTOII;
 import com.example.cookncalc.recipes.RecipeDTO;
 import com.example.cookncalc.recipes.RecipeRepository;
 import com.example.cookncalc.recipes.TotalPriceForRecipe;
@@ -40,7 +41,7 @@ public class HomeController {
     }
 
     @GetMapping("/api/recipes/{id}")
-    public RecipeIngredientDTO detail(@PathVariable Long id){
+    public RecipeIngredientDTOII detail(@PathVariable Long id){
         return homeService.showDetailRecipe(id);
     }
 
