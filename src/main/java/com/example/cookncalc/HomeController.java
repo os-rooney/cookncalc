@@ -1,7 +1,7 @@
 package com.example.cookncalc;
 
 import com.example.cookncalc.ingredient.IngredientDTO;
-import com.example.cookncalc.json.RecipeWithIngredientsDTO;
+import com.example.cookncalc.recipeIngredient.RecipeIngredientDTO;
 import com.example.cookncalc.recipes.RecipeDTO;
 import com.example.cookncalc.recipes.RecipeRepository;
 import com.example.cookncalc.recipes.TotalPriceForRecipe;
@@ -43,12 +43,12 @@ public class HomeController {
     }
 
     @GetMapping("/api/recipes/{id}")
-    public RecipeWithIngredientsDTO detail(@PathVariable Long id){
+    public RecipeIngredientDTO detail(@PathVariable Long id){
         return homeService.showDetailRecipe(id);
     }
 
     @PostMapping("/api/recipes/add")
-    public void add(@RequestBody RecipeWithIngredientsDTO dto){
+    public void add(@RequestBody RecipeIngredientDTO dto){
         homeService.addRecipe(dto);
     }
 
@@ -58,7 +58,7 @@ public class HomeController {
     }
 
     @PostMapping("/api/recipe/{id}/edit")
-    public void change(@PathVariable Long id, @RequestBody RecipeWithIngredientsDTO dto){
+    public void change(@PathVariable Long id, @RequestBody RecipeIngredientDTO dto){
         homeService.deleteRecipe(id);
         homeService.addRecipe(dto);
     }

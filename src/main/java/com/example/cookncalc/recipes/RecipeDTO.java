@@ -6,15 +6,8 @@ public class RecipeDTO {
     private Long id;
     private String title;
     private String description;
-    private String preparation;
 
     public RecipeDTO(){}
-
-    public RecipeDTO(String title, String description, String preparation) {
-        this.title = title;
-        this.description = description;
-        this.preparation = preparation;
-    }
 
     public void setId(Long id) {
         this.id = id;
@@ -22,14 +15,6 @@ public class RecipeDTO {
 
     public Long getId() {
         return id;
-    }
-
-    public String getPreparation() {
-        return preparation;
-    }
-
-    public void setPreparation(String preparation) {
-        this.preparation = preparation;
     }
 
     public String getTitle() {

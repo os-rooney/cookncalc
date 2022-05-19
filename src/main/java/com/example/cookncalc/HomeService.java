@@ -1,6 +1,6 @@
 package com.example.cookncalc;
 
-import com.example.cookncalc.json.RecipeWithIngredientsDTO;
+import com.example.cookncalc.recipeIngredient.RecipeIngredientDTO;
 import com.example.cookncalc.ingredient.Ingredient;
 import com.example.cookncalc.ingredient.IngredientDTO;
 import com.example.cookncalc.ingredient.IngredientRepository;
@@ -67,12 +67,12 @@ public class HomeService {
         return recipeDTO;
     }
 
-    public RecipeWithIngredientsDTO showDetailRecipe(Long id) {
-        RecipeWithIngredientsDTO recipeWithIngredientsDTO = new RecipeWithIngredientsDTO();
+    public RecipeIngredientDTO showDetailRecipe(Long id) {
+        RecipeIngredientDTO recipeIngredientDTO = new RecipeIngredientDTO();
         Recipe recipe = recipeRepository.findById(id).orElseThrow();
-        recipeWithIngredientsDTO.setTitle(recipe.getTitle());
-        recipeWithIngredientsDTO.setDescription(recipe.getDescription());
-        recipeWithIngredientsDTO.setPreparation(recipe.getPreparation());
+        recipeIngredientDTO.setTitle(recipe.getTitle());
+        recipeIngredientDTO.setDescription(recipe.getDescription());
+        recipeIngredientDTO.setPreparation(recipe.getPreparation());
 
         List<RecipeIngredient> recipeIngredient = recipeIngredientRepository.findAllByRecipeId(recipe.getId());
 
@@ -81,12 +81,12 @@ public class HomeService {
             ingredientDTO.setAmount(recipeIngredient1.getAmount());
             ingredientDTO.setName(recipeIngredient1.getIngredient().getName());
             ingredientDTO.setUnit(recipeIngredient1.getIngredient().getUnit());
-            recipeWithIngredientsDTO.getIngredients().add(ingredientDTO);
+            recipeIngredientDTO.getIngredients().add(ingredientDTO);
         }
-        return recipeWithIngredientsDTO;
+        return recipeIngredientDTO;
     }
 
-    public void addRecipe(RecipeWithIngredientsDTO dto){
+    public void addRecipe(RecipeIngredientDTO dto){
         Recipe recipe = new Recipe();
         recipe.setTitle(dto.getTitle());
         recipe.setDescription(dto.getDescription());
