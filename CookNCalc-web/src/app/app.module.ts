@@ -15,6 +15,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { MyRecipeComponent } from './recipe/my-recipe/my-recipe.component';
 import { MyRecipeDetailsComponent } from './recipe/my-recipe/my-recipe-details/my-recipe-details.component';
+import { MyRecipeDetailsEditComponent } from './recipe/my-recipe/my-recipe-details/my-recipe-details-edit/my-recipe-details-edit.component';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { MyRecipeDetailsComponent } from './recipe/my-recipe/my-recipe-details/m
     RegisterComponent,
     MyRecipeComponent,
     MyRecipeDetailsComponent,
+    MyRecipeDetailsEditComponent,
   ],
   imports: [
     BrowserModule,

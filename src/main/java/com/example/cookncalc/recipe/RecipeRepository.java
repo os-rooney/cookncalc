@@ -1,4 +1,4 @@
-package com.example.cookncalc.recipes;
+package com.example.cookncalc.recipe;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;

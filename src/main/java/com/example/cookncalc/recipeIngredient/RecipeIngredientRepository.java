@@ -1,11 +1,10 @@
 package com.example.cookncalc.recipeIngredient;
 
-import com.example.cookncalc.recipes.Recipe;
+import com.example.cookncalc.recipe.Recipe;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public interface RecipeIngredientRepository extends CrudRepository<RecipeIngredient, Long> {
@@ -14,6 +13,4 @@ public interface RecipeIngredientRepository extends CrudRepository<RecipeIngredi
     List<RecipeIngredient> findAllByRecipeId(Long id);
 
     List<RecipeIngredient> findByRecipe(Recipe recipe);
-
-    Optional<RecipeIngredient> findByRecipeIdAndIngredientId(Long recipeId, Long Id);
 }

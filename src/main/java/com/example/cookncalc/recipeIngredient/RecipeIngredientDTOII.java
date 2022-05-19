@@ -1,44 +1,32 @@
-package com.example.cookncalc.json;
+package com.example.cookncalc.recipeIngredient;
 
 import com.example.cookncalc.ingredient.IngredientDTO;
 import com.example.cookncalc.user.User;
+import com.example.cookncalc.user.UserDTO;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecipeWithIngredientsDTO {
-
+public class RecipeIngredientDTOII {
     private String title;
     private String description;
     private String preparation;
 
     private Double amount;
-    private  List<IngredientDTO> ingredients = new ArrayList<>();
+    private List<IngredientDTO> ingredients = new ArrayList<>();
 
-    private User user;
+    private UserDTO userDTO;
 
-    public RecipeWithIngredientsDTO(){
+    public RecipeIngredientDTOII() {
     }
 
-    public RecipeWithIngredientsDTO(String title, String description, String preparation, List<IngredientDTO> ingredients, Double amount) {
-        this.title = title;
-        this.description = description;
-        this.preparation = preparation;
-        this.ingredients = ingredients;
-        this.amount = amount;
-    }
-
-    public RecipeWithIngredientsDTO(String title, String description, String preparation, Double amount, List<IngredientDTO> ingredients, User user) {
+    public RecipeIngredientDTOII(String title, String description, String preparation, Double amount, List<IngredientDTO> ingredients, UserDTO userDTO) {
         this.title = title;
         this.description = description;
         this.preparation = preparation;
         this.amount = amount;
         this.ingredients = ingredients;
-        this.user = user;
-    }
-
-    public void setIngredients(List<IngredientDTO> ingredients) {
-        this.ingredients = ingredients;
+        this.userDTO = userDTO;
     }
 
     public String getTitle() {
@@ -65,10 +53,6 @@ public class RecipeWithIngredientsDTO {
         this.preparation = preparation;
     }
 
-    public List<IngredientDTO> getIngredients() {
-        return ingredients;
-    }
-
     public Double getAmount() {
         return amount;
     }
@@ -77,11 +61,19 @@ public class RecipeWithIngredientsDTO {
         this.amount = amount;
     }
 
-    public User getUser() {
-        return user;
+    public List<IngredientDTO> getIngredients() {
+        return ingredients;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setIngredients(List<IngredientDTO> ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    public UserDTO getUser() {
+        return userDTO;
+    }
+
+    public void setUserDTO(UserDTO userDTO) {
+        this.userDTO = userDTO;
     }
 }

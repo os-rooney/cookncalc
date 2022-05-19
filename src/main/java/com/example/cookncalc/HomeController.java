@@ -1,10 +1,13 @@
 package com.example.cookncalc;
 
 import com.example.cookncalc.ingredient.IngredientDTO;
-import com.example.cookncalc.json.RecipeWithIngredientsDTO;
-import com.example.cookncalc.recipes.RecipeDTO;
-import com.example.cookncalc.recipes.RecipeRepository;
-import com.example.cookncalc.recipes.TotalPriceForRecipe;
+import com.example.cookncalc.recipe.RecipeDTO;
+import com.example.cookncalc.recipe.TotalPriceForRecipe;
+import com.example.cookncalc.recipeIngredient.RecipeIngredientDTO;
+import com.example.cookncalc.recipeIngredient.RecipeIngredientDTOII;
+import com.example.cookncalc.recipe.RecipeDTO;
+import com.example.cookncalc.recipe.RecipeRepository;
+import com.example.cookncalc.recipe.TotalPriceForRecipe;
 import com.example.cookncalc.supermarketIngredient.SupermarketIngredient;
 import com.example.cookncalc.supermarketIngredient.SupermarketIngredientRepository;
 import org.slf4j.Logger;
@@ -21,47 +24,57 @@ public class HomeController {
 
     private final HomeService homeService;
 
-    private final RecipeRepository recipeRepository;
-
-    private final SupermarketIngredientRepository supermarketIngredientRepository;
-
     @Autowired
-    public HomeController(HomeService homeService, RecipeRepository recipeRepository, SupermarketIngredientRepository supermarketIngredientRepository){
+    public HomeController(HomeService homeService) {
         this.homeService = homeService;
-        this.recipeRepository = recipeRepository;
-        this.supermarketIngredientRepository = supermarketIngredientRepository;
     }
 
     @GetMapping("/api")
-    public List<RecipeDTO> home(){
+    public List<RecipeDTO> home() {
         return homeService.showRecipes();
     }
 
     @GetMapping("/api/myrecipes")
-    public List<RecipeDTO> getMyRecipes(@RequestParam long id, @RequestParam String username, @RequestParam boolean admin){
+    public List<RecipeDTO> getMyRecipes(@RequestParam long id, @RequestParam String username, @RequestParam boolean admin) {
+        System.out.println(id);
+        System.out.println(username);
+        System.out.println(admin);
         return homeService.findRecipeByUser(id);
     }
 
     @GetMapping("/api/recipes/{id}")
-    public RecipeWithIngredientsDTO detail(@PathVariable Long id){
+    public RecipeIngredientDTOII detail(@PathVariable Long id) {
         return homeService.showDetailRecipe(id);
     }
 
     @PostMapping("/api/recipes/add")
-    public void add(@RequestBody RecipeWithIngredientsDTO dto){
-        homeService.addRecipe(dto);
+    public void add(@RequestBody RecipeIngredientDTO dto) {
+        if (homeService.checkForDuplicateIngredients(dto)
+                && homeService.checkForAllowedIngredientNames(dto)
+                && homeService.checkIfRecipeIsFilled(dto)) {
+            homeService.addRecipe(dto);
+        }
     }
+
+
 
     @DeleteMapping("/api/recipes/{id}/delete")
     public void deleteRecipe(@PathVariable Long id){
         homeService.deleteRecipe(id);
     }
 
-    @PostMapping("/api/recipe/{id}/edit")
-    public void change(@PathVariable Long id, @RequestBody RecipeWithIngredientsDTO dto){
-        homeService.deleteRecipe(id);
-        homeService.addRecipe(dto);
+    @PostMapping("/api/recipes/{id}/edit")
+    public void change(@PathVariable Long id, @RequestBody RecipeIngredientDTO dto) {
+        System.out.println(dto.getIngredients().get(0).getUnit());
+        System.out.println(dto.getIngredients().get(0).getName());
+        if (homeService.checkForDuplicateIngredients(dto)
+                && homeService.checkForAllowedIngredientNames(dto)
+                && homeService.checkIfRecipeIsFilled(dto)) {
+            homeService.deleteRecipe(id);
+            homeService.addRecipe(dto);
+        }
     }
+
 
     @GetMapping("/api/recipes/{id}/calculation")
     public List<TotalPriceForRecipe> recipeTest(@PathVariable Long id){
