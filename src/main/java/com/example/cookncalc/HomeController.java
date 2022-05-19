@@ -1,7 +1,7 @@
 package com.example.cookncalc;
 
 import com.example.cookncalc.ingredient.IngredientDTO;
-import com.example.cookncalc.json.RecipeWithIngredientsDTO;
+import com.example.cookncalc.recipeIngredient.RecipeIngredientDTO;
 import com.example.cookncalc.recipes.RecipeDTO;
 import com.example.cookncalc.recipes.RecipeRepository;
 import com.example.cookncalc.recipes.TotalPriceForRecipe;
@@ -21,15 +21,9 @@ public class HomeController {
 
     private final HomeService homeService;
 
-    private final RecipeRepository recipeRepository;
-
-    private final SupermarketIngredientRepository supermarketIngredientRepository;
-
     @Autowired
-    public HomeController(HomeService homeService, RecipeRepository recipeRepository, SupermarketIngredientRepository supermarketIngredientRepository){
+    public HomeController(HomeService homeService){
         this.homeService = homeService;
-        this.recipeRepository = recipeRepository;
-        this.supermarketIngredientRepository = supermarketIngredientRepository;
     }
 
     @GetMapping("/api")
@@ -46,13 +40,17 @@ public class HomeController {
     }
 
     @GetMapping("/api/recipes/{id}")
-    public RecipeWithIngredientsDTO detail(@PathVariable Long id){
+    public RecipeIngredientDTO detail(@PathVariable Long id){
         return homeService.showDetailRecipe(id);
     }
 
     @PostMapping("/api/recipes/add")
-    public void add(@RequestBody RecipeWithIngredientsDTO dto){
-        homeService.addRecipe(dto);
+    public void add(@RequestBody RecipeIngredientDTO dto){
+        if(homeService.checkForDuplicateIngredients(dto)
+                && homeService.checkForAllowedIngredientNames(dto)
+                && homeService.checkIfRecipeIsFilled(dto)) {
+            homeService.addRecipe(dto);
+        }
     }
 
     @DeleteMapping("/api/recipes/{id}/delete")
@@ -60,10 +58,14 @@ public class HomeController {
         homeService.deleteRecipe(id);
     }
 
-    @PostMapping("/api/recipes/{id}/edit")
-    public void change(@PathVariable Long id, @RequestBody RecipeWithIngredientsDTO dto){
-        homeService.deleteRecipe(id);
-        homeService.addRecipe(dto);
+    @PostMapping("/api/recipe/{id}/edit")
+    public void change(@PathVariable Long id, @RequestBody RecipeIngredientDTO dto){
+        if(homeService.checkForDuplicateIngredients(dto)
+                && homeService.checkForAllowedIngredientNames(dto)
+                && homeService.checkIfRecipeIsFilled(dto)) {
+            homeService.deleteRecipe(id);
+            homeService.addRecipe(dto);
+        }
     }
 
     @GetMapping("/api/recipes/{id}/calculation")

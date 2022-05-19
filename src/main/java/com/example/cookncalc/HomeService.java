@@ -1,6 +1,6 @@
 package com.example.cookncalc;
 
-import com.example.cookncalc.json.RecipeWithIngredientsDTO;
+import com.example.cookncalc.recipeIngredient.RecipeIngredientDTO;
 import com.example.cookncalc.ingredient.Ingredient;
 import com.example.cookncalc.ingredient.IngredientDTO;
 import com.example.cookncalc.ingredient.IngredientRepository;
@@ -15,10 +15,7 @@ import com.example.cookncalc.supermarketIngredient.SupermarketIngredientReposito
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 
 @Service
@@ -67,12 +64,12 @@ public class HomeService {
         return recipeDTO;
     }
 
-    public RecipeWithIngredientsDTO showDetailRecipe(Long id) {
-        RecipeWithIngredientsDTO recipeWithIngredientsDTO = new RecipeWithIngredientsDTO();
+    public RecipeIngredientDTO showDetailRecipe(Long id) {
+        RecipeIngredientDTO recipeIngredientDTO = new RecipeIngredientDTO();
         Recipe recipe = recipeRepository.findById(id).orElseThrow();
-        recipeWithIngredientsDTO.setTitle(recipe.getTitle());
-        recipeWithIngredientsDTO.setDescription(recipe.getDescription());
-        recipeWithIngredientsDTO.setPreparation(recipe.getPreparation());
+        recipeIngredientDTO.setTitle(recipe.getTitle());
+        recipeIngredientDTO.setDescription(recipe.getDescription());
+        recipeIngredientDTO.setPreparation(recipe.getPreparation());
 
         List<RecipeIngredient> recipeIngredient = recipeIngredientRepository.findAllByRecipeId(recipe.getId());
 
@@ -81,12 +78,12 @@ public class HomeService {
             ingredientDTO.setAmount(recipeIngredient1.getAmount());
             ingredientDTO.setName(recipeIngredient1.getIngredient().getName());
             ingredientDTO.setUnit(recipeIngredient1.getIngredient().getUnit());
-            recipeWithIngredientsDTO.getIngredients().add(ingredientDTO);
+            recipeIngredientDTO.getIngredients().add(ingredientDTO);
         }
-        return recipeWithIngredientsDTO;
+        return recipeIngredientDTO;
     }
 
-    public void addRecipe(RecipeWithIngredientsDTO dto){
+    public void addRecipe(RecipeIngredientDTO dto){
         Recipe recipe = new Recipe();
         recipe.setTitle(dto.getTitle());
         recipe.setDescription(dto.getDescription());
@@ -94,7 +91,7 @@ public class HomeService {
         recipe.setUser(dto.getUser());
         recipeRepository.save(recipe);
 
-        for(IngredientDTO ingredientDTO : dto.getIngredients()){
+        for (IngredientDTO ingredientDTO : dto.getIngredients()) {
             Double amount = ingredientDTO.getAmount();
             RecipeIngredient recipeIngredient = new RecipeIngredient();
             recipeIngredient.setRecipe(recipe);
@@ -102,6 +99,33 @@ public class HomeService {
             recipeIngredient.setAmount(amount);
             recipeIngredientRepository.save(recipeIngredient);
         }
+    }
+
+    public boolean checkForDuplicateIngredients(RecipeIngredientDTO dto){
+        Set<String> ingredientNames = new HashSet<>();
+        for(IngredientDTO ingredientDTO : dto.getIngredients()){
+            ingredientNames.add(ingredientDTO.getName());
+        }
+        if (dto.getIngredients().size() == ingredientNames.size()) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean checkForAllowedIngredientNames(RecipeIngredientDTO dto){
+        for(IngredientDTO ingredientDTO : dto.getIngredients()){
+            if (ingredientRepository.findByName(ingredientDTO.getName()).isEmpty()){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean checkIfRecipeIsFilled(RecipeIngredientDTO dto){
+        if(dto.getTitle().length() > 1 && dto.getIngredients().size() > 0) {
+            return true;
+        }
+        return false;
     }
 
     public List<IngredientDTO> ingredientsForDropdown() {
