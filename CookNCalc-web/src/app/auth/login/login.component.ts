@@ -30,4 +30,8 @@ export class LoginComponent implements OnInit {
         (err: string | undefined) => this.loginError = err);
     }
   }
+
+  register(){
+    this.router.navigate(['/register'])
+  }
 }

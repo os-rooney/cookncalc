@@ -1,37 +1,66 @@
-<div class="container">
-  <h1>New Recipe</h1>
-  <div *ngIf="recipe">
-    <label for="title">
-      Title:
-    </label>
-    <input id="title" name="title" type="text" [(ngModel)]="recipe.title">
-    <label for="description">
-      Description:
-    </label>
-    <input id="description" name="description" type="text" [(ngModel)]="recipe.description">
-    <label for="preparation">
-      Preparation:
-    </label>
-    <input id="preparation" name="preparation" type="text" [(ngModel)]="recipe.preparation">
-    <div class="ingredients" *ngFor="let ingredient of recipe.ingredients; let i = index">
-      <label for="ing-name">Ingredient:
-        <input list="ingredient-name" id="ing-name" type="text" [(ngModel)]="ingredient.name" #ingName>
-        <datalist id="ingredient-name">
-          <option *ngFor="let ingredient of ingredients">
-            {{ingredient.name}}
-          </option>
-        </datalist>
-      </label>
-      <label for="amount">Amount:
-        <input type="text" id="amount" [(ngModel)]="ingredient.amount">
-      </label>
-      <p id="unit" *ngIf="ingName">
-        {{findUnit(ingredient.name)}}
-      </p>
-      <input type="hidden" name="ingredientUni" [value]="findUnit(ingredient.name)">
-      <button id="delete-ingredient" (click)="recipe.ingredients.splice(i,1)">X</button>
+
+<div *ngIf="recipe" class="col-10 mx-auto my-5 maincontent">
+  <h1>Neues Rezept:</h1>
+  <div>
+    <label class="form-label"> Rezeptüberschrift:</label>
+    <input class="form-control" type="text" [(ngModel)]="recipe.title">
+    <p class="error" *ngIf="recipe.title.length < 2">Bitte gib einen Titel mit mindestens 2 Zeichen ein!</p>
+  </div>
+  <div>
+    <label>Kurzbeschreibung:</label>
+    <div class="form-floating">
+      <textarea class="form-control" id="description" style="height: 100px" [(ngModel)]="recipe.description"></textarea>
+      <label for="description">Was macht Ihr Rezept einzigartig?</label>
     </div>
-    <button (click)="recipe.ingredients.push({name:'', unit:'', amount: 0})">add ingredient</button>
-    <button type="submit" (click)="saveRecipe()">Add</button>
+  </div>
+  <label>Zutatenliste:</label>
+
+  <div class="ingredients input-group col-10" *ngFor="let ingredient of recipe.ingredients; let i = index">
+    <div class="col-4">
+      <input class="col-12" list="ingredient-name" id="ing-name" type="text" [(ngModel)]="ingredient.name" #ingName>
+      <datalist id="ingredient-name">
+        <option *ngFor="let ingredient of ingredients">
+          {{ingredient.name}}
+        </option>
+      </datalist>
+    </div>
+
+    <div class="col-2">
+      <input class="col-12" type="number" id="amount" [(ngModel)]="ingredient.amount" placeholder="Menge">
+    </div>
+
+    <div class="col-2">
+      <input class="col-12 einheit" placeholder="Einheit" type="text" name="ingredientUni"
+             [value]="findUnit(ingredient.name)"
+             disabled readonly>
+    </div>
+
+    <div>
+      <button class="delete-btn col-2" (click)="recipe.ingredients.splice(i,1)">löschen</button>
+    </div>
+    <p *ngIf="!ingredientMatchesDropdown(ingredient)">Bitte nur Zutaten aus dem Dropdown auswählen!</p>
+
+  </div>
+  <p class="error" *ngIf="recipe.ingredients.length < 1">Bitte gib mindestens eine Zutat an!</p>
+  <p *ngIf="!noDuplicateIngredients()">Bitte gib jede Zutat nur 1x an!</p>
+
+  <div class="add-Button">
+    <button type="button" class="btn button"
+            (click)="recipe.ingredients.push({name:'', unit:'', amount: 0})">Zutat hinzufügen
+    </button>
+  </div>
+
+  <div>
+    <label>Zubereitung:</label>
+    <div class="form-floating">
+      <textarea class="form-control" style="height: 300px" [(ngModel)]="recipe.preparation"></textarea>
+    </div>
+  </div>
+
+  <div class="add-Button">
+    <button type="button" class="btn button" (click)="saveRecipe()">Rezept speichern</button>
   </div>
 </div>
+
+
+
