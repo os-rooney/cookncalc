@@ -114,7 +114,8 @@ public class HomeService {
 
     public boolean checkForAllowedIngredientNames(RecipeIngredientDTO dto) {
         for (IngredientDTO ingredientDTO : dto.getIngredients()) {
-            if (ingredientRepository.findByName(ingredientDTO.getName()).isEmpty()) {
+            if (ingredientRepository.findByName(ingredientDTO.getName()).isEmpty() ||
+                    ingredientRepository.findByUnit(ingredientDTO.getUnit()).isEmpty()) {
                 return false;
             }
         }
