@@ -14,7 +14,7 @@ const routes: Routes = [
   {path:"", redirectTo:"recipes", pathMatch:"full"},
   {path:"recipes", component:RecipeComponent},
   {path:"recipes/:id", component: RecipeDetailsComponent},
-  {path:"recipes/:id/edit", component: RecipeEditComponent, canActivate: [AuthGuard]},
+  {path:"myRecipes/:id/edit", component: RecipeEditComponent, canActivate: [AuthGuard]},
   {path:"addRecipe", component: RecipeAddComponent, canActivate: [AuthGuard]},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
