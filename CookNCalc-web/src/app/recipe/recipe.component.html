@@ -1,4 +1,4 @@
-<h1 class="text-center mt-4">All Recipes</h1>
+<h1 class="text-center mt-4">Alle Rezepte</h1>
 <div class="svg">
   <svg viewBox="0 0 894 750" fill="none" xmlns="http://www.w3.org/2000/svg">
     <g clip-path="url(#clip0_0_3)">
@@ -81,7 +81,6 @@
       </clipPath>
     </defs>
   </svg>
-
 </div>
 <div class="d-flex flex-wrap justify-content-center align-items-lg-stretch wrapper">
   <div *ngFor="let recipe of recipes" class="recipe mb-5">
@@ -90,7 +89,7 @@
       <p class="text-center">{{recipe.description}}</p>
     </div>
     <div class="btn btn-link d-flex justify-content-center">
-      <a [routerLink]="['/recipes', recipe.id]" class="link">Show Recipe</a>
+      <a [routerLink]="['/recipes', recipe.id]" class="link">Rezept anzeigen</a>
     </div>
   </div>
 </div>
