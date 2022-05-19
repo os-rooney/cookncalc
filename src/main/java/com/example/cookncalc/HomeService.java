@@ -15,10 +15,7 @@ import com.example.cookncalc.supermarketIngredient.SupermarketIngredientReposito
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 
 @Service
@@ -94,7 +91,7 @@ public class HomeService {
         recipe.setUser(dto.getUser());
         recipeRepository.save(recipe);
 
-        for(IngredientDTO ingredientDTO : dto.getIngredients()){
+        for (IngredientDTO ingredientDTO : dto.getIngredients()) {
             Double amount = ingredientDTO.getAmount();
             RecipeIngredient recipeIngredient = new RecipeIngredient();
             recipeIngredient.setRecipe(recipe);
@@ -102,6 +99,17 @@ public class HomeService {
             recipeIngredient.setAmount(amount);
             recipeIngredientRepository.save(recipeIngredient);
         }
+    }
+
+    public boolean checkForDuplicateIngredients(RecipeIngredientDTO dto){
+        Set<String> ingredientNames = new HashSet<>();
+        for(IngredientDTO ingredientDTO : dto.getIngredients()){
+            ingredientNames.add(ingredientDTO.getName());
+        }
+        if (dto.getIngredients().size() == ingredientNames.size()) {
+            return true;
+        }
+        return false;
     }
 
     public List<IngredientDTO> ingredientsForDropdown() {

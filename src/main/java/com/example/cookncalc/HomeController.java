@@ -49,7 +49,9 @@ public class HomeController {
 
     @PostMapping("/api/recipes/add")
     public void add(@RequestBody RecipeIngredientDTO dto){
-        homeService.addRecipe(dto);
+        if(homeService.checkForDuplicateIngredients(dto)) {
+            homeService.addRecipe(dto);
+        }
     }
 
     @DeleteMapping("/api/recipes/{id}/delete")
@@ -59,8 +61,10 @@ public class HomeController {
 
     @PostMapping("/api/recipe/{id}/edit")
     public void change(@PathVariable Long id, @RequestBody RecipeIngredientDTO dto){
-        homeService.deleteRecipe(id);
-        homeService.addRecipe(dto);
+        if(homeService.checkForDuplicateIngredients(dto)) {
+            homeService.deleteRecipe(id);
+            homeService.addRecipe(dto);
+        }
     }
 
     @GetMapping("/api/recipes/{id}/calculation")
