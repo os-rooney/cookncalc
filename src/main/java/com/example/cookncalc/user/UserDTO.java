@@ -25,5 +25,17 @@ public class UserDTO {
     public boolean isAdmin() {
         return admin;
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
+    }
 }
 
