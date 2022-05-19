@@ -7,7 +7,11 @@
     {{ingredient.name}}
   </p>
   <p>{{recipe.preparation}}</p>
-  <a *ngIf="authService.isAuthenticated" routerLink="./edit">Edit</a>
+  <div *ngIf="user">
+    <p>{{user.id}}</p>
+    <p>{{recipe.user.id}}</p>
+    <a *ngIf="(user.id === recipe.user.id)" routerLink="./edit">Edit</a>
+  </div>
   <app-recipe-delete *ngIf="authService.isAuthenticated"></app-recipe-delete>
   <br>
   <a routerLink="/recipes">back to recipes</a>
