@@ -57,7 +57,7 @@ public class HomeController {
         homeService.deleteRecipe(id);
     }
 
-    @PostMapping("/api/recipe/{id}/edit")
+    @PostMapping("/api/recipes/{id}/edit")
     public void change(@PathVariable Long id, @RequestBody RecipeWithIngredientsDTO dto){
         homeService.deleteRecipe(id);
         homeService.addRecipe(dto);
