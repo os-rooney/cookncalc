@@ -121,6 +121,13 @@ public class HomeService {
         return true;
     }
 
+    public boolean checkIfRecipeIsFilled(RecipeIngredientDTO dto){
+        if(dto.getTitle().length() > 1 && dto.getIngredients().size() > 0) {
+            return true;
+        }
+        return false;
+    }
+
     public List<IngredientDTO> ingredientsForDropdown() {
         List<IngredientDTO> ingredientDTOList = new LinkedList<>();
         List<Ingredient> ingredients = ingredientRepository.findAll();
