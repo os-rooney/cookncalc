@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Recipe} from "../Recipe";
+import {Recipe} from "../model/recipe";
 import {HttpClient} from "@angular/common/http";
 
 @Component({

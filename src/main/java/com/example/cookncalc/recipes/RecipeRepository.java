@@ -10,6 +10,9 @@ import java.util.List;
 public interface RecipeRepository extends CrudRepository<Recipe, Long> {
     List<Recipe> findAll();
 
+    List<Recipe> findAllByUserId(Long id);
+
+
     @Query(value = "select t.Rezept_ID, t.Rezept_Title, t.Markt, ROUND(sum(t.Preis*t.VPE_Need),2) as Gesamt_Preis from (" +
             "               select r.id                                                                             as Rezept_ID,\n" +
             "                      r.title                                                                          as Rezept_Title,\n" +
@@ -30,6 +33,5 @@ public interface RecipeRepository extends CrudRepository<Recipe, Long> {
             "                 and si.supermarket_id = s.id\n" +
             "               order by s.name) t where t.Rezept_ID = ?1 GROUP BY t.Rezept_ID, t.Rezept_Title, t.Markt order by t.Rezept_ID, Gesamt_Preis", nativeQuery = true)
     List<Object[]> getTotalAmountPerMarketForRecipeId(Long id);
-
 
 }

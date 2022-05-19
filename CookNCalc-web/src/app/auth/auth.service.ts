@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { User } from './model/user';
+import { HttpClient } from '@angular/common/http';
+import { User } from '../model/user';
 
 const SECURITY_EXAMPLE_LOGIN_STATE = 'SECURITY_EXAMPLE_LOGIN_STATE';
 
@@ -92,9 +92,8 @@ export class AuthService {
     return this.authenticated;
   }
 
-  get isAdmin() {
+ /* get isAdmin() {
     return this.user?.admin ?? false;
   }
-
-
+*/
 }

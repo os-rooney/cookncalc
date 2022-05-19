@@ -1,57 +1,85 @@
 package com.example.cookncalc;
 
 import com.example.cookncalc.ingredient.IngredientDTO;
-import com.example.cookncalc.json.RecipeWithIngredientsDTO;
-import com.example.cookncalc.recipes.Recipe;
+import com.example.cookncalc.recipeIngredient.RecipeIngredientDTO;
 import com.example.cookncalc.recipes.RecipeDTO;
 import com.example.cookncalc.recipes.RecipeRepository;
-import com.example.cookncalc.services.RecipeService;
+import com.example.cookncalc.recipes.TotalPriceForRecipe;
+import com.example.cookncalc.supermarketIngredient.SupermarketIngredient;
+import com.example.cookncalc.supermarketIngredient.SupermarketIngredientRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class HomeController {
 
-    private final RecipeService recipeService;
+    private final static Logger logger = LoggerFactory.getLogger(HomeController.class);
+
+    private final HomeService homeService;
 
     @Autowired
-    public HomeController(RecipeService recipeService){
-        this.recipeService = recipeService;
+    public HomeController(HomeService homeService){
+        this.homeService = homeService;
     }
 
     @GetMapping("/api")
     public List<RecipeDTO> home(){
-        return recipeService.showRecipes();
+        return homeService.showRecipes();
     }
 
-    @GetMapping("/api/recipe/{id}")
-    public RecipeWithIngredientsDTO detail(@PathVariable Long id){
-        return recipeService.showDetailRecipe(id);
+    @GetMapping("/api/myrecipes")
+    public List<RecipeDTO> getMyRecipes(@RequestParam long id, @RequestParam String username, @RequestParam boolean admin){
+        System.out.println(id);
+        System.out.println(username);
+        System.out.println(admin);
+        return homeService.findRecipeByUser(id);
     }
 
-    @PostMapping("/api/addRecipe")
-    public void add(@RequestBody RecipeWithIngredientsDTO dto){
-        recipeService.addRecipe(dto);
+    @GetMapping("/api/recipes/{id}")
+    public RecipeIngredientDTO detail(@PathVariable Long id){
+        return homeService.showDetailRecipe(id);
+    }
+
+    @PostMapping("/api/recipes/add")
+    public void add(@RequestBody RecipeIngredientDTO dto){
+        if(homeService.checkForDuplicateIngredients(dto)
+                && homeService.checkForAllowedIngredientNames(dto)
+                && homeService.checkIfRecipeIsFilled(dto)) {
+            homeService.addRecipe(dto);
+        }
+    }
+
+    @DeleteMapping("/api/recipes/{id}/delete")
+    public void deleteRecipe(@PathVariable Long id){
+        homeService.deleteRecipe(id);
+    }
+
+    @PostMapping("/api/recipe/{id}/edit")
+    public void change(@PathVariable Long id, @RequestBody RecipeIngredientDTO dto){
+        if(homeService.checkForDuplicateIngredients(dto)
+                && homeService.checkForAllowedIngredientNames(dto)
+                && homeService.checkIfRecipeIsFilled(dto)) {
+            homeService.deleteRecipe(id);
+            homeService.addRecipe(dto);
+        }
+    }
+
+    @GetMapping("/api/recipes/{id}/calculation")
+    public List<TotalPriceForRecipe> recipeTest(@PathVariable Long id){
+        return  homeService.priceCalculation(id);
+    }
+
+    @GetMapping("/api/prices/{id}")
+    public List<SupermarketIngredient> getIngredientPrice(@PathVariable("id") Long id){
+        return homeService.getIngredientPrices(id);
     }
 
     @GetMapping("/api/ingredients")
     public List<IngredientDTO> fillDropdown() {
-        return recipeService.ingredientsForDropdown();
-    }
-
-    @DeleteMapping("/api/deleteRecipe/{id}")
-    public void deleteRecipe(@PathVariable Long id){
-        recipeService.deleteRecipe(id);
-    }
-
-    @PostMapping("/api/recipe/{id}/edit")
-    public void change(@PathVariable Long id, @RequestBody RecipeWithIngredientsDTO dto){
-        recipeService.deleteRecipe(id);
-        recipeService.addRecipe(dto);
+        return homeService.ingredientsForDropdown();
     }
 }

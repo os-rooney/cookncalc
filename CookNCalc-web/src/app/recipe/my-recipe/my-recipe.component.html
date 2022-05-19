@@ -1,7 +1,13 @@
 <h1>Meine Rezepte</h1>
 
-{{user?.username}}
-{{user?.admin}}
+<div *ngFor="let recipe of recipes">
+  <br>
+  {{recipe.title}}
+  <br>
+  {{recipe.description}}
+  <br>
+  <a [routerLink]="['/myRecipes', recipe.id]">Details</a>
+</div>
 
 <br>
 <a *ngIf="authService.isAuthenticated" routerLink="/addRecipe">Add</a>

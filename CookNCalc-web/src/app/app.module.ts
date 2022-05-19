@@ -10,10 +10,12 @@ import { RecipeComponent } from './recipe/recipe.component';
 import { RecipeAddComponent } from './recipe/recipe-add/recipe-add.component';
 import { PriceCalculationComponent } from './price-calculation/price-calculation.component';
 import { RecipeDeleteComponent } from './recipe/recipe-delete/recipe-delete.component';
-import {RecipeEditComponent} from "./recipe/recipe-details/recipe-edit/recipe-edit.component";
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
+import {RecipeEditComponent} from "./recipe/recipe-edit/recipe-edit.component";
+import { LoginComponent } from './auth/login/login.component';
+import { RegisterComponent } from './auth/register/register.component';
 import { MyRecipeComponent } from './recipe/my-recipe/my-recipe.component';
+import { MyRecipeDetailsComponent } from './recipe/my-recipe/my-recipe-details/my-recipe-details.component';
+import { MyRecipeDetailsEditComponent } from './recipe/my-recipe/my-recipe-details/my-recipe-details-edit/my-recipe-details-edit.component';
 
 
 @NgModule({
@@ -27,7 +29,9 @@ import { MyRecipeComponent } from './recipe/my-recipe/my-recipe.component';
     RecipeEditComponent,
     LoginComponent,
     RegisterComponent,
-    MyRecipeComponent
+    MyRecipeComponent,
+    MyRecipeDetailsComponent,
+    MyRecipeDetailsEditComponent,
   ],
   imports: [
     BrowserModule,

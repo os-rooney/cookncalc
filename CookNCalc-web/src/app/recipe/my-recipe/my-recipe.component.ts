@@ -1,21 +1,41 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterContentInit, Component, OnInit} from '@angular/core';
 import {User} from "../../model/user";
 import {HttpClient} from "@angular/common/http";
-import {AuthService} from "../../auth.service";
+import {AuthService} from "../../auth/auth.service";
+import {Recipe} from "../../model/recipe";
+import {HttpParams} from "@angular/common/http";
 
 @Component({
   selector: 'app-my-recipe',
   templateUrl: './my-recipe.component.html',
   styleUrls: ['./my-recipe.component.css']
 })
+
 export class MyRecipeComponent implements OnInit {
 
-  user?: User;
+  recipes?: Recipe[];
 
-  constructor(private http: HttpClient, public authService: AuthService) { }
-
-  ngOnInit(): void {
-    this.http.get<User>('/api/users/current').subscribe(user => this.user = user);
+  user={
+    id:0,
+    admin:false,
+    username:""
   }
 
+  constructor(private http: HttpClient, public authService: AuthService) {
+  }
+
+  ngOnInit(): void {
+    this.http.get<User>('/api/users/current').subscribe(user =>{
+      this.user = user;
+      this.getRecipes()
+      }
+    );
+  }
+
+  //mergeMap
+
+  getRecipes(){
+    this.http.get<Recipe[]>("/api/myrecipes", {params: this.user}).subscribe(result => this.recipes=result);
+  }
 }
+

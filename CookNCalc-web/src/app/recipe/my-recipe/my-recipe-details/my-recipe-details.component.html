@@ -1,0 +1,17 @@
+<div *ngIf="recipe">
+  <p>{{recipe.title}}</p>
+  <p>{{recipe.description}}</p>
+  <p *ngFor="let ingredient of recipe.ingredients">
+    {{ingredient.amount}}
+    {{ingredient.unit}}
+    {{ingredient.name}}
+  </p>
+  <p>{{recipe.preparation}}</p>
+  <a *ngIf="authService.isAuthenticated" routerLink="./edit">Edit</a>
+  <app-recipe-delete *ngIf="authService.isAuthenticated"></app-recipe-delete>
+  <br>
+  <a routerLink="/myRecipes">back to recipes</a>
+</div>
+<app-price-calculation *ngIf="authService.isAuthenticated"></app-price-calculation>
+
+
