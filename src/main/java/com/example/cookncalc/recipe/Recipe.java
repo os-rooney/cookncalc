@@ -1,4 +1,4 @@
-package com.example.cookncalc.recipes;
+package com.example.cookncalc.recipe;
 
 import com.example.cookncalc.recipeIngredient.RecipeIngredient;
 import com.example.cookncalc.user.User;

@@ -1,6 +1,6 @@
 package com.example.cookncalc.user;
 
-import com.example.cookncalc.recipes.Recipe;
+import com.example.cookncalc.recipe.Recipe;
 
 import javax.persistence.*;
 import java.util.ArrayList;

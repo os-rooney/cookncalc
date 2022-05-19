@@ -21,23 +21,6 @@ public class RecipeIngredientDTO {
     public RecipeIngredientDTO(){
     }
 
-    public RecipeIngredientDTO(String title, String description, String preparation, List<IngredientDTO> ingredients, Double amount) {
-        this.title = title;
-        this.description = description;
-        this.preparation = preparation;
-        this.ingredients = ingredients;
-        this.amount = amount;
-    }
-
-    public RecipeIngredientDTO(String title, String description, String preparation, Double amount, List<IngredientDTO> ingredients, User user) {
-        this.title = title;
-        this.description = description;
-        this.preparation = preparation;
-        this.amount = amount;
-        this.ingredients = ingredients;
-        this.user = user;
-    }
-
     public void setIngredients(List<IngredientDTO> ingredients) {
         this.ingredients = ingredients;
     }
