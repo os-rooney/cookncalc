@@ -14,8 +14,8 @@
 
     <div class="m-5 p-2">
       <p>{{recipe.preparation}}</p>
-      <a class="link m-3" *ngIf="authService.isAuthenticated" routerLink="./edit">Bearbeiten</a>
-      <app-recipe-delete class="link m-3" *ngIf="authService.isAuthenticated"></app-recipe-delete>
+      <a class="link m-3" *ngIf="user && (user.id === recipe.user.id)" routerLink="./edit">Bearbeiten</a>
+      <app-recipe-delete class="link m-3" *ngIf="user && (user.id === recipe.user.id)"></app-recipe-delete>
       <a class="link m-3" routerLink="/recipes">Zurück zur Rezeptübersicht</a>
     </div>
 
