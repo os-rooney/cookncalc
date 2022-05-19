@@ -2,13 +2,6 @@ body{
   background-color: #EEEEEE;
   color: #1B1A17;
 }
-.svg svg{
-  max-width: 25rem;
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-  margin: 3rem auto 2rem auto;
-}
 .wrapper{
   max-width: 54rem;
   margin: 0 auto;
@@ -37,4 +30,124 @@ h3{
 }
 .recipe:nth-child(odd){
   margin-right: 2rem;
+}
+/* SVG STYLS AND ANIMATIONS */
+.svg svg{
+  max-width: 25rem;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 3rem auto 2rem auto;
+}
+/* plant right right and left right*/
+#plant-right-right, #plant-left-right{
+  animation: plant 6s infinite linear;
+  transform-origin: bottom;
+  transform-box: fill-box;
+}
+/* plant right left and left left */
+#plant-right-left, #plant-left-left{
+  animation: plant 6s infinite linear;
+  transform-origin: bottom;
+  transform-box: fill-box;
+}
+@keyframes plant {
+  0%{
+    transform: rotateZ(15deg);
+  }
+  50%{
+    transform: rotateZ(0deg);
+  }
+  100%{
+    transform: rotateZ(15deg);
+  }
+}
+/* man leg
+#man-leg{
+  animation: leg 3s infinite linear;
+  transform-origin: top;
+  transform-box: fill-box;
+}
+@keyframes leg {
+  0%{
+    transform: rotateZ(0deg);
+  }
+  50%{
+    transform: rotateZ(8deg);
+  }
+  100%{
+    transform: rotateZ(0deg);
+  }
+}*/
+/* man hand */
+#man-hand{
+  animation: man-hand 3s infinite linear;
+  transform-origin: top;
+  transform-box: fill-box;
+}
+@keyframes man-hand {
+  0%{
+    transform: rotateZ(8deg);
+  }
+  50%{
+    transform: rotateZ(0deg);
+  }
+  100%{
+    transform: rotateZ(8deg);
+  }
+}
+/* woman-hand */
+#woman-hand{
+  animation: man-hand 3s infinite linear;
+  animation-delay: 1.5s;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+@keyframes woman-hand {
+  0%{
+    transform: rotateZ(20deg) translateX(0%);
+  }
+  50%{
+    transform: rotateZ(0deg) translateX(50%);
+  }
+  100%{
+    transform: rotateZ(20deg) translateX(0%);
+  }
+}
+/* woman-head */
+#woman-head{
+  animation: man-hand 3s infinite linear;
+  transform-origin: bottom;
+  transform-box: fill-box;
+}
+@keyframes woman-head {
+  0%{
+    transform: translateX(10%);
+  }
+  50%{
+    transform: translateX(-10%);
+  }
+  100%{
+    transform: translateX(10%);
+  }
+}
+/* light animations */
+
+#left-bulb{
+  opacity: 0;
+}
+#left-lamp:hover ~ #left-bulb{
+  opacity: 1;
+}
+#right-bulb{
+  opacity: 0;
+}
+#right-lamp:hover ~ #right-bulb{
+  opacity: 1;
+}
+#middle-bulb{
+  opacity: 0;
+}
+#middle-lamp:hover ~ #middle-bulb{
+  opacity: 1;
 }
