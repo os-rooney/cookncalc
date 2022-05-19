@@ -1,61 +1,37 @@
 .maincontent{
   min-height: 90vh;
 }
+.add-Button{
+  position: relative;
+  min-height: 5rem;
+}
 .maincontent > div{
   padding-bottom: 1rem;
 }
-.container{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-label{
-  display: block;
-  margin-bottom: .2rem;
-}
-input{
-  margin-bottom: 1rem;
-}
-.ingredients{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.ingredients input{
-  margin-right: 1rem;
-}
-button{
+.button{
   display: block;
   color: #1B1A17;
   padding: .625rem;
   border-radius: .5rem;
   box-shadow: .1rem .1rem .1rem #1B1A17;
   background-color: #A7D7C5;
-  margin-bottom: 1rem;
+  position: absolute;
+  right: 0;
 }
-#delete-ingredient{
+.delete-btn{
   display: inline;
   background-color: transparent;
   border: none;
   box-shadow: none;
   color: red;
   -webkit-text-stroke: .3px #000;
-  font-size: 1.2rem;
   align-self: start;
 }
-#unit{
-  margin: 0;
-  align-self: baseline;
-  font-weight: bold;
+.ingredients div{
+  margin: 0.4rem 0.4rem 0.4rem 0rem;
 }
-.submit{
-  display: block;
-  color: #1B1A17;
-  padding: .625rem;
- border: none;
-  box-shadow: .1rem .1rem .1rem #1B1A17;
-  background-color: #A7D7C5;
-  margin-bottom: 1rem;
-  margin-top: 1rem;
+.einheit{
+  border:none;
+  color: black;
 }
+
