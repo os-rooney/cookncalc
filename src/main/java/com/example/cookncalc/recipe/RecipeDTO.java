@@ -1,4 +1,4 @@
-package com.example.cookncalc.recipes;
+package com.example.cookncalc.recipe;
 
 
 public class RecipeDTO {

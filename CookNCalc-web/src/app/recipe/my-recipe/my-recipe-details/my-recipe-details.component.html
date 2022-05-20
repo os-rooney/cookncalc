@@ -1,17 +1,26 @@
 <div *ngIf="recipe">
-  <p>{{recipe.title}}</p>
-  <p>{{recipe.description}}</p>
-  <p *ngFor="let ingredient of recipe.ingredients">
-    {{ingredient.amount}}
-    {{ingredient.unit}}
-    {{ingredient.name}}
-  </p>
-  <p>{{recipe.preparation}}</p>
-  <a *ngIf="authService.isAuthenticated" routerLink="./edit">Edit</a>
-  <app-recipe-delete *ngIf="authService.isAuthenticated"></app-recipe-delete>
-  <br>
-  <a routerLink="/myRecipes">back to recipes</a>
+  <div class="text-center m-3">
+    <h2 class="fw-bold">{{recipe.title}}</h2>
+    <h4 class="fst-italic"> - {{recipe.description}} - </h4>
+  </div>
+
+  <div class="d-flex flex-column align-items-center m-5">
+    <div class="ingredients text-center border border-light" *ngFor="let ingredient of recipe.ingredients">
+      <span class="d-inline-block p-1 text-end amount">{{ingredient.amount}}</span>
+      <span class="d-inline-block p-1 text-start unit">{{ingredient.unit}}</span>
+      <span class="d-inline-block p-1 text-start name">{{ingredient.name}}</span>
+    </div>
+  </div>
+
+  <div class="m-5 p-2">
+    <p>{{recipe.preparation}}</p>
+    <a class="link m-3" *ngIf="authService.isAuthenticated" routerLink="./edit">Bearbeiten</a>
+    <app-recipe-delete class="link m-3" *ngIf="authService.isAuthenticated"></app-recipe-delete>
+    <a class="link m-3" routerLink="/recipes">Zurück zur Rezeptübersicht</a>
+  </div>
+
 </div>
-<app-price-calculation *ngIf="authService.isAuthenticated"></app-price-calculation>
 
-
+<div class="d-flex flex-column align-items-center m-5 calculation">
+  <app-price-calculation *ngIf="authService.isAuthenticated"></app-price-calculation>
+</div>

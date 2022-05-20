@@ -1,14 +1,74 @@
-<div>
-  <label for="username">Username</label>
-  <input type="text" id="username" name="username" [(ngModel)]="registration.username" required>
+<div class="container">
+  <div class="row d-flex justify-content-center align-items-center">
+    <div class="row g-0">
+      <div class="col-lg-6 firstcolumn">
+        <div class="text-center pt-4">
+          <img src="assets/undraw_cooking_lyxy.png" alt="logo" style="width: 185px">
+        </div>
+        <div class="d-flex align-items-center justify-content-center">
+          <h2 class="pb-5">Registrierung</h2>
+        </div>
 
-  <label for="password">Password</label>
-  <input type="password" id="password" name="password" [(ngModel)]="registration.password" required>
 
-  <label for="passwordRepeat">Repeat password</label>
-  <input type="password" id="passwordRepeat" name="passwordRepeat" [(ngModel)]="registration.passwordRepeat" required>
-  <span class="error" *ngIf="registration.password !== registration.passwordRepeat">Passwords do not match!</span>
+        <div class="d-flex align-items-center justify-content-center">
+          <div class="form-outline">
+            <input class="form-control" placeholder="UserName" type="text" id="username" name="username"
+                   [(ngModel)]="registration.username" required>
+          </div>
+        </div>
+        <div class="d-flex p-2 align-items-center justify-content-center">
+          <div class="pb-2">
+            <label for="username">Username</label>
+          </div>
+        </div>
 
-  <button (click)="register()" [disabled]="!valid()">Register</button>
+
+        <div class="d-flex align-items-center justify-content-center">
+          <div class="form-outline">
+            <input class="form-control" placeholder="Passwort" type="password" id="password" name="password"
+                   [(ngModel)]="registration.password" required>
+          </div>
+        </div>
+        <div class="d-flex p-2 align-items-center justify-content-center pb-4">
+          <label for="password">Password</label>
+        </div>
+
+
+        <div class="d-flex align-items-center justify-content-center">
+          <div class="form-outline">
+            <input class="form-control" placeholder="Passwort" type="password" id="passwordRepeat" name="passwordRepeat"
+                   [(ngModel)]="registration.passwordRepeat" required>
+          </div>
+        </div>
+        <div class="d-flex p-2 align-items-center justify-content-center pb-4">
+          <label for="passwordRepeat">Repeat password</label>
+          <span class="error"
+                *ngIf="registration.password !== registration.passwordRepeat">Passwords do not match!</span>
+        </div>
+
+
+        <div class="d-flex align-items-center justify-content-center pb-4">
+          <button type="button" class="btn button btn-block fa-lg mb-3" (click)="register()" [disabled]="!valid()">
+            Register
+          </button>
+        </div>
+      </div>
+
+      <div class="col-lg-6 d-flex align-items-center gradient-component p-sm-4">
+        <div>
+          <h2>Willkommen bei CookNCalc</h2>
+          <p class="small mb-0">Keine Lust mehr auf Zettel-Chaos bei Rezepten? Keinen Übersicht über
+            die Kosten beim Einkaufen? Dann bist du bei uns genau richtig.</p>
+          <br>
+          <ul>
+            <li>Digitale Verwaltung von Rezepten</li>
+            <br>
+            <li>Automatische Berechnung von Einkaufskosten</li>
+            <br>
+            <li>Anlegen und Abspeichern von eigenen Rezepten</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-
