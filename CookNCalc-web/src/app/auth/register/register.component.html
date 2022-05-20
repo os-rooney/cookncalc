@@ -12,13 +12,13 @@
 
         <div class="d-flex align-items-center justify-content-center">
           <div class="form-outline">
-            <input class="form-control" placeholder="UserName" type="text" id="username" name="username"
+            <input class="form-control" placeholder="Name" type="text" id="username" name="username"
                    [(ngModel)]="registration.username" required>
           </div>
         </div>
         <div class="d-flex p-2 align-items-center justify-content-center">
           <div class="pb-2">
-            <label for="username">Username</label>
+            <label for="username">Benutzername</label>
           </div>
         </div>
 
@@ -30,7 +30,7 @@
           </div>
         </div>
         <div class="d-flex p-2 align-items-center justify-content-center pb-4">
-          <label for="password">Password</label>
+          <label for="password">Passwort</label>
         </div>
 
 
@@ -41,15 +41,14 @@
           </div>
         </div>
         <div class="d-flex p-2 align-items-center justify-content-center pb-4">
-          <label for="passwordRepeat">Repeat password</label>
-          <span class="error"
-                *ngIf="registration.password !== registration.passwordRepeat">Passwords do not match!</span>
+          <label for="passwordRepeat">Passwort wiederholen</label>
         </div>
-
+        <span class="error"
+              *ngIf="registration.password !== registration.passwordRepeat">Die Passwörter stimmen nicht überein!</span>
 
         <div class="d-flex align-items-center justify-content-center pb-4">
           <button type="button" class="btn button btn-block fa-lg mb-3" (click)="register()" [disabled]="!valid()">
-            Register
+            Registrieren
           </button>
         </div>
       </div>

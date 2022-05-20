@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Recipe} from "../../model/recipe";
 import {ActivatedRoute, Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
@@ -11,8 +11,6 @@ import {User} from "../../model/user";
   styleUrls: ['./recipe-edit.component.css']
 })
 export class RecipeEditComponent implements OnInit {
-
-  constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router) { }
 
   recipe: Recipe = {
     id: 0,
@@ -30,6 +28,10 @@ export class RecipeEditComponent implements OnInit {
   id?:number;
 
   user?:User;
+
+  checkIngredientMatch: boolean = false;
+
+  constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router) { }
 
   ngOnInit(): void {
     this.http.get<RecipeIngredient[]>('api/ingredients').subscribe(list => this.ingredients = list);
@@ -60,4 +62,30 @@ export class RecipeEditComponent implements OnInit {
     return "";
   }
 
+  ingredientMatchesDropdown(ingredient: RecipeIngredient): boolean {
+    let check : boolean = false;
+    this.checkIngredientMatch = false;
+    if (this.ingredients) {
+      for (let ingr of this.ingredients) {
+        if (ingr.name === ingredient.name) {
+          check = true;
+          this.checkIngredientMatch = true;
+        }
+      }
+    }
+    return check;
+  }
+
+  noDuplicateIngredients():boolean {
+    let ingrList : String[] = [];
+    for (let ingr of this.recipe.ingredients) {
+      if (!ingrList.includes(ingr.name)) {
+        ingrList.push(ingr.name);
+      }
+    }
+    if(ingrList.length === this.recipe.ingredients.length) {
+      return true;
+    }
+    return false;
+  }
 }
