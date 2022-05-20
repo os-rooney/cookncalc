@@ -34,14 +34,6 @@ public class Recipe {
         this.createdAt = Instant.now();
     }
 
-    public Recipe(String title, String description, String preparation, User user) {
-        this.title = title;
-        this.description = description;
-        this.preparation = preparation;
-        this.createdAt = Instant.now();
-        this.user = user;
-    }
-
     public Recipe(String title, String description, String preparation) {
         this.title = title;
         this.description = description;

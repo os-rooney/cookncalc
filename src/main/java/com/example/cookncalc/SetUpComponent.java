@@ -74,13 +74,13 @@ public class SetUpComponent {
                         "Käse darüber streuen.");
 
         Recipe schokoTorte = new Recipe("Schokotorte", "Die leckerste Kalorienbombe der Welt!", "Die 150 g Kinderschokolade " +
-                " und 250 g Kinderschokolade in einem Wasserbad schmelzen. Die Butter cremig rühren und Zuckers, den Kakao, die Eigelbe, die Eier, " +
+                " und 250 g Nutella in einem Wasserbad schmelzen. Die Butter cremig rühren und Zucker, den Kakao, die Eigelbe, die Eier, " +
                 "den Vanillinzucker und Schokolade unterrühren. Mehl mit Backpulver mischen, Eiweiße steif schlagen."+
-                "Die Teigmasse in zwei Hälften teilen im vorgeheizten Backofen bei 180°C ca. 40 – 45 min. in der Springform backen.");
+                "Die Teigmasse in zwei Hälften teilen und im vorgeheizten Backofen bei 180°C ca. 40 – 45 min in der Springform backen.");
 
         Recipe spargelImUltra = new Recipe("Spargel im Ultra", "Das Gericht der Spargelsaison", "Den Spargel gut schälen, die " +
                 "holzigen Enden abschneiden und den Spargel tropfnass in den Ultra - Plus von Tupper legen (ich habe den 3-Liter Topf genommen)." +
-                " Salz und Zucker darüber streuen und die zerlassene Butter darüber gießen. Den Backofen bei Umluft auf 180 Grad vorheizen und den " +
+                " Salz und Zucker darüber streuen und die zerlassene Butter darüber gießen. Den Backofen bei Umluft auf 180°C vorheizen und den " +
                 "Spargel darin 40 bis 45 Minuten garen (zwischendurch evtl. eine Messerprobe machen).");
 
 
@@ -105,9 +105,9 @@ public class SetUpComponent {
 
         Ingredient butter = new Ingredient("Butter", "g", 250);
         Ingredient zucker = new Ingredient("Zucker", "g", 500);
-        Ingredient vanilleZucker = new Ingredient("VanilleZucker", "Päckchen", 1);
+        Ingredient vanilleZucker = new Ingredient("Vanillezucker", "Päckchen", 1);
         Ingredient schokolade = new Ingredient("Schokolade", "g", 250);
-        Ingredient eier = new Ingredient("Eier", "Stück", 10);
+        Ingredient eier = new Ingredient("Ei(er)", "Stück", 10);
         Ingredient mehl = new Ingredient("Mehl", "g", 500);
         Ingredient kakaoPulver = new Ingredient("Kakaopulver", "g", 100);
         Ingredient backPulver = new Ingredient("Backpulver", "Päckchen", 1);
@@ -117,9 +117,6 @@ public class SetUpComponent {
 
         Ingredient Spargel = new Ingredient("Spargel", "Bund", 1);
         Ingredient salz = new Ingredient("Salz", "g", 250);
-
-//        Ingredient marmelade = new Ingredient("Marmelade", "g", 500);
-//        Ingredient mehl = new Ingredient("Mehl", "g", 1000);
 
         if (ingredientRepository.count() == 0) {
             ingredientRepository.save(basilikum);
@@ -147,9 +144,6 @@ public class SetUpComponent {
 
             ingredientRepository.save(Spargel);
             ingredientRepository.save(salz);
-
-//            ingredientRepository.save(marmelade);
-//            ingredientRepository.save(mehl);
         }
 
         //link recipes to ingredients
@@ -221,9 +215,9 @@ public class SetUpComponent {
             addSupermarketIngredient(tomate, lidl, 0.60);
             addSupermarketIngredient(tomate, edeka, 0.70);
             //Zucchini
-            addSupermarketIngredient(zucchini, rewe, 1.5);
-            addSupermarketIngredient(zucchini, lidl, 1.4);
-            addSupermarketIngredient(zucchini, edeka, 1.5);
+            addSupermarketIngredient(zucchini, rewe, 1.2);
+            addSupermarketIngredient(zucchini, lidl, 1.0);
+            addSupermarketIngredient(zucchini, edeka, 1.1);
 
             //Hack
             addSupermarketIngredient(hack, rewe, 7.0);
@@ -288,22 +282,10 @@ public class SetUpComponent {
             addSupermarketIngredient(Spargel, rewe, 4.50);
             addSupermarketIngredient(Spargel, lidl, 3.80);
             addSupermarketIngredient(Spargel, edeka, 4.25);
-
             //Salz
             addSupermarketIngredient(salz, rewe, 1.30);
             addSupermarketIngredient(salz, lidl, 0.90);
             addSupermarketIngredient(salz, edeka, 1.15);
-
-
-//            //Marmelade
-//            addSupermarketIngredient(marmelade, rewe, 3.0);
-//            addSupermarketIngredient(marmelade, lidl, 2.0);
-//            addSupermarketIngredient(marmelade, edeka, 1.90);
-//            //Mehl
-//            addSupermarketIngredient(mehl, rewe, 1.79);
-//            addSupermarketIngredient(mehl, lidl, 1.29);
-//            addSupermarketIngredient(mehl, edeka, 1.20);
-
         }
     }
 }

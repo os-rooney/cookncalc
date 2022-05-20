@@ -13,9 +13,7 @@ import com.example.cookncalc.recipe.RecipeRepository;
 import com.example.cookncalc.recipe.TotalPriceForRecipe;
 import com.example.cookncalc.supermarketIngredient.SupermarketIngredient;
 import com.example.cookncalc.supermarketIngredient.SupermarketIngredientRepository;
-import com.example.cookncalc.user.User;
 import com.example.cookncalc.user.UserDTO;
-import com.example.cookncalc.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,18 +26,17 @@ public class HomeService {
     private final RecipeRepository recipeRepository;
     private final IngredientRepository ingredientRepository;
     private final RecipeIngredientRepository recipeIngredientRepository;
-    private final UserRepository userRepository;
 
     private final SupermarketIngredientRepository supermarketIngredientRepository;
 
     @Autowired
     public HomeService(RecipeRepository recipeRepository,
                        IngredientRepository ingredientRepository,
-                       RecipeIngredientRepository recipeIngredientRepository, UserRepository userRepository, SupermarketIngredientRepository supermarketIngredientRepository) {
+                       RecipeIngredientRepository recipeIngredientRepository,
+                       SupermarketIngredientRepository supermarketIngredientRepository) {
         this.recipeRepository = recipeRepository;
         this.ingredientRepository = ingredientRepository;
         this.recipeIngredientRepository = recipeIngredientRepository;
-        this.userRepository = userRepository;
         this.supermarketIngredientRepository = supermarketIngredientRepository;
     }
 
@@ -156,9 +153,9 @@ public class HomeService {
         Optional<Recipe> recipeToDeleteOptional = recipeRepository.findById(id);
         if (recipeToDeleteOptional.isPresent()) {
             Recipe recipeToDelete = recipeToDeleteOptional.get();
-            List<RecipeIngredient> recipeIngredient = recipeIngredientRepository.findByRecipe(recipeToDelete);
-            for (RecipeIngredient recipeIngredient1 : recipeIngredient) {
-                recipeIngredientRepository.delete(recipeIngredient1);
+            List<RecipeIngredient> recipeIngredients = recipeIngredientRepository.findByRecipe(recipeToDelete);
+            for (RecipeIngredient recipeIngredient : recipeIngredients) {
+                recipeIngredientRepository.delete(recipeIngredient);
             }
             recipeRepository.delete(recipeToDelete);
         }

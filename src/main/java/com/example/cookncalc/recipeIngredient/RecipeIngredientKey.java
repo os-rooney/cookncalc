@@ -36,7 +36,7 @@ public class RecipeIngredientKey implements Serializable {
     public void setIngredientId(Long ingredientId) {
         this.ingredientId = ingredientId;
     }
-    //TODO: ????????????????
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -58,7 +58,7 @@ public class RecipeIngredientKey implements Serializable {
             return false;
         return true;
     }
-    //TODO: ????????????????
+
     @Override
     public int hashCode() {
         final int prime = 31;

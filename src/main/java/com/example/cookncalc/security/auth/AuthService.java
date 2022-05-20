@@ -48,7 +48,7 @@ public class AuthService {
 
         Cookie cookie = new Cookie(cookieName, token);
         cookie.setHttpOnly(true);
-        // FIXME cookie.setMaxAge() should be called to set a time in seconds after when the cookie should expire
+        cookie.setMaxAge(60*60*24*7); //called to set a time in seconds after when the cookie should expire
         cookie.setPath("/");
         return cookie;
     }
