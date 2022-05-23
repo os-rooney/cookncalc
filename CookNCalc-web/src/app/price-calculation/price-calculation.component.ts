@@ -14,7 +14,7 @@ export class PriceCalculationComponent implements OnInit {
   totalPriceForRecipe?: TotalPriceForRecipe[];
   pricePerUnit?: TotalPriceForRecipe[];
   id?:number;
-  marketId?:number;
+  supermarket?:string;
   test = false;
 
   constructor(private http: HttpClient, private route: ActivatedRoute) { }
@@ -27,6 +27,7 @@ export class PriceCalculationComponent implements OnInit {
   }
 
   ingredientPriceDetail(supermarket:string){
+    this.supermarket = supermarket;
     this.http.get<ingredientPriceForRecipe[]>(`/api/recipes/${this.id}/${supermarket}`).subscribe(result => this.ingredientPricePerMarket= result);
     this.test = true;
   }
