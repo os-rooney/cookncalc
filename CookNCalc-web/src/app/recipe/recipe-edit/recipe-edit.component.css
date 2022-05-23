@@ -1,10 +1,9 @@
 .maincontent{
   min-height: 90vh;
+  width: 85vw;
+  margin: 0 auto;
 }
-.add-Button{
-  position: relative;
-  min-height: 5rem;
-}
+
 .maincontent > div{
   padding-bottom: 1rem;
 }
@@ -28,10 +27,26 @@
   align-self: start;
 }
 .ingredients div{
- margin: 0.4rem 0.4rem 0.4rem 0rem;
+  margin: 0.4rem 0.4rem 0.4rem 0rem;
 }
 .einheit{
   border:none;
   color: black;
 }
+.add-Button{
+  position: relative;
+  min-height: 5rem;
+}
+.error {
+  width: 100%;
+  font-weight: bold;
+  display: inline-block;
+  text-align: left;
+  color: darkred;
+}
 
+@media only screen and (min-width: 62.5em){
+  .maincontent{
+    width: 60vw;
+  }
+}

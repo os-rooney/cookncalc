@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row d-flex justify-content-center align-items-center">
     <div class="row g-0">
-      <div class="col-lg-6 leftside">
+      <div class="col-lg-6 leftside order-1">
         <div class="card-body p-md-5 mx-md-4">
 
           <div class="text-center">
@@ -12,17 +12,18 @@
           <form>
             <div class="form-outline mb-4">
               <input class="form-control" type="text" id="username" name="username"
-                     placeholder="UserName" [(ngModel)]="credentials.username" required>
-              <label for="username">Username</label>
+                     placeholder="Name" [(ngModel)]="credentials.username" required>
+              <label for="username">Benutzername</label>
             </div>
 
             <div class="form-outline mb-4">
               <input type="password" id="password" name="password"
                      class="form-control" [(ngModel)]="credentials.password" required>
-              <label for="password">Password</label>
+              <label for="password">Passwort</label>
             </div>
 
-            <div *ngIf="loginError"><small style="color: darkred">{{ loginError | json }}</small></div>
+            <div *ngIf="loginError"><small style="color: darkred">Login leider nicht erfolgreich! Benutzername
+            oder Passwort sind nicht korrekt!</small></div>
 
             <div class="text-center pt-1 mb-5 pb-1">
               <button class="btn button btn-block fa-lg mb-3" type="button"
@@ -39,7 +40,7 @@
 
         </div>
       </div>
-      <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
+      <div class="col-lg-6 d-flex align-items-center gradient-custom-2 order-0">
         <div class="text-black px-3 py-4 p-md-5 mx-md-4">
           <h2 class="mb-4">CookNCalc</h2>
           <br>

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Recipe} from "../../../../model/recipe";
 import {HttpClient} from "@angular/common/http";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -11,8 +11,6 @@ import {User} from "../../../../model/user";
   styleUrls: ['./my-recipe-details-edit.component.css']
 })
 export class MyRecipeDetailsEditComponent implements OnInit {
-
-  constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router) { }
 
   recipe: Recipe = {
     id: 0,
@@ -29,7 +27,11 @@ export class MyRecipeDetailsEditComponent implements OnInit {
 
   id?:number;
 
-  user?: User;
+  user?:User;
+
+  checkIngredientMatch: boolean = false;
+
+  constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router) { }
 
   ngOnInit(): void {
     this.http.get<RecipeIngredient[]>('api/ingredients').subscribe(list => this.ingredients = list);
@@ -37,17 +39,17 @@ export class MyRecipeDetailsEditComponent implements OnInit {
     this.http.get<Recipe>(`/api/recipes/${this.id}`).subscribe(result => {
       this.recipe = result;
       this.http.get<User>('/api/users/current').subscribe(user => this.user = user);
-    },)
+    })
   }
 
   changeRecipe(){
-    if (this.user) {
-      this.recipe.user = this.user;
+    if (this.user?.id === this.recipe.user.id) {
+      this.http.post<Recipe>(`/api/recipes/${this.id}/edit`, this.recipe).subscribe();
+      this.http.get<Recipe[]>("/api").subscribe(result => this.recipes=result);
     }
-    this.http.post<Recipe>(`/api/recipes/${this.id}/edit`, this.recipe).subscribe();
-    this.http.get<Recipe[]>("/api").subscribe(result => this.recipes=result);
     this.router.navigate(['/recipes']);
   }
+
   findUnit(ingredientName : string){
     if(this.ingredients){
       for(let ingredient of this.ingredients){
@@ -59,4 +61,30 @@ export class MyRecipeDetailsEditComponent implements OnInit {
     return "";
   }
 
+  ingredientMatchesDropdown(ingredient: RecipeIngredient): boolean {
+    let check : boolean = false;
+    this.checkIngredientMatch = false;
+    if (this.ingredients) {
+      for (let ingr of this.ingredients) {
+        if (ingr.name === ingredient.name) {
+          check = true;
+          this.checkIngredientMatch = true;
+        }
+      }
+    }
+    return check;
+  }
+
+  noDuplicateIngredients():boolean {
+    let ingrList : String[] = [];
+    for (let ingr of this.recipe.ingredients) {
+      if (!ingrList.includes(ingr.name)) {
+        ingrList.push(ingr.name);
+      }
+    }
+    if(ingrList.length === this.recipe.ingredients.length) {
+      return true;
+    }
+    return false;
+  }
 }

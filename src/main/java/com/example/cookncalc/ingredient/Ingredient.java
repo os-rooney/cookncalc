@@ -24,7 +24,6 @@ public class Ingredient {
     @OneToMany(mappedBy = "ingredient")
     private Set<SupermarketIngredient> supermarketIngredients = new HashSet<>();
 
-    //TODO: Enum erstellen
     private String unit;
 
     public Ingredient(){}

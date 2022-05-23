@@ -17,8 +17,6 @@ import java.util.List;
 @RestController
 public class HomeController {
 
-    private final static Logger logger = LoggerFactory.getLogger(HomeController.class);
-
     private final HomeService homeService;
 
     @Autowired
@@ -53,8 +51,6 @@ public class HomeController {
         }
     }
 
-
-
     @DeleteMapping("/api/recipes/{id}/delete")
     public void deleteRecipe(@PathVariable Long id){
         homeService.deleteRecipe(id);
@@ -71,7 +67,6 @@ public class HomeController {
             homeService.addRecipe(dto);
         }
     }
-
 
     @GetMapping("/api/recipes/{id}/calculation")
     public List<TotalPriceForRecipe> getTotalRecipePriceForShoppingList(@PathVariable Long id){

@@ -1,5 +1,4 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
 import {Recipe} from "./model/recipe";
 import {AuthService} from "./auth/auth.service";
 
@@ -10,14 +9,15 @@ import {AuthService} from "./auth/auth.service";
 })
 export class AppComponent implements OnInit{
 
+  @Input()
+  recipes?: Recipe[];
+
+  // Navbar toggler
+  isShown:boolean = false;
 
   constructor(public authService: AuthService) {
   }
 
   ngOnInit(): void {
   }
-
-  @Input()
-  recipes?: Recipe[];
-
 }

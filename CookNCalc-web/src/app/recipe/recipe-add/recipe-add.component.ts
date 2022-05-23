@@ -25,11 +25,10 @@ export class RecipeAddComponent implements OnInit {
     preparation: "",
     user: {id: 0, username: "", admin: true}
   }
-  ingredientUnit?: string;
 
+  checkIngredientMatch: boolean = false;
 
-  constructor(private http: HttpClient, private router: Router) {
-  }
+  constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit(): void {
     this.http.get<RecipeIngredient[]>('api/ingredients').subscribe(list => this.ingredients = list);
@@ -57,15 +56,16 @@ export class RecipeAddComponent implements OnInit {
 
   ingredientMatchesDropdown(ingredient: RecipeIngredient): boolean {
     let check : boolean = false;
+    this.checkIngredientMatch = false;
     if (this.ingredients) {
       for (let ingr of this.ingredients) {
         if (ingr.name === ingredient.name) {
           check = true;
+          this.checkIngredientMatch = true;
         }
       }
-      return check;
     }
-    return false;
+    return check;
   }
 
   noDuplicateIngredients():boolean {

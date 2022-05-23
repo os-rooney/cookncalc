@@ -1,6 +1,6 @@
 .prices {
   border-radius: 5px;
-  width: 200px;
+  min-width: 10rem;
   background-color: #A7D7C5;
 }
 .button{

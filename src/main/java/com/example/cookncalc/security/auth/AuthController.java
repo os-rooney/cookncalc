@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 
-import static java.lang.String.format;
-
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {

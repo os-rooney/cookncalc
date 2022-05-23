@@ -3,8 +3,11 @@ body{
   color: #1B1A17;
 }
 .wrapper{
-  max-width: 54rem;
+  max-width: 90vw;
   margin: 0 auto;
+}
+h1{
+  color: #274341;
 }
 h3{
   width: auto;
@@ -24,12 +27,9 @@ h3{
   color: #EEEEEE;
   background-color: #5C8D89;
   padding: 2rem;
-  width: 25rem;
+  width: 100%;
   border-radius: 1rem;
   box-shadow: .1rem .1rem .3rem #1B1A17;
-}
-.recipe:nth-child(odd){
-  margin-right: 2rem;
 }
 /* SVG STYLS AND ANIMATIONS */
 .svg svg{
@@ -62,24 +62,7 @@ h3{
     transform: rotateZ(15deg);
   }
 }
-/* man leg
-#man-leg{
-  animation: leg 3s infinite linear;
-  transform-origin: top;
-  transform-box: fill-box;
-}
-@keyframes leg {
-  0%{
-    transform: rotateZ(0deg);
-  }
-  50%{
-    transform: rotateZ(8deg);
-  }
-  100%{
-    transform: rotateZ(0deg);
-  }
-}*/
-/* man hand */
+
 #man-hand{
   animation: man-hand 3s infinite linear;
   transform-origin: top;
@@ -150,4 +133,16 @@ h3{
 }
 #middle-lamp:hover ~ #middle-bulb{
   opacity: 1;
+}
+/* min width 1000px */
+@media only screen and (min-width: 62.5em){
+  .wrapper{
+    max-width: 54rem;
+  }
+  .recipe{
+    width: 25rem;
+  }
+  .recipe:nth-child(odd){
+    margin-right: 2rem;
+  }
 }

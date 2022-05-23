@@ -1,3 +1,6 @@
+h1{
+  color: #274341;
+}
 .container{
   min-height: 100vh;
 }
@@ -16,7 +19,7 @@ a.btn:hover{
   margin: 3rem auto 2rem auto;
 }
 .wrapper{
-  max-width: 54rem;
+  max-width: 90vw;
   margin: 3rem auto 1rem auto;
 }
 h3{
@@ -37,10 +40,19 @@ h3{
   color: #EEEEEE;
   background-color: #5C8D89;
   padding: 2rem;
-  width: 25rem;
+  width: 100%;
   border-radius: 1rem;
   box-shadow: .1rem .1rem .3rem #1B1A17;
 }
-.recipe:nth-child(odd){
-  margin-right: 2rem;
+/* min width 1000px */
+@media only screen and (min-width: 62.5em){
+  .wrapper{
+    max-width: 54rem;
+  }
+  .recipe{
+    width: 25rem;
+  }
+  .recipe:nth-child(odd){
+    margin-right: 2rem;
+  }
 }
