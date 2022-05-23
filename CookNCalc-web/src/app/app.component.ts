@@ -12,6 +12,9 @@ export class AppComponent implements OnInit{
   @Input()
   recipes?: Recipe[];
 
+  // Navbar toggler
+  isShown:boolean = false;
+
   constructor(public authService: AuthService) {
   }
 

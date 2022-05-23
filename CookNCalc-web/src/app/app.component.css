@@ -24,3 +24,9 @@
 #navbarSupportedContent .active{
   color: #274341;
 }
+
+@media only screen and (min-width: 62em){
+  .right-nav{
+    margin-left: calc(100vw - 40rem);
+  }
+}
