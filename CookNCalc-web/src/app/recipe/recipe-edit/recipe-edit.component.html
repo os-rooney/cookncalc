@@ -16,7 +16,7 @@
 
   <div class="ingredients input-group col-10" *ngFor="let ingredient of recipe.ingredients; let i = index">
     <div class="col-4">
-      <input class="col-12" list="ingredient-name" id="ing-name" type="text" [(ngModel)]="ingredient.name" #ingName>
+      <input class="col-12" list="ingredient-name" id="ing-name" type="text" [(ngModel)]="ingredient.name">
       <datalist id="ingredient-name">
         <option *ngFor="let ingredient of ingredients">
           {{ingredient.name}}
