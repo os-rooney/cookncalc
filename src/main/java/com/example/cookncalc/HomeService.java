@@ -173,6 +173,15 @@ public class HomeService {
         return calcTable;
     }
 
+    public List<TotalPriceForRecipe> priceCalculationPerUnit(Long id) {
+        List<TotalPriceForRecipe> calcTable = new ArrayList<>();
+        for (Object[] object : this.recipeRepository.getPricePerUnitForRecipeId(id)) {
+            calcTable.add(new TotalPriceForRecipe(object));
+
+        }
+        return calcTable;
+    }
+
     public List<SupermarketIngredient> getIngredientPrices(Long id) {
         return supermarketIngredientRepository.findSupermarketIngredientByIngredientId(id);
     }
