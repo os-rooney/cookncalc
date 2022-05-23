@@ -39,15 +39,14 @@ export class MyRecipeDetailsEditComponent implements OnInit {
     this.http.get<Recipe>(`/api/recipes/${this.id}`).subscribe(result => {
       this.recipe = result;
       this.http.get<User>('/api/users/current').subscribe(user => this.user = user);
-    },)
+    })
   }
 
   changeRecipe(){
-    if (this.user) {
-      this.recipe.user = this.user;
+    if (this.user?.id === this.recipe.user.id) {
+      this.http.post<Recipe>(`/api/recipes/${this.id}/edit`, this.recipe).subscribe();
+      this.http.get<Recipe[]>("/api").subscribe(result => this.recipes=result);
     }
-    this.http.post<Recipe>(`/api/recipes/${this.id}/edit`, this.recipe).subscribe();
-    this.http.get<Recipe[]>("/api").subscribe(result => this.recipes=result);
     this.router.navigate(['/recipes']);
   }
 
