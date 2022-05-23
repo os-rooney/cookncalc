@@ -1,5 +1,6 @@
 package com.example.cookncalc;
 
+import com.example.cookncalc.recipe.*;
 import com.example.cookncalc.recipeIngredient.RecipeIngredientDTO;
 import com.example.cookncalc.ingredient.Ingredient;
 import com.example.cookncalc.ingredient.IngredientDTO;
@@ -7,13 +8,8 @@ import com.example.cookncalc.ingredient.IngredientRepository;
 import com.example.cookncalc.recipeIngredient.RecipeIngredient;
 import com.example.cookncalc.recipeIngredient.RecipeIngredientDTOII;
 import com.example.cookncalc.recipeIngredient.RecipeIngredientRepository;
-import com.example.cookncalc.recipe.Recipe;
-import com.example.cookncalc.recipe.RecipeDTO;
-import com.example.cookncalc.recipe.RecipeRepository;
-import com.example.cookncalc.recipe.TotalPriceForRecipe;
 import com.example.cookncalc.supermarketIngredient.SupermarketIngredient;
 import com.example.cookncalc.supermarketIngredient.SupermarketIngredientRepository;
-import com.example.cookncalc.user.User;
 import com.example.cookncalc.user.UserDTO;
 import com.example.cookncalc.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -168,7 +164,6 @@ public class HomeService {
         List<TotalPriceForRecipe> calcTable = new ArrayList<>();
         for (Object[] object : this.recipeRepository.getTotalAmountPerMarketForRecipeId(id)) {
             calcTable.add(new TotalPriceForRecipe(object));
-
         }
         return calcTable;
     }
@@ -177,7 +172,14 @@ public class HomeService {
         List<TotalPriceForRecipe> calcTable = new ArrayList<>();
         for (Object[] object : this.recipeRepository.getPricePerUnitForRecipeId(id)) {
             calcTable.add(new TotalPriceForRecipe(object));
+        }
+        return calcTable;
+    }
 
+    public List<IngredientPriceForRecipe> priceIngredientCalculation(Long id, String supermarket) {
+        List<IngredientPriceForRecipe> calcTable = new ArrayList<>();
+        for (Object[] object : this.recipeRepository.getAmountPerIngredientPerMarketForRecipeId(id, supermarket)) {
+            calcTable.add(new IngredientPriceForRecipe(object));
         }
         return calcTable;
     }
