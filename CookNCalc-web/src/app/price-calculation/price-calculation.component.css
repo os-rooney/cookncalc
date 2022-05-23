@@ -3,3 +3,26 @@
   min-width: 10rem;
   background-color: #A7D7C5;
 }
+.button{
+  border:none;
+}
+.button:hover{
+  transform: scale(1.1);
+}
+.detailHead{
+  /*background-color: #74B49B;*/
+  color: #274341;
+}
+.listElement{
+  /*background-color: #A7D7C5;*/
+  color: #274341;
+}
+
+.closeButton{
+  display: block;
+  color: #1B1A17;
+  padding: .625rem;
+  border-radius: .5rem;
+  box-shadow: .1rem .1rem .1rem #1B1A17;
+  background-color: #A7D7C5;
+}

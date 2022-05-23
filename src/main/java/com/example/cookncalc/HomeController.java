@@ -1,11 +1,14 @@
 package com.example.cookncalc;
 
 import com.example.cookncalc.ingredient.IngredientDTO;
-import com.example.cookncalc.recipe.RecipeDTO;
-import com.example.cookncalc.recipe.TotalPriceForRecipe;
+import com.example.cookncalc.recipe.*;
 import com.example.cookncalc.recipeIngredient.RecipeIngredientDTO;
 import com.example.cookncalc.recipeIngredient.RecipeIngredientDTOII;
+import com.example.cookncalc.recipe.RecipeDTO;
+import com.example.cookncalc.recipe.TotalPriceForRecipe;
 import com.example.cookncalc.supermarketIngredient.SupermarketIngredient;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -73,6 +76,12 @@ public class HomeController {
     public List<TotalPriceForRecipe> getRecipePricePerUnit(@PathVariable Long id){
         return  homeService.priceCalculationPerUnit(id);
     }
+
+    @GetMapping("/api/recipes/{id}/{supermarket}")
+    public List<IngredientPriceForRecipe> getIngredientPricePerMarket(@PathVariable Long id, @PathVariable String supermarket){
+        return  homeService.priceIngredientCalculation(id, supermarket);
+    }
+
 
     @GetMapping("/api/prices/{id}")
     public List<SupermarketIngredient> getIngredientPrice(@PathVariable("id") Long id){

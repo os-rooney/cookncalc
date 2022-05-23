@@ -55,4 +55,27 @@ public interface RecipeRepository extends CrudRepository<Recipe, Long> {
             "               order by s.name, r.id) t where t.Rezept_ID = ?1 GROUP BY t.Rezept_ID, t.Rezept_Title, t.Markt order by t.Rezept_ID, Gesamt_Preis", nativeQuery = true)
     List<Object[]> getPricePerUnitForRecipeId(Long id);
 
+    @Query(value = "select t.Rezept_ID, t.Rezept_Title, t.Markt, t.Zutat, t.VPE_Need, ROUND(t.Preis * t.VPE_Need, 2) as Ges_Produkt_Preis\n" +
+            "from (select r.id                                                                             as Rezept_ID,\n" +
+            "             r.title                                                                          as Rezept_Title,\n" +
+            "             i.name                                                                           as Zutat,\n" +
+            "             si.price                                                                         as Preis,\n" +
+            "            s.id                                                                             as Markt_ID,\n"+
+            "             s.name                                                                           as Markt,\n" +
+            "             i.package_size                                                                   as VPE,\n" +
+            "             ri.amount                                                                        as Rezept_Amount,\n" +
+            "             floor(ri.amount / i.package_size) + if(mod(ri.amount, i.package_size) > 0, 1, 0) as VPE_Need\n" +
+            "      from ingredient i,\n" +
+            "           recipe r,\n" +
+            "           recipe_ingredient ri,\n" +
+            "           supermarket_ingredient si,\n" +
+            "           supermarket s\n" +
+            "      where ri.ingredient_id = i.id\n" +
+            "        and ri.recipe_id = r.id\n" +
+            "        and si.ingredient_id = i.id\n" +
+            "        and si.supermarket_id = s.id\n" +
+            "      order by s.name) t where t.Rezept_ID = ?1 AND t.Markt=?2\n" +
+            "order by t.Rezept_ID, t.Markt, t.Zutat", nativeQuery = true)
+    List<Object[]> getAmountPerIngredientPerMarketForRecipeId(Long id, String supermarket);
+
 }
