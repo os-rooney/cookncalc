@@ -3,7 +3,8 @@
   <div>
     <label class="form-label"> Rezeptüberschrift:</label>
     <input class="form-control" type="text" [(ngModel)]="recipe.title">
-    <p class="error" *ngIf="recipe.title.length < 2">Bitte gib einen Titel mit mindestens 2 Zeichen ein!</p>
+    <p class="error" *ngIf="recipe.title.length < 2 || recipe.title.length > 100">
+      Bitte gib einen Titel mit mindestens 2 und höchstens 100 Zeichen ein!</p>
   </div>
   <div>
     <label>Kurzbeschreibung:</label>
@@ -53,12 +54,13 @@
     <label>Zubereitung:</label>
     <div class="form-floating">
       <textarea class="form-control" style="height: 300px" [(ngModel)]="recipe.preparation"></textarea>
+      <p class="error" *ngIf="recipe.preparation.length > 1000">Beschreibe die Zubereitung mit max. 1000 Zeichen!</p>
     </div>
   </div>
 
   <div class="add-Button">
     <button type="button" class="btn button" (click)="changeRecipe()" [disabled]="!noDuplicateIngredients()
-    ||recipe.ingredients.length < 1||recipe.title.length < 2||!checkIngredientMatch
-    ||recipe.description.length > 255">Rezept speichern</button>
+    ||recipe.ingredients.length < 1 ||recipe.title.length < 2 ||recipe.title.length > 100 ||!checkIngredientMatch
+    ||recipe.description.length > 255 ||recipe.preparation.length > 1000">Rezept speichern</button>
   </div>
 </div>
