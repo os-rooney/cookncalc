@@ -1,0 +1,45 @@
+.maincontent{
+  min-height: 90vh;
+}
+.add-Button{
+  position: relative;
+  min-height: 5rem;
+}
+.maincontent > div{
+  padding-bottom: 1rem;
+}
+.button{
+  display: block;
+  color: #1B1A17;
+  padding: .625rem;
+  border-radius: .5rem;
+  box-shadow: .1rem .1rem .1rem #1B1A17;
+  background-color: #A7D7C5;
+  position: absolute;
+  right: 0;
+}
+.delete-btn{
+  display: inline;
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  color: red;
+  -webkit-text-stroke: .3px #000;
+  align-self: start;
+}
+.ingredients div{
+  margin: 0.4rem 0.4rem 0.4rem 0rem;
+}
+.einheit{
+  border:none;
+  color: black;
+}
+
+.error {
+  width: 100%;
+  font-weight: bold;
+  display: inline-block;
+  text-align: left;
+  color: darkred;
+}
+

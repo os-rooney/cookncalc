@@ -1,15 +1,15 @@
-
 <div *ngIf="recipe" class="col-10 mx-auto my-5 maincontent">
   <h1>Neues Rezept:</h1>
   <div>
     <label class="form-label"> Rezeptüberschrift:</label>
     <input class="form-control" type="text" [(ngModel)]="recipe.title">
-    <p class="error" *ngIf="recipe.title.length < 2">Bitte gib einen Titel mit mindestens 2 Zeichen ein!</p>
-  </div>
+    <p class="error" *ngIf="recipe.title.length < 2 || recipe.title.length > 100">
+      Bitte gib einen Titel mit mindestens 2 und höchstens 100 Zeichen ein!</p>  </div>
   <div>
     <label>Kurzbeschreibung:</label>
     <div class="form-floating">
       <textarea class="form-control" id="description" style="height: 100px" [(ngModel)]="recipe.description"></textarea>
+      <p class="error" *ngIf="recipe.description.length > 255">Halte deine Beschreibung kurz (max. 255 Zeichen)!</p>
       <label for="description">Was macht Ihr Rezept einzigartig?</label>
     </div>
   </div>
@@ -38,11 +38,10 @@
     <div>
       <button class="delete-btn col-2" (click)="recipe.ingredients.splice(i,1)">löschen</button>
     </div>
-    <p *ngIf="!ingredientMatchesDropdown(ingredient)">Bitte nur Zutaten aus dem Dropdown auswählen!</p>
-
+    <p class="error" *ngIf="!ingredientMatchesDropdown(ingredient)">Bitte nur Zutaten aus dem Dropdown auswählen!</p>
   </div>
   <p class="error" *ngIf="recipe.ingredients.length < 1">Bitte gib mindestens eine Zutat an!</p>
-  <p *ngIf="!noDuplicateIngredients()">Bitte gib jede Zutat nur 1x an!</p>
+  <p class="error" *ngIf="!noDuplicateIngredients()">Bitte gib jede Zutat nur 1x an!</p>
 
   <div class="add-Button">
     <button type="button" class="btn button"
@@ -54,13 +53,13 @@
     <label>Zubereitung:</label>
     <div class="form-floating">
       <textarea class="form-control" style="height: 300px" [(ngModel)]="recipe.preparation"></textarea>
+      <p class="error" *ngIf="recipe.preparation.length > 1000">Beschreibe die Zubereitung mit max. 1000 Zeichen!</p>
     </div>
   </div>
 
   <div class="add-Button">
-    <button type="button" class="btn button" (click)="saveRecipe()">Rezept speichern</button>
+    <button type="button" class="btn button" (click)="saveRecipe()" [disabled]="!noDuplicateIngredients()
+    ||recipe.ingredients.length < 1 ||recipe.title.length < 2 ||recipe.title.length > 100 ||!checkIngredientMatch
+    ||recipe.description.length > 255 ||recipe.preparation.length > 1000">Rezept speichern</button>
   </div>
 </div>
-
-
-

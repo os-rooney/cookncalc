@@ -5,13 +5,7 @@ import com.example.cookncalc.recipe.RecipeDTO;
 import com.example.cookncalc.recipe.TotalPriceForRecipe;
 import com.example.cookncalc.recipeIngredient.RecipeIngredientDTO;
 import com.example.cookncalc.recipeIngredient.RecipeIngredientDTOII;
-import com.example.cookncalc.recipe.RecipeDTO;
-import com.example.cookncalc.recipe.RecipeRepository;
-import com.example.cookncalc.recipe.TotalPriceForRecipe;
 import com.example.cookncalc.supermarketIngredient.SupermarketIngredient;
-import com.example.cookncalc.supermarketIngredient.SupermarketIngredientRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,8 +13,6 @@ import java.util.List;
 
 @RestController
 public class HomeController {
-
-    private final static Logger logger = LoggerFactory.getLogger(HomeController.class);
 
     private final HomeService homeService;
 
@@ -56,8 +48,6 @@ public class HomeController {
         }
     }
 
-
-
     @DeleteMapping("/api/recipes/{id}/delete")
     public void deleteRecipe(@PathVariable Long id){
         homeService.deleteRecipe(id);
@@ -75,10 +65,13 @@ public class HomeController {
         }
     }
 
-
     @GetMapping("/api/recipes/{id}/calculation")
-    public List<TotalPriceForRecipe> recipeTest(@PathVariable Long id){
+    public List<TotalPriceForRecipe> getTotalRecipePriceForShoppingList(@PathVariable Long id){
         return  homeService.priceCalculation(id);
+    }
+    @GetMapping("/api/recipes/{id}/calculationPerUnit")
+    public List<TotalPriceForRecipe> getRecipePricePerUnit(@PathVariable Long id){
+        return  homeService.priceCalculationPerUnit(id);
     }
 
     @GetMapping("/api/prices/{id}")

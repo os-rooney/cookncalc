@@ -38,3 +38,11 @@ h1{
   color: black;
 }
 
+.error {
+  width: 100%;
+  font-weight: bold;
+  display: inline-block;
+  text-align: left;
+  color: darkred;
+}
+

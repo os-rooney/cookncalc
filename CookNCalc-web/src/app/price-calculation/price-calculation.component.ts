@@ -10,7 +10,8 @@ import {ActivatedRoute, Route} from "@angular/router";
 })
 export class PriceCalculationComponent implements OnInit {
 
-  totalAmountRow?: TotalPriceForRecipe[];
+  totalPriceForRecipe?: TotalPriceForRecipe[];
+  pricePerUnit?: TotalPriceForRecipe[];
   id?:number;
 
 
@@ -18,7 +19,8 @@ export class PriceCalculationComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = Number(this.route.snapshot.paramMap.get("id"));
-    this.http.get<TotalPriceForRecipe[]>(`/api/recipes/${this.id}/calculation`).subscribe(result => this.totalAmountRow= result);
+    this.http.get<TotalPriceForRecipe[]>(`/api/recipes/${this.id}/calculation`).subscribe(result => this.totalPriceForRecipe= result);
+    this.http.get<TotalPriceForRecipe[]>(`/api/recipes/${this.id}/calculationPerUnit`).subscribe(result => this.pricePerUnit= result);
   }
 
 }
