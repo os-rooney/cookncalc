@@ -2,10 +2,10 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light" id="color">
   <div class="container-fluid">
     <div class="logo">
-      <img src="assets/logo.svg" alt="CookNCalc Logo">
+      <img src="assets/logo.svg" alt="CookNCalc Logo" >
     </div>
     <div class="cook-n-calc">
-      <a class="navbar-brand ms-2" routerLink="/"><img src="assets/CookNCalc.svg" alt="Brand name"></a>
+      <a class="navbar-brand ms-2" routerLink="/" (click)="isShown = !isShown"><img src="assets/CookNCalc.svg" alt="Brand name"></a>
     </div>
     <button (click)="isShown = !isShown" id="navBtn" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
