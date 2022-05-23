@@ -9,6 +9,7 @@
     <label>Kurzbeschreibung:</label>
     <div class="form-floating">
       <textarea class="form-control" id="description" style="height: 100px" [(ngModel)]="recipe.description"></textarea>
+      <p class="error" *ngIf="recipe.description.length > 255">Halte deine Beschreibung kurz (max. 255 Zeichen)!</p>
       <label for="description">Was macht Ihr Rezept einzigartig?</label>
     </div>
   </div>
@@ -57,6 +58,7 @@
 
   <div class="add-Button">
     <button type="button" class="btn button" (click)="saveRecipe()" [disabled]="!noDuplicateIngredients()
-    ||recipe.ingredients.length < 1||recipe.title.length < 2||!checkIngredientMatch">Rezept speichern</button>
+    ||recipe.ingredients.length < 1||recipe.title.length < 2||!checkIngredientMatch
+    ||recipe.description.length > 255">Rezept speichern</button>
   </div>
 </div>
