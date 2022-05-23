@@ -66,7 +66,12 @@ public class SetUpComponent {
                         "Basilikumblätter nicht schneiden, sonder in Stücke zupfen, damit sich das Aroma entfalten" +
                         " kann. Zuletzt wird noch der Feta über die Pfanne gestreut und dann kann serviert werden :)"
         );
-        Recipe gefuellteZucchini = new Recipe("gefüllte Zucchini", "Ein tolles Ofengericht!",
+        Recipe wurstsalat = new Recipe("Schweizer Wurstsalat", "Ergänzt deine Brotzeit!",
+                "Die Fleischwurst, die Zwiebeln und den Käse (am besten Emmentaler) kleinschneiden. " +
+                        "Alles in eine Schüssel geben und mit Essig und Öl begießen. Mindestens 3 Stunden ziehen" +
+                        " lassen und ggf. vor dem Servieren kaltstellen."
+        );
+        Recipe gefuellteZucchini = new Recipe("Gefüllte Zucchini", "Ein tolles Ofengericht!",
                 "Den Reis kochen. Zwiebeln und Tomaten in kleine Stücke schneiden. Die Zucchinis mit " +
                         "einem Löffel aushöhlen. Hackfleisch nach Belieben würzen und zusammen mit den Zwiebeln " +
                         "anbraten. Reis und Tomaten zufügen und Zucchinis mit der Mischung füllen. Ab in den Ofen " +
@@ -75,7 +80,7 @@ public class SetUpComponent {
 
         Recipe schokoTorte = new Recipe("Schokotorte", "Die leckerste Kalorienbombe der Welt!", "Die 150 g Kinderschokolade " +
                 " und 250 g Nutella in einem Wasserbad schmelzen. Die Butter cremig rühren und Zucker, den Kakao, die Eigelbe, die Eier, " +
-                "den Vanillinzucker und Schokolade unterrühren. Mehl mit Backpulver mischen, Eiweiße steif schlagen."+
+                "den Vanillinzucker und Schokolade unterrühren. Mehl mit Backpulver mischen, Eiweiße steif schlagen. "+
                 "Die Teigmasse in zwei Hälften teilen und im vorgeheizten Backofen bei 180°C ca. 40 – 45 min in der Springform backen.");
 
         Recipe spargelImUltra = new Recipe("Spargel im Ultra", "Das Gericht der Spargelsaison", "Den Spargel gut schälen, die " +
@@ -86,6 +91,7 @@ public class SetUpComponent {
 
         if (recipeRepository.count() == 0) {
             recipeRepository.save(gemuesepfanne);
+            recipeRepository.save(wurstsalat);
             recipeRepository.save(gefuellteZucchini);
             recipeRepository.save(schokoTorte);
             recipeRepository.save(spargelImUltra);
@@ -99,9 +105,12 @@ public class SetUpComponent {
         Ingredient tomate = new Ingredient("Tomate(n)", "Stück", 1);
         Ingredient zucchini = new Ingredient("Zucchini", "Stück", 1);
 
+        Ingredient zwiebel = new Ingredient("Zwiebel(n)", "Stück", 1);
+        Ingredient wurst = new Ingredient("Fleischwurst", "g", 500);
+        Ingredient essig = new Ingredient("Essig", "ml", 500);
+
         Ingredient hack = new Ingredient("Hackfleisch", "g", 250);
         Ingredient reis = new Ingredient("Reis", "g", 500);
-        Ingredient zwiebel = new Ingredient("Zwiebel(n)", "Stück", 1);
 
         Ingredient butter = new Ingredient("Butter", "g", 250);
         Ingredient zucker = new Ingredient("Zucker", "g", 500);
@@ -126,9 +135,12 @@ public class SetUpComponent {
             ingredientRepository.save(tomate);
             ingredientRepository.save(zucchini);
 
+            ingredientRepository.save(zwiebel);
+            ingredientRepository.save(wurst);
+            ingredientRepository.save(essig);
+
             ingredientRepository.save(hack);
             ingredientRepository.save(reis);
-            ingredientRepository.save(zwiebel);
 
             ingredientRepository.save(butter);
             ingredientRepository.save(zucker);
@@ -154,6 +166,13 @@ public class SetUpComponent {
             addRecipeIngredient(gemuesepfanne, oel, 20.0);
             addRecipeIngredient(gemuesepfanne, tomate, 4.0);
             addRecipeIngredient(gemuesepfanne, zucchini, 2.0);
+            addRecipeIngredient(gemuesepfanne, salz, 5.0);
+
+            addRecipeIngredient(wurstsalat, zwiebel, 1.0);
+            addRecipeIngredient(wurstsalat, wurst, 250.0);
+            addRecipeIngredient(wurstsalat, oel, 50.0);
+            addRecipeIngredient(wurstsalat, essig, 50.0);
+            addRecipeIngredient(wurstsalat, kaese, 200.0);
 
             addRecipeIngredient(gefuellteZucchini, hack, 150.0);
             addRecipeIngredient(gefuellteZucchini, kaese, 100.0);
@@ -195,9 +214,9 @@ public class SetUpComponent {
         //link recipes to ingredients
         if (supermarketIngredientRepository.count() == 0) {
             //Basilikum
-            addSupermarketIngredient(basilikum, rewe, 2.0);
-            addSupermarketIngredient(basilikum, lidl, 1.5);
-            addSupermarketIngredient(basilikum, edeka, 1.8);
+            addSupermarketIngredient(basilikum, rewe, 1.0);
+            addSupermarketIngredient(basilikum, lidl, 0.8);
+            addSupermarketIngredient(basilikum, edeka, 0.9);
             //Käse
             addSupermarketIngredient(kaese, rewe, 3.0);
             addSupermarketIngredient(kaese, lidl, 2.3);
@@ -211,13 +230,26 @@ public class SetUpComponent {
             addSupermarketIngredient(oel, lidl, 5.5);
             addSupermarketIngredient(oel, edeka, 5.25);
             //Tomate
-            addSupermarketIngredient(tomate, rewe, 0.80);
-            addSupermarketIngredient(tomate, lidl, 0.60);
-            addSupermarketIngredient(tomate, edeka, 0.70);
+            addSupermarketIngredient(tomate, rewe, 0.40);
+            addSupermarketIngredient(tomate, lidl, 0.30);
+            addSupermarketIngredient(tomate, edeka, 0.40);
             //Zucchini
-            addSupermarketIngredient(zucchini, rewe, 1.2);
-            addSupermarketIngredient(zucchini, lidl, 1.0);
-            addSupermarketIngredient(zucchini, edeka, 1.1);
+            addSupermarketIngredient(zucchini, rewe, 0.6);
+            addSupermarketIngredient(zucchini, lidl, 0.5);
+            addSupermarketIngredient(zucchini, edeka, 0.5);
+
+            //Zwiebel
+            addSupermarketIngredient(zwiebel, rewe, 0.3);
+            addSupermarketIngredient(zwiebel, lidl, 0.2);
+            addSupermarketIngredient(zwiebel, edeka, 0.2);
+            //Wurst
+            addSupermarketIngredient(wurst, rewe, 7.6);
+            addSupermarketIngredient(wurst, lidl, 5.35);
+            addSupermarketIngredient(wurst, edeka, 6.5);
+            //Essig
+            addSupermarketIngredient(essig, rewe, 5.6);
+            addSupermarketIngredient(essig, lidl, 4.35);
+            addSupermarketIngredient(essig, edeka, 5.1);
 
             //Hack
             addSupermarketIngredient(hack, rewe, 7.0);
@@ -227,11 +259,6 @@ public class SetUpComponent {
             addSupermarketIngredient(reis, rewe, 1.80);
             addSupermarketIngredient(reis, lidl, 1.60);
             addSupermarketIngredient(reis, edeka, 1.70);
-            //Zwiebel
-            addSupermarketIngredient(zwiebel, rewe, 0.6);
-            addSupermarketIngredient(zwiebel, lidl, 0.35);
-            addSupermarketIngredient(zwiebel, edeka, 0.5);
-
 
             //Butter
             addSupermarketIngredient(butter, rewe, 1.50);
