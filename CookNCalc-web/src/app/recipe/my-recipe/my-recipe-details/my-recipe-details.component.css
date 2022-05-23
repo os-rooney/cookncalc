@@ -1,3 +1,13 @@
+.recipe h2{
+  font-size: 1.2rem;
+}
+.recipe h4{
+  font-size: 1rem;
+}
+h2{
+  color: #274341;
+}
+
 .fst-italic {
   color: #5C8D89;
 }
@@ -15,12 +25,18 @@
 }
 
 .ingredients {
-  width: 350px;
-  border-radius: 5px;
+  width: 85vw;
 }
 
 .ingredients:nth-child(odd) {
   background-color: #F4F9F4;
+}
+
+.recipe-preparation{
+  width: 85vw;
+}
+.recipe-preparation p{
+  text-align: justify;
 }
 
 .calculation {

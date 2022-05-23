@@ -1,5 +1,5 @@
 <div *ngIf="recipe">
-  <div class="text-center m-3">
+  <div class="text-center m-3 recipe">
     <h2 class="fw-bold">{{recipe.title}}</h2>
     <h4 class="fst-italic"> - {{recipe.description}} - </h4>
   </div>
@@ -12,10 +12,10 @@
     </div>
   </div>
 
-  <div class="m-5 p-2">
+  <div class="recipe-preparation">
     <p>{{recipe.preparation}}</p>
     <a class="link m-3" *ngIf="authService.isAuthenticated" routerLink="./edit">Bearbeiten</a>
-    <app-recipe-delete class="link m-3" *ngIf="authService.isAuthenticated"></app-recipe-delete>
+    <app-recipe-delete class="link m-3 bg-danger" *ngIf="authService.isAuthenticated"></app-recipe-delete>
     <a class="link m-3" routerLink="/recipes">Zurück zur Rezeptübersicht</a>
   </div>
 

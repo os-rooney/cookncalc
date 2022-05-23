@@ -7,12 +7,20 @@
 }
 
 .middlebar{
-  width: 75%;
+  width: 85%;
   background-color: white;
 }
 
 .gradient-custom-2 {
   background: -webkit-linear-gradient(to right, #F4F9F4, #A7D7C5,#74B49B, #5C8D89 );
-
   background: linear-gradient(to right, #F4F9F4, #A7D7C5,#74B49B, #5C8D89);
+}
+.logo img{
+  width: 2.625rem;
+}
+.cook-n-calc img{
+  width: 8rem;
+}
+#navbarSupportedContent .active{
+  color: #274341;
 }
