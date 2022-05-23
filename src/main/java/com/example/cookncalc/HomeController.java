@@ -66,8 +66,12 @@ public class HomeController {
     }
 
     @GetMapping("/api/recipes/{id}/calculation")
-    public List<TotalPriceForRecipe> recipeTest(@PathVariable Long id){
+    public List<TotalPriceForRecipe> getTotalRecipePriceForShoppingList(@PathVariable Long id){
         return  homeService.priceCalculation(id);
+    }
+    @GetMapping("/api/recipes/{id}/calculationPerUnit")
+    public List<TotalPriceForRecipe> getRecipePricePerUnit(@PathVariable Long id){
+        return  homeService.priceCalculationPerUnit(id);
     }
 
     @GetMapping("/api/prices/{id}")
