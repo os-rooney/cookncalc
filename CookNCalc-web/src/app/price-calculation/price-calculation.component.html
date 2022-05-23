@@ -1,12 +1,14 @@
 <div class="text-center p-3">
-<h3 class="m-3">Price calculation</h3>
-<span class="d-inline-block ps-2 pe-2 m-3 fs-5 prices" *ngFor="let row of totalAmountRow">
-  <span>{{ row.supermarket }}: <strong> {{ row.totalPrice }} €</strong></span>
+<h3 class="m-3">Einkaufspreis</h3>
+  <p>Preis wenn alle Zutaten in vollständigen Verpackungseinheiten im Supermarkt gekauft werden</p>
+<span class="d-inline-block ps-2 pe-2 m-3 fs-5 prices" *ngFor="let calc of totalPriceForRecipe">
+  <span>{{ calc.supermarket }}: <strong> {{ calc.totalPrice }} €</strong></span>
 </span>
 </div>
 <div class="text-center p-3">
-  <h3 class="m-3">Price calculation per Unit</h3>
-  <span class="d-inline-block ps-2 pe-2 m-3 fs-5 prices" *ngFor="let row of pricePerUnit">
-  <span>{{ row.supermarket }}: <strong> {{ row.totalPrice }} €</strong></span>
+  <h3 class="m-3">Zutatenpreis</h3>
+  <p>Exakter Gesamtpreis der benutzten Zutaten</p>
+  <span class="d-inline-block ps-2 pe-2 m-3 fs-5 prices" *ngFor="let calc of pricePerUnit">
+  <span>{{ calc.supermarket }}: <strong> {{ calc.totalPrice }} €</strong></span>
 </span>
 </div>
