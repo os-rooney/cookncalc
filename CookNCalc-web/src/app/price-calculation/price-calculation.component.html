@@ -1,14 +1,45 @@
 <div class="text-center p-3">
-<h3 class="m-3">Einkaufspreis</h3>
+  <h3 class="m-3">Einkaufspreis</h3>
   <p>Preis wenn alle Zutaten in vollständigen Verpackungseinheiten im Supermarkt gekauft werden</p>
-<span class="d-inline-block ps-2 pe-2 m-3 fs-5 prices" *ngFor="let calc of totalPriceForRecipe">
-  <span>{{ calc.supermarket }}: <strong> {{ calc.totalPrice }} €</strong></span>
-</span>
+  <!-- Button trigger modal -->
+  <div *ngFor="let calc of totalPriceForRecipe" class="d-inline-block">
+    <button type="button" (click)="ingredientPriceDetail(calc.supermarket)" class="d-inline-block ps-2 pe-2 m-3 fs-5 prices button" data-bs-toggle="modal"
+            data-bs-target="#ingredientPriceDetail">
+      {{ calc.supermarket }}: <strong> {{ calc.totalPrice }} €</strong>
+    </button>
+  </div>
 </div>
+
 <div class="text-center p-3">
   <h3 class="m-3">Zutatenpreis</h3>
-  <p>Exakter Gesamtpreis der benutzten Zutaten</p>
+  <p class="w-75 mx-auto">Exakter Gesamtpreis der benutzten Zutaten</p>
   <span class="d-inline-block ps-2 pe-2 m-3 fs-5 prices" *ngFor="let calc of pricePerUnit">
   <span>{{ calc.supermarket }}: <strong> {{ calc.totalPrice }} €</strong></span>
 </span>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="ingredientPriceDetail" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header detailHead">
+        <h5 class="modal-title m-3" id="exampleModalLabel" >Preise der einzelnen Produkte bei {{supermarket}}</h5>
+      </div>
+      <div class="modal-body">
+        <div class="p-3" *ngIf="test">
+          <div *ngFor="let calc of ingredientPricePerMarket">
+            <ul class="list-group list-group-flush list">
+              <li class="list-group-item listElement"> {{calc.vpeNeed}} x {{ calc.ingredient }} für <strong> {{ calc.totalPrice }} €</strong></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary closeButton" data-bs-dismiss="modal">Schließen</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

@@ -1,26 +1,26 @@
 <div *ngIf="recipe">
-  <div class="text-center m-3">
+  <div class="text-center m-3 recipe">
     <h2 class="fw-bold">{{recipe.title}}</h2>
     <h4 class="fst-italic"> - {{recipe.description}} - </h4>
   </div>
 
   <div class="d-flex flex-column align-items-center m-5">
     <div class="ingredients text-center border border-light" *ngFor="let ingredient of recipe.ingredients">
-      <span class="d-inline-block p-1 text-end amount">{{ingredient.amount}}</span>
-      <span class="d-inline-block p-1 text-start unit">{{ingredient.unit}}</span>
-      <span class="d-inline-block p-1 text-start name">{{ingredient.name}}</span>
+      <span class="d-inline-block p-1 text-center amount">{{ingredient.amount}}</span>
+      <span class="d-inline-block p-1 text-center unit">{{ingredient.unit}}</span>
+      <span class="d-inline-block p-1 text-center name">{{ingredient.name}}</span>
     </div>
   </div>
-
-  <div class="m-5 p-2">
-    <p>{{recipe.preparation}}</p>
-    <a class="link m-3" *ngIf="authService.isAuthenticated" routerLink="./edit">Bearbeiten</a>
-    <app-recipe-delete class="link m-3" *ngIf="authService.isAuthenticated"></app-recipe-delete>
-    <a class="link m-3" routerLink="/recipes">Zurück zur Rezeptübersicht</a>
+  <div class="recipe-preparation mb-3">
+    <p class="mb-3">{{recipe.preparation}}</p>
+    <div class="links d-flex flex-column flex-lg-row align-items-stretch justify-content-center align-items-lg-stretch justify-content-lg-center text-center w-50">
+      <button class="btn link" *ngIf="authService.isAuthenticated" routerLink="./edit">Bearbeiten</button>
+      <app-recipe-delete class="bg-danger link" *ngIf="authService.isAuthenticated"></app-recipe-delete>
+      <button class="link btn" routerLink="/recipes">Zurück zur Rezeptübersicht</button>
+    </div>
   </div>
-
 </div>
-
-<div class="d-flex flex-column align-items-center m-5 calculation">
+<hr>
+<div class="d-flex flex-column align-items-center mt-3 calculation">
   <app-price-calculation *ngIf="authService.isAuthenticated"></app-price-calculation>
 </div>
