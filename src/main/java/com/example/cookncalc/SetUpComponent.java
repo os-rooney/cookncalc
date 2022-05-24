@@ -226,9 +226,9 @@ public class SetUpComponent {
             addSupermarketIngredient(nudeln, lidl, 1.50);
             addSupermarketIngredient(nudeln, edeka, 1.75);
             //Öl
-            addSupermarketIngredient(oel, rewe, 5.0);
-            addSupermarketIngredient(oel, lidl, 5.5);
-            addSupermarketIngredient(oel, edeka, 5.25);
+            addSupermarketIngredient(oel, rewe, 3.0);
+            addSupermarketIngredient(oel, lidl, 2.5);
+            addSupermarketIngredient(oel, edeka, 2.25);
             //Tomate
             addSupermarketIngredient(tomate, rewe, 0.40);
             addSupermarketIngredient(tomate, lidl, 0.30);
@@ -247,14 +247,14 @@ public class SetUpComponent {
             addSupermarketIngredient(wurst, lidl, 5.35);
             addSupermarketIngredient(wurst, edeka, 6.5);
             //Essig
-            addSupermarketIngredient(essig, rewe, 5.6);
-            addSupermarketIngredient(essig, lidl, 4.35);
-            addSupermarketIngredient(essig, edeka, 5.1);
+            addSupermarketIngredient(essig, rewe, 3.6);
+            addSupermarketIngredient(essig, lidl, 3.35);
+            addSupermarketIngredient(essig, edeka, 4.1);
 
             //Hack
-            addSupermarketIngredient(hack, rewe, 7.0);
-            addSupermarketIngredient(hack, lidl, 6.5);
-            addSupermarketIngredient(hack, edeka, 8.25);
+            addSupermarketIngredient(hack, rewe, 5.0);
+            addSupermarketIngredient(hack, lidl, 4.5);
+            addSupermarketIngredient(hack, edeka, 5.25);
             //Reis
             addSupermarketIngredient(reis, rewe, 1.80);
             addSupermarketIngredient(reis, lidl, 1.60);
