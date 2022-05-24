@@ -28,9 +28,6 @@ public class HomeController {
 
     @GetMapping("/api/myrecipes")
     public List<RecipeDTO> getMyRecipes(@RequestParam long id, @RequestParam String username, @RequestParam boolean admin) {
-        System.out.println(id);
-        System.out.println(username);
-        System.out.println(admin);
         return homeService.findRecipeByUser(id);
     }
 
@@ -55,8 +52,6 @@ public class HomeController {
 
     @PostMapping("/api/recipes/{id}/edit")
     public void change(@PathVariable Long id, @RequestBody RecipeIngredientDTO dto) {
-        System.out.println(dto.getIngredients().get(0).getUnit());
-        System.out.println(dto.getIngredients().get(0).getName());
         if (homeService.checkForDuplicateIngredients(dto)
                 && homeService.checkForAllowedIngredientNames(dto)
                 && homeService.checkIfRecipeIsFilled(dto)) {
