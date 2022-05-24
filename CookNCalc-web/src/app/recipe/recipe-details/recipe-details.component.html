@@ -14,8 +14,8 @@
   <div class="recipe-preparation mb-3">
     <p class="mb-3">{{recipe.preparation}}</p>
     <div class="links d-flex flex-column flex-lg-row align-items-stretch justify-content-center align-items-lg-stretch justify-content-lg-center text-center w-50">
-      <button class="btn link" *ngIf="authService.isAuthenticated" routerLink="./edit">Bearbeiten</button>
-      <app-recipe-delete class="bg-danger link" *ngIf="authService.isAuthenticated"></app-recipe-delete>
+      <button class="btn link" *ngIf="user && (user.id === recipe.user.id)" routerLink="./edit">Bearbeiten</button>
+      <app-recipe-delete class="bg-danger link" *ngIf="user && (user.id === recipe.user.id)"></app-recipe-delete>
       <button class="link btn" routerLink="/recipes">Zurück zur Rezeptübersicht</button>
     </div>
   </div>
