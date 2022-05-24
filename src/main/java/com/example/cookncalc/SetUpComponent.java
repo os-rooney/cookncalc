@@ -87,7 +87,9 @@ public class SetUpComponent {
                 "holzigen Enden abschneiden und den Spargel tropfnass in den Ultra - Plus von Tupper legen (ich habe den 3-Liter Topf genommen)." +
                 " Salz und Zucker darüber streuen und die zerlassene Butter darüber gießen. Den Backofen bei Umluft auf 180°C vorheizen und den " +
                 "Spargel darin 40 bis 45 Minuten garen (zwischendurch evtl. eine Messerprobe machen).");
-
+        Recipe pizza = new Recipe("Pizza", "Die beste Pizza der Welt!", "Alle Mehl, Wasser, Zucker, Salz und einen halben Hefewürfel in die Schüssel geben. Anschließend den" +
+                " Knethacken an die Rührmaschine anbringen und den Teig 10min kneten. Sobald eine homogene Masse entstanden ist den Teig nochmals per Hand 5min durchkneten. Nun muss der Teig 2h gehen." +
+                "Sobald der Teig aufgegangen ist den Teig vierteln und 4 Pizzen formen. Nun die Tomatensoße und den Büffelmozarella belegen und für 4min in den vorgeheizten Pizzaofen. Als letztes die Pizza mit Basilikumblättern verzieren und Guten Appetit!");
 
         if (recipeRepository.count() == 0) {
             recipeRepository.save(gemuesepfanne);
@@ -95,6 +97,7 @@ public class SetUpComponent {
             recipeRepository.save(gefuellteZucchini);
             recipeRepository.save(schokoTorte);
             recipeRepository.save(spargelImUltra);
+            recipeRepository.save(pizza);
         }
 
         //new ingredients
@@ -127,6 +130,10 @@ public class SetUpComponent {
         Ingredient Spargel = new Ingredient("Spargel", "Bund", 1);
         Ingredient salz = new Ingredient("Salz", "g", 250);
 
+        Ingredient mozzarella = new Ingredient("Büffelmozzarella", "Stück", 1);
+        Ingredient wasser = new Ingredient("Wasser", "ml", 1000);
+        Ingredient hefe = new Ingredient("Hefe", "Stück", 1);
+
         if (ingredientRepository.count() == 0) {
             ingredientRepository.save(basilikum);
             ingredientRepository.save(kaese);
@@ -156,6 +163,9 @@ public class SetUpComponent {
 
             ingredientRepository.save(Spargel);
             ingredientRepository.save(salz);
+            ingredientRepository.save(mozzarella);
+            ingredientRepository.save(wasser);
+            ingredientRepository.save(hefe);
         }
 
         //link recipes to ingredients
@@ -197,6 +207,15 @@ public class SetUpComponent {
             addRecipeIngredient(spargelImUltra, salz, 10.0);
             addRecipeIngredient(spargelImUltra, butter, 30.0);
             addRecipeIngredient(spargelImUltra, zucker, 5.0);
+
+            addRecipeIngredient(pizza, mehl, 360.0);
+            addRecipeIngredient(pizza, wasser, 200.0);
+            addRecipeIngredient(pizza, hefe, 0.5);
+            addRecipeIngredient(pizza, salz, 4.0);
+            addRecipeIngredient(pizza, zucker, 2.0);
+            addRecipeIngredient(pizza, tomate, 4.0);
+            addRecipeIngredient(pizza, basilikum, 1.0);
+            addRecipeIngredient(pizza, mozzarella, 4.0);
         }
 
 
@@ -313,6 +332,21 @@ public class SetUpComponent {
             addSupermarketIngredient(salz, rewe, 1.30);
             addSupermarketIngredient(salz, lidl, 0.90);
             addSupermarketIngredient(salz, edeka, 1.15);
+
+            //Mozzarella
+            addSupermarketIngredient(mozzarella, rewe, 2.30);
+            addSupermarketIngredient(mozzarella, lidl, 1.90);
+            addSupermarketIngredient(mozzarella, edeka, 2.15);
+
+            //Wasser
+            addSupermarketIngredient(wasser, rewe, 0.30);
+            addSupermarketIngredient(wasser, lidl, 0.20);
+            addSupermarketIngredient(wasser, edeka, 0.25);
+
+            //Hefe
+            addSupermarketIngredient(hefe, rewe, 0.40);
+            addSupermarketIngredient(hefe, lidl, 0.25);
+            addSupermarketIngredient(hefe, edeka, 0.25);
         }
     }
 }
